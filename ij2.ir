@@ -1,0 +1,44 @@
+; {{?props}}
+;     Hello, {{name | titleCase}}
+; {{/props}}
+SECTION section_0
+	TEXT "Hello, "
+	FILTER (FORMAT "name") "titleCase"
+	TEXT "\n"
+IF_SECTION "props" section_0
+
+
+
+; {{?.}}
+;     Blocked List:
+;     {{?users}}
+;         - {{name}}
+;     {{/users}}
+; {{/.}}
+SECTION section_1
+	TEXT "Blocked List:\n"
+	SECTION section_2
+		TEXT "- "
+		FORMAT "name"
+		TEXT "\n"
+	IF_SECTION "users" section_2
+IF_SECTION "." section_1
+
+;; Python Impl
+; from ij2tpl import runtime
+;
+; def template(data):
+; 	ctx = Context(data);
+;
+; 	def section_0(ctx):
+; 		return "Hello, " + runtime.filter(ctx.resolve("name"), "titleCase") + "\n"
+;
+; 	def section_1(ctx):
+; 		def section_1_0(ctx):
+; 			return "- " + ctx.resolve("name") + "\n"
+;
+; 		return "Blocked List:\n" + runtime.if_section(ctx.resolve("users"), section_1_0)
+;
+; 	return runtime.if_section(ctx.resolve("props"), section_0) + runtime.if_section(ctx.resolve("."), section_1)
+
+;; Golang Impl?

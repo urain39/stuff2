@@ -1,0 +1,27 @@
+syntax "C8ASM" "\.c8asm$"
+
+# Labels
+color brightblue "^[[:space:]]*\*[^[:space:]*@]+$"
+color brightblue "@[^[:space:]*@]+"
+
+# Accessible Registers
+color brightgreen "\<(SP|V[0-3])\>"
+
+# Non-accessible Registers
+color white,red "\<P[CS]\>"
+
+# Special Addresses
+color brightmagenta,cyan "\<(RN|I[TK]|T[HML])\>"
+
+# Numbers
+color brightmagenta "#-?\<([[:digit:]]+|\$[[:digit:]A-F]+)\>"
+
+# Instructions
+color brightyellow "\<(NOP|LDV|STV|TSV|NOT|AND|ORV|EOR|SH[LR]|CLC|ADC|SBC|P(SH|OP)|CMP|J[A-Z]{2}|RTS|IOI)\>"
+
+# Comments
+color brightcyan ";.*$"
+
+# Useless Spaces
+color ,red "[[:space:]]+$"
+

@@ -1,0 +1,6 @@
+http://mirrors.ustc.edu.cn/alpine/v3.13/main
+http://mirrors.ustc.edu.cn/alpine/v3.13/community
+@edge http://mirrors.ustc.edu.cn/alpine/edge/main
+@edge http://mirrors.ustc.edu.cn/alpine/edge/community
+@edge http://mirrors.ustc.edu.cn/alpine/edge/testing
+

@@ -1,0 +1,6 @@
+[Unit]
+Description=Wait network online (userland)
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'while ! ping -c1 baidu.com; do sleep 1; done'
+TimeoutStartSec=60s

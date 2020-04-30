@@ -1,0 +1,23 @@
+source /etc/network/interfaces.d/*
+
+# Local loopback
+auto lo
+iface lo inet loopback
+
+# Physical interface
+auto eth0
+iface eth0 inet manual
+
+# Bridge interface
+auto br0
+iface br0 inet static
+    bridge_ports regex (eth|vif).*
+    address 192.168.1.250
+    broadcast 192.168.1.255
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+
+# Wireless interface
+allow-hotplug wlan0
+iface wlan0 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf

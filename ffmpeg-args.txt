@@ -1,0 +1,11 @@
+; 注：使用 ffmpeg -hwaccel auto 可以实现硬件加速
+; 可能需要选择对应的编解码器，在 -codecs 中查看
+
+; 1080P@60FPS,H.264,AAC
+-preset fast -s 1920x1080 -r 60 -b:v 6M -c:v h264 -ac 2 -ar 44.1K -b:a 192K -c:a aac
+
+; 1080P@60FPS,H.265,AAC
+-preset fast -s 1920x1080 -r 60 -b:v 3M -c:v hevc -ac 2 -ar 44.1K -b:a 192K -c:a aac
+
+; 截取图片（每8秒一张）
+-preset placebo -r 0.125 -q:v 1 -qmin 1 -qmax 1 %08d.jpg

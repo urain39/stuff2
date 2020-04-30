@@ -1,0 +1,1729 @@
+commit d483defcdf0a958f768d3c360522663f2f436984
+Author: urain39 <urain39@qq.com>
+Date:   Wed May 22 19:48:52 2024 +0800
+
+    add progress2.awk
+
+commit 26e41ee0c47d0066f575e5b86f7938c7f11e5458
+Author: urain39 <urain39@qq.com>
+Date:   Fri May 17 22:33:41 2024 +0800
+
+    leg.sh: set IFS only for read
+
+commit b2aeea5fd5528a597432b606b6d261f74088ce90
+Author: urain39 <urain39@qq.com>
+Date:   Mon Apr 29 06:56:15 2024 +0800
+
+    full-width-chars.sh: fix pattern
+
+commit ed239c233630ad2f224cc0c97f5e20aa550d0f89
+Author: urain39 <urain39@qq.com>
+Date:   Sun Apr 28 23:32:56 2024 +0800
+
+    *.sh: save changes
+
+commit 95ed44b1f5bb65329faafb5212b220f3f829f7bf
+Author: urain39 <urain39@qq.com>
+Date:   Sun Apr 28 07:04:46 2024 +0800
+
+    rsync-extsd.sh: add --no-times
+
+commit e321367a7253a79ea41d2f28ae6d1fe53ffe6998
+Author: urain39 <urain39@qq.com>
+Date:   Sat Apr 27 13:29:30 2024 +0800
+
+    add rsync-extsd.sh
+
+commit 9051ae4ea14f5e9d677bcbd2b32ebaf768038823
+Author: urain39 <urain39@qq.com>
+Date:   Wed Apr 24 09:10:04 2024 +0800
+
+    fold-interlace-lines.sh: optimize
+
+commit dc5bf1593366cb6be34189ea769cddd360c88d7b
+Author: urain39 <urain39@qq.com>
+Date:   Mon Apr 22 21:30:38 2024 +0800
+
+    add nyaq.sh, fold-interlace-lines.sh
+
+commit e7d4b69cf7aef73fe0b698e452ab9581c1e2d0dc
+Author: urain39 <urain39@qq.com>
+Date:   Fri Mar 15 12:50:11 2024 +0800
+
+    *.sh: sync local
+
+commit a4f107917d507ae0b0f01b4d67c598fcd5c252a2
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 11 18:28:33 2023 +0800
+
+    pixiv-dl.sh: skip downloaded
+
+commit 40b9c47e1907f8ab17f4794ff33afec7d60c5dcd
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 11 18:19:11 2023 +0800
+
+    update leg.README.md
+
+commit 18d31a31af5939dfc6be31b0cbc246756093344e
+Author: urain39 <urain39@qq.com>
+Date:   Thu Dec 7 01:20:48 2023 +0800
+
+    update leg.README.md
+
+commit ab5dd5af971c43a870a6c1d5698f9fb3dc87f976
+Author: urain39 <urain39@qq.com>
+Date:   Tue Nov 14 18:45:14 2023 +0800
+
+    update xp3filter.tjs
+
+commit 49215283ccb57188ff452e8f7fc467613ee3550f
+Author: urain39 <urain39@qq.com>
+Date:   Tue Nov 14 06:11:54 2023 +0800
+
+    add xp3filter.tjs
+
+commit 40a83c06fde5d2750f8f26a679bf1de1b9ec9e53
+Author: urain39 <urain39@qq.com>
+Date:   Mon Oct 30 13:25:02 2023 +0800
+
+    update poi-rename.sh
+
+commit 6fadbfd45ca3aeac83fd28affc5bab00d8512d42
+Author: urain39 <urain39@qq.com>
+Date:   Sat Oct 21 23:12:04 2023 +0800
+
+    update pixiv-dl.sh
+
+commit 6ad5a02453a12ed0dccde7ad816641b35b6260f2
+Author: urain39 <urain39@qq.com>
+Date:   Sat Oct 21 16:45:23 2023 +0800
+
+    add pixiv-dl.sh
+
+commit 2eb3205c81a85b9aa5c3ae1332910613dd0c330e
+Author: urain39 <urain39@qq.com>
+Date:   Sat Oct 14 14:18:31 2023 +0800
+
+    add dedup-ext4.sh
+
+commit 38c56810fdfc673bf21178563efe9bd6112b04f4
+Author: urain39 <urain39@qq.com>
+Date:   Sat Oct 7 13:10:16 2023 +0800
+
+    add fat-uuid.sh
+
+commit 1e7b22b32be5dbc99aeadb26e84aad67b6ed017d
+Author: urain39 <urain39@qq.com>
+Date:   Tue Oct 3 09:15:34 2023 +0800
+
+    update gen-manifest.sh
+
+commit 0feff18d09950ca7d01502193c0248469b1061d5
+Author: urain39 <urain39@qq.com>
+Date:   Fri Sep 29 05:25:03 2023 +0800
+
+    update 00tmpdir
+
+commit b448fda3d4407c31c17c791b3c3bd9501450882d
+Author: urain39 <urain39@qq.com>
+Date:   Fri Sep 29 05:22:53 2023 +0800
+
+    add poi-rename.sh
+
+commit 3ac85acddf045a60f7e0f89c70bca936b859b217
+Author: urain39 <urain39@qq.com>
+Date:   Sat Sep 23 14:59:24 2023 +0800
+
+    update ffmpeg-args.txt
+
+commit 77ee7e8dd537de6209bd9282400f550c9cf0d979
+Author: urain39 <urain39@qq.com>
+Date:   Thu Jun 1 20:11:01 2023 +0800
+
+    add new files
+
+commit 5958f00fc59d89d83bd092aaa409ba94e3a7608b
+Author: urain39 <urain39@qq.com>
+Date:   Tue May 30 10:52:26 2023 +0800
+
+    add new one
+
+commit d29535762f7c01d2d797a8d74904b7aafc9d0629
+Author: urain39 <urain39@qq.com>
+Date:   Sun May 28 11:42:45 2023 +0800
+
+    add setup-flyme8.sh
+
+commit b1941aebc8961d575be178cb506f60f50474db1b
+Author: urain39 <urain39@qq.com>
+Date:   Sun May 28 08:11:19 2023 +0800
+
+    add new files
+
+commit 94f111a5861520b72e1333df487cfe1152821afd
+Author: urain39 <urain39@qq.com>
+Date:   Thu Oct 6 15:08:34 2022 +0800
+
+    to_unsigned.py: remove wrong comments
+
+commit 079449d5856a152adb829a3f10df42137fb428d0
+Author: urain39 <urain39@qq.com>
+Date:   Wed Oct 5 18:22:59 2022 +0800
+
+    add gitea docker-compose.yml
+
+commit 56a6a573e46539496251009f7b86a9fbf7c73efe
+Author: urain39 <urain39@qq.com>
+Date:   Wed Oct 5 03:12:44 2022 +0800
+
+    armbian_first_run.txt: correct config
+
+commit bc356baeec154cc3bad41534dfc76a8a640c5e4e
+Author: urain39 <urain39@qq.com>
+Date:   Tue Oct 4 17:40:08 2022 +0800
+
+    interfaces: add wireless interface
+
+commit 357402bd5464fe9b0c12a5980b0c1600eeaf564f
+Author: urain39 <urain39@qq.com>
+Date:   Tue Oct 4 16:26:55 2022 +0800
+
+    add armbian_first_run.txt
+
+commit 80008e20a24b124880610435cf61f81df420212d
+Author: urain39 <urain39@qq.com>
+Date:   Mon Oct 3 13:57:47 2022 +0800
+
+    update ufw.sh
+
+commit 6fe83205e96e6886b7ed56d8239e90461244af3a
+Author: urain39 <urain39@qq.com>
+Date:   Wed Sep 14 01:18:50 2022 +0800
+
+    update to_signed.py x2
+
+commit 4ea7b2ea213298d604bf1b3c0916ccd3e4741dc0
+Author: urain39 <urain39@qq.com>
+Date:   Wed Sep 14 01:14:57 2022 +0800
+
+    update to_signed.py
+
+commit a0e9c9ba69000d54c664e0d1a61be52cb3e5cbc9
+Author: urain39 <urain39@qq.com>
+Date:   Tue Sep 13 08:32:27 2022 +0800
+
+    update to_unsigned.py
+
+commit 2b5e81b0ef93c64462eee90d4c12b866623e3bdc
+Author: urain39 <urain39@qq.com>
+Date:   Tue Sep 13 06:38:03 2022 +0800
+
+    update unsigned_right_shift.py
+
+commit 085c68ab900a5aa4050b73c3051febc8af936c2a
+Author: urain39 <urain39@qq.com>
+Date:   Tue Sep 13 03:08:57 2022 +0800
+
+    update to_{,un}singed.py
+
+commit 5c9989d09e46bdcbdc2d495385f82932cf8cd5c2
+Author: urain39 <urain39@qq.com>
+Date:   Mon Sep 12 07:48:49 2022 +0800
+
+    fix typo
+
+commit cb79299abf8d104a3333f9c85649aed3580af8f1
+Author: urain39 <urain39@qq.com>
+Date:   Sat Sep 3 01:45:38 2022 +0800
+
+    small fixes
+
+commit 4214c2817633554fdfedd11ec8803e54f1b2a017
+Author: urain39 <urain39@qq.com>
+Date:   Sat Sep 3 01:28:01 2022 +0800
+
+    add BT*.py, CDB.py
+
+commit dbedd8b10f6e3f6b1aa159175d0bec0b600e1ac7
+Author: urain39 <urain39@qq.com>
+Date:   Sat Sep 3 01:15:36 2022 +0800
+
+    update TAGS.sql
+
+commit 7b8d733cece48dfaa5df2e2e9fe1a1324f2a5845
+Author: urain39 <urain39@qq.com>
+Date:   Fri Sep 2 23:02:56 2022 +0800
+
+    update TAGS.sql
+
+commit c6358d2ca06911f2c8b7567322155b4e06170d02
+Author: urain39 <urain39@qq.com>
+Date:   Fri Sep 2 19:36:46 2022 +0800
+
+    add TAGS.sql
+
+commit 3721c3a1ddd6667423bdc2d53419891d61eba916
+Author: urain39 <urain39@qq.com>
+Date:   Thu Sep 1 16:46:34 2022 +0800
+
+    add AndroidAppKeeper.sh
+
+commit 773bc451ab4d77b33bf2526a22891cc9ff220187
+Author: urain39 <urain39@qq.com>
+Date:   Mon Jul 11 22:57:04 2022 +0800
+
+    leg.README.md: 添加卸载小节
+
+commit c6f7c3c50e2fb9dc48818278ac53fc00a2342b90
+Author: urain39 <urain39@qq.com>
+Date:   Mon Jul 11 22:44:12 2022 +0800
+
+    leg.README.md: 修改错误
+
+commit 29944c07dea69d83958cd11f5f53f4861200a981
+Author: urain39 <urain39@qq.com>
+Date:   Mon Jul 11 22:35:32 2022 +0800
+
+    leg.README.md: update
+
+commit a9750219109143a2efd0950261a57ec5b44a3efe
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jun 29 21:53:27 2022 +0800
+
+    add m1721-*.conf
+
+commit b846f446dea9e023e055cacfe481f81774c4945e
+Author: urain39 <urain39@qq.com>
+Date:   Sun Jun 26 23:12:02 2022 +0800
+
+    leg.sh: remove useless chmod
+
+commit a867c50e5f72290c15d5125ae6d0a6ecf98ea296
+Author: urain39 <urain39@qq.com>
+Date:   Sun Jun 26 21:51:44 2022 +0800
+
+    leg.sh: remove zRAM Writeback
+
+commit 4ead6b7ec639aa501eb87d4ba7445b353104f3bc
+Author: urain39 <urain39@qq.com>
+Date:   Sun Jun 26 02:17:46 2022 +0800
+
+    leg.sh: use fat arrow instead thin arrow
+
+commit a9f784918f20bab055f57a3f33d6c88e9aa2dd2f
+Author: urain39 <urain39@qq.com>
+Date:   Thu Jun 23 11:52:53 2022 +0800
+
+    leg.sh,init.target.post_boot.sh: add zRAM writeback support
+
+commit af4ad2bebe9b2c755898aa5b67e106a396055359
+Author: urain39 <urain39@qq.com>
+Date:   Thu Jun 23 00:15:31 2022 +0800
+
+    arm64-kernel-build-deps.sh: add gcc
+
+commit 62b0a244db5802e5acd88f193e15f69444034101
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jun 22 04:47:30 2022 +0800
+
+    add init.target.post_boot.sh
+
+commit a8f7d4550d7c301ec81ae85439d709b240278a11
+Author: urain39 <urain39@qq.com>
+Date:   Tue Jun 21 13:02:46 2022 +0800
+
+    add arm64-kernel-build-*.sh
+
+commit 0dcdbe0d13e3f9013bd2fdf76347b1e13c5aa2b2
+Author: urain39 <urain39@qq.com>
+Date:   Thu Jun 16 16:15:33 2022 +0800
+
+    update leg.sh
+
+commit fc562b862a002067289cf1fe6f39b388d211610a
+Author: urain39 <urain39@qq.com>
+Date:   Mon Jun 6 01:03:09 2022 +0800
+
+    rclone-sync.sh: remove my-msod*
+
+commit f645b2855d2cd41ec9bae18bb59794fafbefa80b
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jun 4 05:03:31 2022 +0800
+
+    add gen-manifest.sh
+
+commit c5cbc1062a1562efc2eb671180dd355809609663
+Author: urain39 <urain39@qq.com>
+Date:   Sat May 21 11:18:01 2022 +0800
+
+    leg.sh: fix first sync run too early
+
+commit 6929c85ffb281da608365075be52a5efbae637f3
+Author: urain39 <urain39@qq.com>
+Date:   Sat May 21 10:26:49 2022 +0800
+
+    leg.sh: correct log dir perms
+
+commit 293350d7488f0f11c4d52eeb6a4fc590c129990d
+Author: urain39 <urain39@qq.com>
+Date:   Sat May 21 09:32:23 2022 +0800
+
+    leg.sh: change log dir to fix log missing
+
+commit 2dc8f154571e8c0775f5ec89bd12f9640a4e436b
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri May 20 10:55:15 2022 +0800
+
+    leg.sh: remove unused var
+
+commit 8bb4f28f76ea09692a3b165654dd9b38c31206df
+Author: urain39 <urain39@qq.com>
+Date:   Thu May 19 21:32:04 2022 +0800
+
+    leg.sh: fix tty fd bug
+
+commit f7c1731ebb26d7826bb46adcea09396a6caf462f
+Author: urain39 <urain39@qq.com>
+Date:   Thu May 19 18:56:33 2022 +0800
+
+    leg.sh: update comment
+
+commit 0f23ac9da4307a14385a8e1f0c83231bc2de90fb
+Author: urain39 <urain39@qq.com>
+Date:   Thu May 19 16:02:23 2022 +0800
+
+    leg.sh: update output style
+
+commit 8fa5d3a63e6fe65795b68c5cf4cc2d392964e348
+Author: urain39 <urain39@qq.com>
+Date:   Thu May 19 15:47:00 2022 +0800
+
+    leg.sh: add log support
+
+commit f25c75ee3a85c6fc3a9320baf4520a553d79cea3
+Author: urain39 <urain39@qq.com>
+Date:   Sun May 8 19:40:06 2022 +0800
+
+    include 规则中加入 ADM/
+
+commit b237cc551b5cdf7520aba97b02e591b8af4d7025
+Author: urain39 <urain39@qq.com>
+Date:   Thu May 5 18:52:27 2022 +0800
+
+    add 99-crond.sh
+
+commit be26fc6ef1d1b81507374601acbdce56bcfeb621
+Author: urain39 <urain39@qq.com>
+Date:   Fri Apr 22 19:25:36 2022 +0800
+
+    include 规则中加入 mhtml
+
+commit 999224d9e90105cc5b58215a4f063b7c2c867ffb
+Author: urain39 <urain39@qq.com>
+Date:   Tue Apr 5 19:50:40 2022 +0800
+
+    add leg.README.md
+
+commit 57c477e542775cc170e9355441ed6499dc3bded7
+Author: urain39 <urain39@qq.com>
+Date:   Fri Mar 18 08:02:14 2022 +0800
+
+    add 99-logrotate-override.conf
+
+commit d4154119ca5e528be10bba559851c43cb8eb5700
+Author: urain39 <urain39@qq.com>
+Date:   Wed Mar 16 01:37:35 2022 +0800
+
+    image-repack-manga.sh: increase quality
+
+commit 9458ef857f8289c9af27c12802f4c56f6ae3a6cf
+Author: urain39 <urain39@qq.com>
+Date:   Wed Mar 16 00:49:35 2022 +0800
+
+    image-repack-manga.sh: set output format to webp
+
+commit dbac15dd8cdaf54806342769ac677073a6896c4d
+Author: urain39 <urain39@qq.com>
+Date:   Thu Feb 10 22:55:31 2022 +0800
+
+    fix rclone-sync.sh
+
+commit 673bb06b3adac2b8838026b992d457e09fedfefd
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 29 15:11:19 2022 +0800
+
+    image-repack*.sh: remove -enhance for photo to get more details
+
+commit b49e0f3002fd573b6c062b159aea8fb8631e6fbe
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 29 00:19:56 2022 +0800
+
+    image-repack.sh: keep PNG format
+
+commit 355580c6def2936b8e8e541cf929ad70df9053c1
+Author: urain39 <urain39@qq.com>
+Date:   Fri Jan 28 19:41:21 2022 +0800
+
+    image-repack*.sh: change min-width to 1680
+
+commit 031e9ebed3e786f0d51b1c756b13ad09e917c836
+Author: urain39 <urain39@qq.com>
+Date:   Fri Jan 28 15:54:32 2022 +0800
+
+    image-repack*.sh: change colorspace to YUV
+
+commit 52859d16756d32efc34eb77f8c41dcfdf73d4c58
+Author: urain39 <urain39@qq.com>
+Date:   Tue Jan 25 20:23:42 2022 +0800
+
+    image-repack*.sh: limit colorspace
+
+commit 5032efeaff3b963d398500ca44c7fa48088dfb19
+Author: urain39 <urain39@qq.com>
+Date:   Fri Jan 21 19:00:00 2022 +0800
+
+    image-repack*.sh: correct args
+
+commit 82b90ad0800d1d344f95453a97ceec873bab3b8b
+Author: urain39 <urain39@qq.com>
+Date:   Thu Jan 20 08:10:33 2022 +0800
+
+    ffmpeg-args.txt: correct args
+
+commit 4c64ab69774069e4edd56a101d39d54f9a9556d2
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jan 19 22:36:30 2022 +0800
+
+    ffmpeg-args.txt: re-add old args
+
+commit 406474d3636cb754392c4ae96197f7d0d9ff7cd6
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jan 19 22:13:27 2022 +0800
+
+    ffmpeg-args.txt: remove --tune option
+
+commit b1aa7c72bd43e5b1a8321aca1533c20ff662b241
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jan 19 22:09:18 2022 +0800
+
+    ffmpeg-args.txt: change preset to ultrafast
+
+commit 4cac4ce13287e3993bd3ab03c3dc33337e77de67
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jan 19 21:06:42 2022 +0800
+
+    ffmpeg-args.txt: use h265(hevc) instead h264(avc)
+
+commit c2757db2e365431d64180839101fe7ab40420f0c
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jan 19 10:45:32 2022 +0800
+
+    add rmtool.json
+
+commit dd6405813420b23fc76d00909ea271e10e289c75
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jan 19 10:12:57 2022 +0800
+
+    add rpgmvdec.py
+
+commit 0b03ef3f6b082f069677012be86357956606e216
+Author: urain39 <urain39@qq.com>
+Date:   Tue Jan 18 08:20:46 2022 +0800
+
+    add JapaneseConvert.js
+
+commit a145ce00d0f71e5e57fea7b34429d013fcdc0688
+Author: urain39 <urain39@qq.com>
+Date:   Thu Jan 13 04:05:43 2022 +0800
+
+    image-repack-manga.sh: change min-width to 1536, 3072
+
+commit 1cac1c04d3931aa35d239533b8e29c31990707ce
+Author: urain39 <urain39@qq.com>
+Date:   Mon Jan 10 22:18:46 2022 +0800
+
+    ffmpeg-args.txt: change 1080P@30FPS bitrate to 2.5Mbps
+
+commit a27892bdeae70c6014b650cb1619f36de3d9c85b
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 8 16:08:29 2022 +0800
+
+    ffmpeg-args.txt: update
+
+commit c3ca9dae6295635cd53b2036cec9e0be69e6321f
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 8 14:53:49 2022 +0800
+
+    ffmpeg-args.txt: libx264 -> h264
+
+commit 9091c7b81b6048ec1fa674fecbd0ea2eab967b72
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 8 12:25:01 2022 +0800
+
+    add ffmpeg-args.txt
+
+commit 501c64ebe075a7db9ba09663697902b3a2f516fe
+Author: urain39 <urain39@qq.com>
+Date:   Wed Jan 5 23:44:17 2022 +0800
+
+    add dec-姬恋~缚羽的欠片.py
+
+commit 0673de8354cb0a1e62a8a89502caa5a73b9d7b71
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 1 10:30:12 2022 +0800
+
+    etc-backup: use mtime instead atime
+
+commit b238d58457818445636675dde6f92c13722e754b
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 1 10:23:44 2022 +0800
+
+    add etc-backup
+
+commit 3dc3b9859b06e080f954799177fc8e6d49e1ce62
+Author: urain39 <urain39@qq.com>
+Date:   Sat Jan 1 10:15:31 2022 +0800
+
+    add leg-user-init (replacement of systemd --user)
+
+commit 4cf8835cebf17567a6e7a843366b47d92b0b1e82
+Author: urain39 <urain39@qq.com>
+Date:   Thu Dec 30 18:36:42 2021 +0800
+
+    add ufw.sh
+
+commit 88df18da0196af41a258bed38e9f424c7a4ea524
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 27 11:10:07 2021 +0800
+
+    99-mmap-optimize.conf: increase zRAM usage
+
+commit 291600b8d96389862ad859e2dc9d624e7f593363
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 20 21:25:03 2021 +0800
+
+    image-repack-manga.sh: ignore empty line
+
+commit a6019a466f09fa43c257b485b8be72fafc59fc9a
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 20 20:46:50 2021 +0800
+
+    image-repack-manga.sh: match only jpg, png; set output format be jpg
+
+commit 54b777c91546817843408c77b9336f0250f26302
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 20 19:09:31 2021 +0800
+
+    re-add image-repack.sh for local compat
+
+commit becd971aebb7ec2482ceb17598e6adc5b363c4f7
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 20 19:07:57 2021 +0800
+
+    image-repack*.sh: update args, delete old one
+
+commit b59c11a1d9bec7a47574edb80807aafc53002c4b
+Author: urain39 <urain39@qq.com>
+Date:   Sun Dec 19 08:49:48 2021 +0800
+
+    add image-repack-manga.sh
+
+commit da9fcc386deb802e6d34116d05af4ff2ee49020f
+Author: urain39 <urain39@qq.com>
+Date:   Sun Dec 19 02:02:25 2021 +0800
+
+    image-repack.sh: update comments
+
+commit 3a390613cbba2087d2fe27ec2274c5845c5c7357
+Author: urain39 <urain39@qq.com>
+Date:   Sat Dec 18 23:36:46 2021 +0800
+
+    correct 99-mmap-optimize.conf
+
+commit 220eca782dad31d70ff3f78c4fc2fa3a48d21d28
+Author: urain39 <urain39@qq.com>
+Date:   Sat Dec 18 21:36:00 2021 +0800
+
+    image-repack.sh: reduce memory limit to 256MiB
+
+commit 362375c1630f9afb9dbc2ab9fac4f06b1dc35f9e
+Author: urain39 <urain39@qq.com>
+Date:   Sat Dec 18 00:45:08 2021 +0800
+
+    use real size instead original one
+
+commit 0f168163d2513e503021ab3d7dad161ccf343ddf
+Author: urain39 <urain39@qq.com>
+Date:   Sat Dec 18 00:28:02 2021 +0800
+
+    add image-repack.sh
+
+commit 1736afec4c10351e656f80dd2b9145d622505e0a
+Author: urain39 <urain39@qq.com>
+Date:   Tue Dec 14 03:40:05 2021 +0800
+
+    tmpdir.conf: re-set ramdisk size to 33%
+
+commit 570a1cbb7dd36bdfefe3e085c2394ab0504de65f
+Author: urain39 <urain39@qq.com>
+Date:   Sun Dec 12 17:56:16 2021 +0800
+
+    leg.sh: reset VDIR_SWAP_SIZE
+
+commit a4e5984cf0b24f8587f47d96071c2d7ef60b9c65
+Author: urain39 <urain39@qq.com>
+Date:   Sun Dec 12 17:47:56 2021 +0800
+
+    leg.sh: add ZRAM_CONST_SIZE
+
+commit d718bcc3e4129ae2560d0653d7ea13bfc8c0b98f
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 10 15:32:23 2021 +0800
+
+    qemu-start*.sh: reduce memory to 256M
+
+commit 569b144ae8ac2aebc8dc652cd450f5db02d02be6
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 10 03:26:50 2021 +0800
+
+    leg.sh: stop parsing option after VDIR_SYNC_ARGS
+
+commit d34006e5df44872e7b36f9529ed4ef7d4347f949
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 10 00:58:42 2021 +0800
+
+    qemu-start*.sh: change default memory size to 512M
+
+commit 46f149d3826a5d34cdb4633a1b3d56a292a99a9f
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 10 00:35:49 2021 +0800
+
+    leg.sh: avoid some error outputs
+
+commit 91304b7a501cce59726558566e71e1dc820e72cf
+Author: urain39 <urain39@qq.com>
+Date:   Thu Dec 9 20:26:17 2021 +0800
+
+    leg.sh: auto calculate zRAM range
+
+commit ee24198cc879fd075b429edaf9aea85d017035ee
+Author: urain39 <urain39@qq.com>
+Date:   Thu Dec 9 19:31:13 2021 +0800
+
+    leg.sh: add zRAM configs
+
+commit 90505dddfde27de1856fd866f912d8d68edb9918
+Author: urain39 <urain39@qq.com>
+Date:   Wed Dec 8 18:23:28 2021 +0800
+
+    add qemu-start-bridge.sh
+
+commit 0707a7c820a5de04a849222e9eb51289593914e9
+Author: urain39 <urain39@qq.com>
+Date:   Wed Dec 8 17:34:55 2021 +0800
+
+    add linux interfaces conf
+
+commit f04ae8b426bc36e3ddc1f6a3bb6423b50d7e7d7f
+Author: urain39 <urain39@qq.com>
+Date:   Tue Dec 7 14:31:09 2021 +0800
+
+    leg.sh: fix systemd conflicts
+
+commit 9d0d99f2ca5015bf2322f2c10bab2d5f1655410c
+Author: urain39 <urain39@qq.com>
+Date:   Tue Dec 7 11:59:27 2021 +0800
+
+    increase default sync delay
+
+commit bd69dd7f7e268aab126d40cd58678afb9193f58e
+Author: urain39 <urain39@qq.com>
+Date:   Mon Dec 6 21:21:02 2021 +0800
+
+    qemu-start.sh: forward samba port
+
+commit a63019b7c76ed4d0a0ea02bde171149e5fed0739
+Author: urain39 <urain39@qq.com>
+Date:   Sun Dec 5 15:54:16 2021 +0800
+
+    revert: VDIR_SYNC_XXX -> VDIR_RSYNC_XXX
+
+commit 41af716b0d7ee5e8c1c35d0481fbc2c9023331f1
+Author: urain39 <urain39@qq.com>
+Date:   Sun Dec 5 14:55:08 2021 +0800
+
+    enable zRAM overcommit (150%)
+    
+    * append --one-file-system, -x to VDIR_RSYNC_ARGS
+
+commit a0e84acb8372579deeaf82a05d62f14fdc00b9b7
+Author: urain39 <urain39@qq.com>
+Date:   Sun Dec 5 12:57:27 2021 +0800
+
+    fix leg.sh freeze
+    
+    zRAM will take some time to compressing, but the boot time is too short, so it freezes.
+
+commit ea6e7db8b8a76e2f41065f2336b74b845e5e9472
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 3 22:56:35 2021 +0800
+
+    -cpu host can only works with kvm
+
+commit b91a6c69c1ed6c139ed94339bca06b267562a5c4
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 3 22:35:19 2021 +0800
+
+    add qemu-start.sh
+
+commit 0ab0b80468c49daaa66d1afe93240a6ab58fe517
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 3 20:43:47 2021 +0800
+
+    add rclone-sync.sh
+
+commit 78482317faf6196819ebfd0942900663041d545c
+Author: urain39 <urain39@qq.com>
+Date:   Fri Dec 3 09:02:58 2021 +0800
+
+    add meta info
+    
+    * EOF -> EOT
+
+commit 5076aa3b126c917adaa184bc25f5c0e524401bee
+Author: urain39 <urain39@qq.com>
+Date:   Thu Dec 2 18:57:30 2021 +0800
+
+    update systemd service
+
+commit 82a78d963f560e39f61dbdd576cee39b7e979ed7
+Author: urain39 <urain39@qq.com>
+Date:   Thu Dec 2 12:47:51 2021 +0800
+
+    add static directory
+
+commit b5dbbbf9a3b11e395ac780460b09ff288b69dec7
+Author: urain39 <urain39@qq.com>
+Date:   Wed Dec 1 16:17:32 2021 +0800
+
+    add init command
+    
+    * fix systemd service (duck you!)
+    
+    * fix systemd service(duck you x2!)
+    
+    * increase vDIR sync delay
+    
+    * fix cron expression
+
+commit 8818a87bb03ab34e1a1b7d7f4b3cd010ccff9312
+Author: urain39 <urain39@qq.com>
+Date:   Wed Dec 1 11:06:28 2021 +0800
+
+    support custom sync delay
+
+commit 13db98fb3463db75103644e9de0cb88ccc7c5096
+Author: urain39 <urain39@qq.com>
+Date:   Tue Nov 30 16:05:01 2021 +0800
+
+    fix cannot work on debian
+
+commit 304d0e60155cf3c8ce803baaca6aed0d4a0fe98f
+Author: urain39 <urain39@qq.com>
+Date:   Tue Nov 30 10:25:34 2021 +0800
+
+    fix swap file permission
+
+commit c8df2e1240d5ed8e120a4d5387921ba207cfe0b7
+Author: urain39 <urain39@qq.com>
+Date:   Tue Nov 30 10:05:35 2021 +0800
+
+    add my-cloud-seed.iso
+
+commit 33b290b781584018e91378ed8bd5b3c50f9cbf75
+Author: urain39 <urain39@qq.com>
+Date:   Mon Nov 29 11:17:00 2021 +0800
+
+    add leg.sh
+    
+    use shfmt format leg.sh
+
+commit 6c168ec4f1535ced2686d1224c59d1638ff8d017
+Author: urain39 <urain39@qq.com>
+Date:   Fri Nov 26 11:59:54 2021 +0800
+
+    fix RegExp
+
+commit 4d329f0adad8961d7b1d6f345ef5cf4237a84965
+Author: urain39 <urain39@qq.com>
+Date:   Sun Nov 21 12:10:36 2021 +0800
+
+    rename mount-avfs.sh to command-action style
+
+commit 1b9d4e13ba787bf932d0463d2336784892aed945
+Author: urain39 <urain39@qq.com>
+Date:   Sun Nov 21 12:02:39 2021 +0800
+
+    add mount-avfs.sh
+
+commit 0bf5ac01e1e28044c475cb9e39ec3dc5185d297c
+Author: urain39 <urain39@qq.com>
+Date:   Fri Nov 19 20:14:24 2021 +0800
+
+    tmpdir: fix shellcheck warning
+
+commit abc519793285a069ca7d9c083efbe7fc32c50714
+Author: urain39 <urain39@qq.com>
+Date:   Thu Nov 18 08:59:25 2021 +0800
+
+    tmpdir: support custom mount options
+
+commit cb487dca627e5b76ac58441c0a35626d028ec4ab
+Author: urain39 <urain39@qq.com>
+Date:   Wed Nov 17 22:58:11 2021 +0800
+
+    update check flag
+
+commit 5b379fdae35704ff53e118b245d1113013085751
+Author: urain39 <urain39@qq.com>
+Date:   Wed Nov 17 01:15:05 2021 +0800
+
+    allow samba access fuse mount point
+    
+    Note: do not forget uncomment user_allow_other in /etc/fuse.conf
+
+commit d5831700c582a16834f92b16303703f83f79619f
+Author: urain39 <urain39@qq.com>
+Date:   Mon Nov 15 07:17:00 2021 +0800
+
+    move ~/.local/cron to ~/.local/share/crontabs
+
+commit 78d9040ddbbd0fbce82a8c8b777a25fa044a61c5
+Author: urain39 <urain39@qq.com>
+Date:   Sun Nov 14 12:22:35 2021 +0800
+
+    重新改为未加密
+
+commit d15b1c960dbe14c6236591498600d1d511b7931d
+Author: urain39 <urain39@qq.com>
+Date:   Sun Nov 14 02:31:06 2021 +0800
+
+    update comments
+
+commit 26d361c3b18623f466bf4c9ff29ca63933d79d8d
+Author: urain39 <urain39@qq.com>
+Date:   Sat Nov 13 21:03:33 2021 +0800
+
+    support partial path
+
+commit c847ae5aaa5b04085e78575b1ec1decd1f81e5b9
+Author: urain39 <urain39@qq.com>
+Date:   Sat Nov 13 15:25:15 2021 +0800
+
+    fix a logic bug
+
+commit ac7b917267764c0e957b0bcba9e527ceb9ab4148
+Author: urain39 <urain39@qq.com>
+Date:   Sat Nov 13 03:49:11 2021 +0800
+
+    add find_clean_directory.py
+
+commit 131157c1b5a1047ea1261cd2789d6ab0a8364924
+Author: urain39 <urain39@qq.com>
+Date:   Fri Nov 12 19:42:05 2021 +0800
+
+    use encrypted source
+
+commit 22f4eab08d279e5ff30de6f4452dd1de18910348
+Author: urain39 <urain39@qq.com>
+Date:   Tue Nov 2 20:50:20 2021 +0800
+
+    disable write cache (for sdcard)
+
+commit dabfc9334bd7c93cabe4a5d457a4f0a1a7947bff
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Oct 31 21:01:46 2021 +0800
+
+    修复丢失最后一个任务的问题。
+
+commit b1f407c750b79c22247575c10a8b5f8f02254b5f
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Oct 31 20:50:04 2021 +0800
+
+    修复解析错误。
+
+commit e930d72b6a938a94761c97f35039878c9fabb72d
+Author: urain39 <urain39@qq.com>
+Date:   Sat Oct 30 07:08:14 2021 +0800
+
+    给用户级 crontab 设置默认 shell 。
+
+commit b3af9367d9e6cbf8d6ef293840bf622c22dfac47
+Author: urain39 <urain39@qq.com>
+Date:   Fri Oct 22 09:47:22 2021 +0800
+
+    过滤空白行。
+
+commit f1023cb5a72775518ed9d6337d5eaaa58b5ae640
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri Oct 15 05:50:53 2021 +0800
+
+    Update rclone-mount.service
+
+commit 84df180b4290f3927fe7705d7f6ce10e9bfed356
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri Oct 15 05:45:50 2021 +0800
+
+    Update rclone-mount.service
+
+commit 8a0f8d0e53b050ab826743fdcd33b0dc9ec09436
+Author: urain39 <urain39@qq.com>
+Date:   Sun Oct 10 15:59:55 2021 +0800
+
+    fix indention
+
+commit d9aab123c0861df5cf18cb410f90c028926c29d3
+Author: urain39 <urain39@qq.com>
+Date:   Sun Oct 10 03:36:29 2021 +0800
+
+    将 cron 唤醒间隔改为30分钟。
+
+commit 07239ce077a669ea382a6cb4279236783db8503b
+Author: urain39 <urain39@qq.com>
+Date:   Wed Oct 6 21:31:47 2021 +0800
+
+    添加 termux rsyncd 配置。
+
+commit e392756d2cd46ff96027128d71f46f9a316a4972
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue Oct 5 01:40:53 2021 +0800
+
+    Add files via upload
+
+commit 8688a9d91e2f870ea233ba14d25ce2c4ea8c1def
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Oct 4 14:50:20 2021 +0800
+
+    减少 grep 调用次数。
+
+commit 781595d6f1219c48343f99087f4ad2b93c2c595c
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat Oct 2 14:51:07 2021 +0800
+
+    Update rclone-mount.service
+
+commit 73690c6674626d4fce77ef864b83af69e8e6ee2f
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat Oct 2 01:59:20 2021 +0800
+
+    减少缓存时间（本地磁盘太小）。
+
+commit 11067257d8cf3d26c3447c800d500dc5d70e169e
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri Oct 1 14:07:54 2021 +0800
+
+    使正则表达式兼容 mawk 。
+
+commit 2176fb6e57d145238c8d4dba7fa5d46612fa70bb
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri Oct 1 10:52:30 2021 +0800
+
+    Add files via upload
+
+commit db6c41f1d577fb80c6400824adb2d103fea041a8
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Thu Sep 30 15:58:24 2021 +0800
+
+    Create rclone-mount.service
+
+commit 4294b6a9bcc6a93fe3868eb25b8d3a9c7085e900
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue Sep 28 14:34:26 2021 +0800
+
+    Update and rename cron-script-switcher.sh to cron-script-limiter.sh
+
+commit 3a8ff13dd0e0f3a58328f40325a62231621bc495
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue Sep 28 01:31:41 2021 +0800
+
+    Add files via upload
+
+commit 4d08582632ff7995c95566ad1cfcc276fb9a277e
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 27 17:11:57 2021 +0800
+
+    删掉多余的目录。
+
+commit 7ca31671aa6f42c0b7baa47a153629a697c524a2
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 27 12:28:08 2021 +0800
+
+    Update wait-network-online.service
+
+commit 8845c28b38e50f97981e59290f50d55875dbed45
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 27 12:26:11 2021 +0800
+
+    Create wait-network-online.service
+
+commit 32b235dd200fc871c744115f1081622bf9fee47a
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 27 09:02:05 2021 +0800
+
+    Create setup-crontabs.sh
+
+commit 0199f69aee4950520353f187e24790268048f75b
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat Sep 25 09:00:28 2021 +0800
+
+    修复svc可能的Killed报错。
+    
+    搞不懂为什么，部分busybox会出现这个错误，我用Linux版的busybox就没错。
+
+commit ce7ab68e36df0a412160676a2217b071ed4c5f89
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat Sep 25 02:01:00 2021 +0800
+
+    修复cron表达式语法错误。
+    
+    这里我好像被网上的教程误导了，或者我自己理解错了。
+
+commit 86780c9ac7275e7b030ecc75afbcafb42a16279d
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri Sep 24 15:08:47 2021 +0800
+
+    修复busybox兼容性问题。
+
+commit 34efe0b43faec919112033fc1051f83afa1d81a3
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue Sep 21 17:33:17 2021 +0800
+
+    使用更安全的 svc power reboot 代替 reboot。
+
+commit 1ee490585a3cd649b4d4ab1328737e07482cb219
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue Sep 21 07:23:32 2021 +0800
+
+    增加修复时差的表达式。
+
+commit d7cb66a52d0811d967123a74cf6a5398c5ebd875
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Thu Sep 16 23:22:04 2021 +0800
+
+    完全对 media_rw 开放权限。
+    
+    子目录权限受父目录权限影响。在这里父目录并没有赋予 other 可执行（x）权限；也就是说就算子目录是 777 ，other 也无法访问子目录。
+    
+    另外又因为这里子目录的 owner 是 root ，所以实际上（在 777 权限下）只有 root、root group、media_rw 可以访问。
+    
+    不过 media_rw group 好像就无法访问了。具体哪些组件受影响就不太清楚了，总之目前我这里使用正常吧。
+
+commit 1fb78276737286ce48c8d146c66a9e09bf69c658
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Thu Sep 16 22:43:18 2021 +0800
+
+    保留父目录的执行权限（查看子目录需要执行权限）
+
+commit 45b0aa149ff5e94cc21cc208e73973789846eb5c
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue Sep 14 20:55:55 2021 +0800
+
+    修复可能的权限问题。
+
+commit 9a05a25014288f2c1d1826ab10e9c98628f13587
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 13 23:22:35 2021 +0800
+
+    修复 toybox 低版本兼容性问题。
+    
+    toybox 低版本的 grep 不支持“\b”、“\<”和“\>”，所以这里选择改成“$TOPDIR$?”格式，用于和“$TOPDIRxxx……”做区分。
+
+commit 98302c0004bcac0a265d9afa70974e467cb605f7
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 13 19:03:56 2021 +0800
+
+    修复 TMPDIR 路径匹配
+    
+    原版忽略了“[^/.]\.”和“\.[^/.]”这两种情况，这里补上了。
+
+commit 9ec5c8534a4524cc71252d94d520a208e46d9fbb
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 13 16:28:21 2021 +0800
+
+    修复 $TOPDIR 匹配问题。
+
+commit 9f2fd9457849f289d67d73110187df99c91e08c7
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Sep 12 22:38:59 2021 +0800
+
+    修复逻辑 bug 等。
+
+commit 1ada36a191c78e9929fbd93fd361a9a76e2005cf
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Sep 12 17:17:34 2021 +0800
+
+    修复正则表达式错误（旧版不受影响）
+
+commit 7545a36e91600a8b48a181cd93b5da0f402fb54e
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Sep 12 13:45:44 2021 +0800
+
+    Update 00tmpdir
+
+commit 5bfe4107f2f88d83b83889c54943c0d70c8a71a0
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Sep 12 13:42:59 2021 +0800
+
+    Update 00tmpdir
+
+commit d00e92ca2a808ef66f8173b565748b17f0054236
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Sep 12 12:58:09 2021 +0800
+
+    优化代码逻辑。
+
+commit ccfdd487a68acea3491e58ca8b3626cf3ba65d9f
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Sep 12 12:56:13 2021 +0800
+
+    修复父目录不存在时错误的问题。
+
+commit d6c13c6541821cd85e95e1d4aab5d0f0a31079ab
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun Sep 12 10:19:59 2021 +0800
+
+    Update setup-crontabs-android.sh
+
+commit 50f84d23ec4317e17adf4093ff1710900c2021a9
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat Sep 11 23:55:39 2021 +0800
+
+    Create setup-crontabs-android.sh
+
+commit 4a2669b3abf33feda14ebfc9ad9dce30bda6c0ef
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri Sep 10 15:07:59 2021 +0800
+
+    进一步限制tmpdir大小。
+
+commit 603bd100090e374e36758101bfc15a64a9e28449
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Thu Sep 9 21:01:11 2021 +0800
+
+    Create aria2-on-download-complete2.sh
+
+commit 741da8936de8a20339fc0fa141be20679c7ab564
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Thu Sep 9 19:15:21 2021 +0800
+
+    Create aria2-on-download-complete.sh
+
+commit 9ec939d768f56c5b5491ba557e233e08a530dd42
+Author: urain39 <urain39@qq.com>
+Date:   Thu Sep 2 07:51:12 2021 +0800
+
+    限制 tmpdir 大小。
+
+commit 456689ab63c854fea66cb7dd5e194e89814b6323
+Author: urain39 <urain39@cyfan.cf>
+Date:   Sat Aug 7 07:56:04 2021 +0800
+
+    fix regexp of comment
+
+commit 7839e539ae3f77c44faa7987534a0c50fd8cbdae
+Author: urain39 <urain39@cyfan.cf>
+Date:   Sat Aug 7 03:21:51 2021 +0800
+
+    no cat!
+
+commit e57c2c51c4a9b735f69b71be69832157e6911489
+Author: urain39 <urain39@cyfan.cf>
+Date:   Sat Aug 7 03:09:34 2021 +0800
+
+    fix security issues
+
+commit d4fa8986a661d3c8d8bbf1c455f94f99346bdc01
+Author: urain39 <urain39@cyfan.cf>
+Date:   Thu Aug 5 05:35:42 2021 +0800
+
+    update 00tmpdir
+
+commit 54c5ef4698c8be9bcdf802eb988877519e26b191
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Thu Jul 22 18:51:31 2021 +0800
+
+    Create 00tmpdir
+
+commit c62f5633c2508cb2a7dad852cc682889cea0db33
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Thu Jun 17 20:06:43 2021 +0800
+
+    Add files via upload
+
+commit fa5f57875dfd6a0397e62ea75af201c553594f4b
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 30 19:04:52 2021 +0800
+
+    Add files via upload
+
+commit d71ec1c449f2142f8913822da6c0fb141c0dd09a
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri May 28 16:56:35 2021 +0800
+
+    Add files via upload
+
+commit a5a554da109672aeb87c9336c6838bd6ea078c73
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri May 28 16:50:00 2021 +0800
+
+    Add files via upload
+
+commit 2a2642e9dc91754c1bb1c63047532ef0c9baca06
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri May 28 16:40:35 2021 +0800
+
+    Update setup-alpine-qbittorrent.sh
+
+commit 7e580520dd78d07e4a598404f90b1287deb7aeed
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Wed May 26 18:52:41 2021 +0800
+
+    Add files via upload
+
+commit 0bc9439d1eccde932d128d555a747952fca4e8aa
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue May 25 15:39:30 2021 +0800
+
+    Add files via upload
+
+commit e57003aaf9b5b98441a5720c8884ee7094231daa
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Tue May 25 14:02:07 2021 +0800
+
+    Add files via upload
+
+commit c7a7a2cf195e3c3e66a4a9f0ca690fd2403a959d
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon May 24 20:19:25 2021 +0800
+
+    Add files via upload
+
+commit bcb1109c73762542bdc9bdac2d22427bbcdfe2c7
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 23 12:09:10 2021 +0800
+
+    alpine linux package metadata
+
+commit 2e732a2cb29b5f439f80b714c39f56aaeb06ed72
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon May 17 02:47:25 2021 -0500
+
+    Create setup-alpine-qbittorrent.sh
+
+commit ebf53e42a4fc02ad731e0966e82c12ae412acced
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Mon May 17 00:10:31 2021 -0500
+
+    Create qchroot.sh
+
+commit de0982d46bfbad665c15a254e488bc24ac829feb
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 16 22:43:24 2021 -0500
+
+    Create qchroot.sh
+
+commit 7969115a36c1e5d6c81677f937f9666e19c4ce86
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 16 22:36:28 2021 -0500
+
+    Create qchroot.sh
+
+commit 3fcefda556420722ea2a5f4d5ebab01e811ccfb9
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 16 02:00:06 2021 -0500
+
+    Create qchroot.sh
+
+commit b342d02c891439eb14297d2ca99250e025d0d773
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 16 00:53:56 2021 -0500
+
+    Create qchroot.sh
+
+commit d4b70429be5b5b45b68bd04e39e09bde3db3e45b
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 16 00:35:24 2021 -0500
+
+    Create qchroot.sh
+
+commit 6580dbb7472e5c625a6e9c89efde441ff3b0656a
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat May 15 01:31:23 2021 -0500
+
+    Create qchroot.sh
+
+commit 37027418e62577a38e5c7a47bf6a7f40f68ef8ff
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat May 15 01:23:30 2021 -0500
+
+    Create qchroot.sh
+
+commit 5c657959342677ab8f0d03005a5873d60e15638d
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Sat May 15 01:17:09 2021 -0500
+
+    Create qchroot.sh
+
+commit b65e6a24c28042b9e3f3a9b346eaaad101f6fc89
+Author: μrainЗ⑨ <16981964+urain39@users.noreply.github.com>
+Date:   Fri May 7 21:50:40 2021 -0500
+
+    Create ij3tpl.c
+
+commit e18df98aac1c5622912d784320802652b97d7022
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Apr 27 06:35:41 2021 -0500
+
+    Create sbc.py
+
+commit 23ede01326d66c70147abdeaa25e098777fe4d24
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Apr 23 11:24:43 2021 -0500
+
+    Create adc.py
+
+commit 9fc8a50d56a5ce9047338634aaa7962ed7fd36fa
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Apr 23 07:44:43 2021 -0500
+
+    Create adc.py
+
+commit e5baf3d27de267ed5631ae10f61bdd6d07e59d12
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Wed Apr 14 03:52:44 2021 -0500
+
+    Create to_signed.py
+
+commit 6f549f5e7623d7ffd5eb5d039a8d3d1d1fc1d26a
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Wed Apr 14 03:49:55 2021 -0500
+
+    Create to_signed.py
+
+commit 31d118afa79a27237e66029b457a374af6cd84a7
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Wed Apr 14 02:02:05 2021 -0500
+
+    Create to_unsigned.py
+
+commit 997a421ffce5f4c835523097cb8f541d46c78112
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Wed Apr 14 02:00:40 2021 -0500
+
+    Create to_unsigned.py
+
+commit 2d16bc3c575eadd76d6bafeecb95eede0c25cebb
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Wed Apr 14 01:36:38 2021 -0500
+
+    Create unsigned_right_shift.py
+
+commit 33a063d64a42dfb97d78b63d9840fbd18fc71da3
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Thu Mar 25 12:07:42 2021 +0000
+
+    Update flappy.py
+    
+    添加边界，修改波动幅度。
+
+commit 119962feffcb6d4249f24f3669d3c96554bc6c98
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Thu Mar 25 05:27:00 2021 +0000
+
+    Create flappy.py
+    
+    简单的类似flappy bird的地图生成算法。
+
+commit 6e19a0bde7033ac26db4d8fb6619fbf5a1d783bd
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Mar 22 00:32:31 2021 -0500
+
+    Update maxsum.lisp
+
+commit ba96e7e2dc14b92f9eef14d02fe43c6e052aaa86
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Mar 22 00:24:38 2021 -0500
+
+    Create maxsum.lisp
+
+commit 90a3bc7ec92d00b254fa0d3f7756fbd1b3529b34
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sat Mar 13 21:39:53 2021 -0600
+
+    Add files via upload
+
+commit f487ddd8fc26d85ebbef4e4f9770e8fcfec55345
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sat Mar 13 10:21:56 2021 -0600
+
+    Add files via upload
+
+commit 0937635e056a223f95dd97097f6e9960ecb1af2b
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Mar 8 04:28:03 2021 +0800
+
+    Add files via upload
+
+commit e00be46c553abf448bd927e226670fc3cb8d0093
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sun Mar 7 12:44:46 2021 -0600
+
+    Create calc.js
+
+commit d456cc7a82a47ae18c58b912060cc8441479baa3
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sun Mar 7 05:03:53 2021 -0600
+
+    Create calc.js
+
+commit d869055d6d80c23fee10ca651e80e6283fed9025
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Mar 5 00:52:48 2021 -0600
+
+    ij2.ir: 修复诸多错误。
+
+commit 56fea949da5cff7942184dbc54fba08f4aa24df1
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Mar 5 00:44:30 2021 -0600
+
+    Update ij2.ir
+
+commit 79007e88bc16828fa03a797e2c6fde44f9449bd7
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Mar 2 13:34:27 2021 -0600
+
+    Delete PromiseA-.js
+
+commit 442279bd29be276a2461b8f69ec808366036919e
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Mar 2 13:34:11 2021 -0600
+
+    Create lazy-tokenize.js
+
+commit 0e13a895cb495648ee48600bdecccdecb08e62b5
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Mar 2 07:53:12 2021 -0600
+
+    修复countjs中的错误。
+
+commit 8c51783c829d2b0573b525d7e999ec9a5c696feb
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Mar 2 07:39:33 2021 -0600
+
+    Update count.js
+
+commit 52f91337934b9238114098d5ac731b8d44f22fc5
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Mar 2 07:21:22 2021 -0600
+
+    Create BFSearch.js
+
+commit c41d800008e82058894ec0cea0665631add3e5e2
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sat Feb 13 21:35:30 2021 +0800
+
+    重命名属性。
+
+commit 0b1b672baa75a33db902c9a26574e49c957d3fbe
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sat Feb 13 20:07:39 2021 +0800
+
+    添加PromiseA-（简化版）实现。
+
+commit 697a85fdc149a2723bca2fae03e67e9ab226513f
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Feb 2 15:11:51 2021 +0800
+
+    Create watchdog.awc
+
+commit 0d75dd6b9484463dd317f1ca632d16940a99ce46
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sat Jan 30 22:40:39 2021 +0800
+
+    Create preprocess.ts
+
+commit 5ae706be46503a4dc16379799c9ae17423371b68
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Wed Jan 27 22:14:46 2021 +0800
+
+    Update JSONType.ts
+
+commit b0b42ae9878d29455c3d4bdd61d2ee495b802fd8
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Jan 26 23:53:32 2021 +0800
+
+    Update awkini.awk
+
+commit b0076bb8bde837aec3683958ba996b8e49463aef
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Jan 26 23:43:08 2021 +0800
+
+    Rename ieee754 to ieee754.c
+
+commit 22fc4a111e014dd0ec6ee006d3170c2dbf10532f
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Jan 26 23:42:31 2021 +0800
+
+    Create JSONType.ts
+
+commit 2ee6cf89d913ea5516e3f12ed8cda9a01f7fbff7
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Nov 16 11:36:00 2020 -0600
+
+    Create 99-mmap-optimize.conf
+
+commit cd72c2edb91a095c0fae1a0912b2e8de17dafb5b
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Nov 16 08:32:07 2020 -0600
+
+    Create 99-mmap-optimize.conf
+
+commit dc68ac6c9c5e7e41141b297496c06affd9160c6c
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Nov 16 07:54:51 2020 -0600
+
+    Create 99-mmap-optimize.conf
+
+commit c3530910662441e75603b58135bc45d93a7babc8
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Sep 7 18:07:51 2020 +0800
+
+    Create awkini.awk
+
+commit 9430dc72278c490f1ffeae3f6d447bc1edab97fc
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Aug 24 07:48:15 2020 +0800
+
+    Create 64color.py
+
+commit 715ac649ce8006e1e81e67072d88537bbb210fbf
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Aug 10 20:18:15 2020 +0800
+
+    Create ieee754
+
+commit ed58569f02c94e49a04e1e7a2b9fdd31b0c8ae4c
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Jul 10 03:35:33 2020 -0500
+
+    Update c8asm.nanorc
+
+commit 2ee3226e072831016921cb5b9ccf4755ef80997a
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Jul 10 03:29:30 2020 -0500
+
+    Create ij2.ir
+
+commit d086cac06c2fccb5011adf708ed6bed4e0c8529a
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Jul 10 03:26:45 2020 -0500
+
+    在异步js中如何实现sleep的一种思路
+
+commit 2cdfbba5ad7e6648717cbcf398ab8a0b43443edb
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri Jul 10 03:19:53 2020 -0500
+
+    Update cg.awk
+
+commit c42b8eff195910ab218a7d2849e3efdaf225376d
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Mon Jul 6 23:00:09 2020 -0500
+
+    Update c8asm.nanorc
+
+commit c17d45b86d55bbcfe8deeb98fd6e613b1f310080
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue Jul 7 10:03:40 2020 +0800
+
+    备注：c8asm第一版高亮
+
+commit ac23d3dce44eec338d308f7276a7cd36a6bbaaa4
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sun Jul 5 11:24:25 2020 -0500
+
+    Create ntl.nanorc
+    
+    一个小众语言的nano自设语法高亮
+
+commit 2c5b8c84006c3619eca9dea67157792c6544e04f
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue May 19 08:40:03 2020 -0500
+
+    Create version.sh
+
+commit 2caf1562f20a32951cdda298939c04b57af4b8f0
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue May 19 08:10:41 2020 -0500
+
+    Update version.js
+
+commit 88d3f8e5903a29ce5a29c2b737f474ac0e73fb71
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue May 19 08:08:46 2020 -0500
+
+    Update version.js
+
+commit e52e719a14f03daa549cf180002ab3c18f7bcc28
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Tue May 19 08:05:47 2020 -0500
+
+    备注：此代码用于在nodejs中生成随机版本号
+
+commit b2556709cdc9912293f838ff064081ba42010c49
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 10 03:38:04 2020 +0800
+
+    Update endian.h
+
+commit 9e33a668825c63f8650c61ef44d89fc220736fb8
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 10 02:19:07 2020 +0800
+
+    Create test-endian.c
+
+commit 1675e31318a1de603ba8fe7a51db8943349c8969
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 10 02:16:24 2020 +0800
+
+    Create endian.h
+
+commit 62153a5fee9548f0cedbe88f9c81dfb73553a5c1
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sun May 10 02:15:36 2020 +0800
+
+    Create endian.c
+
+commit 6169f3136499db95879773ab9804eaba0dcaccf6
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sat May 9 21:53:24 2020 +0800
+
+    Update count.js
+
+commit 8ce9c54b9af82293305d7f7cf44b8a72badcc7da
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Sat May 9 21:41:08 2020 +0800
+
+    备注：给JavaScript的String原型添加类似Python的count方法。
+
+commit a4c9ef7c5ea0394917edd038615490f5039e74b3
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri May 1 03:44:50 2020 +0800
+
+    备注：处理krkrz游戏存档时写的小脚本。
+
+commit db7d7cc0b5c53f3844ffc9752dddba99b986dfeb
+Author: urain39 <16981964+urain39@users.noreply.github.com>
+Date:   Fri May 1 03:41:50 2020 +0800
+
+    Initial commit

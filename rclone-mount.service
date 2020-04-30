@@ -1,0 +1,16 @@
+[Unit]
+Description=RClone Mount
+Requires=wait-network-online.service
+After=wait-network-online.service
+
+[Service]
+Environment=DOWNLOAD_DIR="%h/my-msod"
+ExecStartPre=/bin/sh -c 'rm -rf "$DOWNLOAD_DIR"; mkdir -p "$DOWNLOAD_DIR"'
+ExecStart=/usr/bin/env rclone mount my-msod:/ "$DOWNLOAD_DIR" --allow-other --vfs-cache-mode full --vfs-cache-max-age 30m --vfs-cache-max-size 10G --use-mmap
+# Wait until RClone is really be mounted.
+ExecStartPost=/bin/sh -c 'while ! grep -Fq " $DOWNLOAD_DIR fuse.rclone " /proc/mounts; do echo "Waiting \x27$DOWNLOAD_DIR\x27 mount..."; sleep 3; done'
+TimeoutStartSec=999s
+
+[Install]
+WantedBy=default.target
+
