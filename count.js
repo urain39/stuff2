@@ -1,5 +1,5 @@
 String.prototype.count = function(substring) {
-	var i,
+	var i = -1,
 		count = 0;
 	if (substring)
 		while ((i = this.indexOf(substring, i + 1)) !== -1)
