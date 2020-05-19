@@ -5,7 +5,7 @@
 var { version } = require('../package');
 
 
-function toHexString(num) {
+function toShortString(num) {
 	var mod,
 		str = '',
 		base = '0'.charCodeAt(0),
@@ -32,5 +32,5 @@ function toHexString(num) {
 }
 
 exports.getDirtyVersion = function() {
-	return version + `-${toHexString(Date.now())}`;
+	return version + `-${toShortString(Date.now())}`;
 }
