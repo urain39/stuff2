@@ -32,5 +32,5 @@ function toShortString(num) {
 }
 
 exports.getDirtyVersion = function() {
-	return version + `-${toShortString(Date.now())}`;
+	return `${version}-${toShortString(Date.now())}`;
 }
