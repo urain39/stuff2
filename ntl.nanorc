@@ -1,0 +1,29 @@
+syntax "NTL" "\.ntl$"
+
+# Types
+color green "\<(void|number|string)\>"
+
+# Keywords
+color brightyellow "\<(tuple|extends|relates|let|eat|return|if|else|end|loop|next|stop|done)\>"
+
+# Operators
+color brightblue "[+*/%^=!-]"
+
+# Builtins
+color blue "__arguments__|__module__|print"
+
+# Strings
+color magenta ""([^"]|\\")*""
+
+# Numbers
+color magenta "-?([[:digit:]]+(\.[[:digit:]])*)"
+
+# Brackets
+color yellow "[(){}]|\[|\]"
+
+# Comments
+color cyan "^[[:space:]]*;.+$"
+
+# Useless spaces
+color ,red "[[:space:]]+$"
+
