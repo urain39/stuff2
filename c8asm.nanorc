@@ -1,7 +1,8 @@
 syntax "C8ASM" "\.c8asm$"
 
 # Labels
-color brightblue "^[[:space:]]*:[^:]+$"
+color brightblue "^[[:space:]]*\*[^[:space:]*@]+$"
+color brightblue "@[^[:space:]*@]+"
 
 # Accessible Registers
 color brightgreen "\<(SP|V[0-3])\>"
