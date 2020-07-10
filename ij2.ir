@@ -1,0 +1,25 @@
+; {{?name}}
+;     Hello, {{name}}
+; {{/name}}
+TEMPLATE template_0
+	TEXT "Hello, "
+	FORMAT "name"
+	TEXT "\n"
+IF_SECTION "name" template_0
+
+
+
+; {{?.}}
+;     Blocked List:
+;     {{?users}}
+;         - {{name}}
+;     {{/users}}
+; {{/.}}
+TEMPLATE template_1
+	TEXT "Blocked List:\n"
+	TEMPLATE template_2
+		TEXT "- "
+		FORMAT "name"
+		TEXT "\n"
+	IF_SECTION "users" template_2
+IF_SECTION "." template_1
