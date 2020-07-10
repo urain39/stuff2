@@ -1,5 +1,5 @@
 {
-	gsub(/\r\n|\r/, "\n")
+	gsub(/\r\n?/, "\n")
 	if (NF == 2 && $1 ~ /([A-Za-z_][0-9A-Za-z_]*),/) {
 		gsub(/^,|,$/, "", $2)
 		split($2, cglist, ",")
