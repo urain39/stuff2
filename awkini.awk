@@ -12,7 +12,7 @@ BEGIN {
 		next
 	}
 
-	gsub(/^[ \t]*|[ \t]*$/, "", $0)
+	gsub(/^[ \t]+|[ \t]+$/, "", $0)
 	INDEX = index($0, "=")
 
 	if (!INDEX)
@@ -21,10 +21,10 @@ BEGIN {
 	KEY = sprintf("%s.%s",
 		SECTION,
 		substr($0, 1, INDEX - 1))
-	sub(/[ \t]*$/, "", KEY)
+	sub(/[ \t]+$/, "", KEY)
 
 	VALUE = substr($0, INDEX + 1)
-	sub(/^[ \t]*/, "", VALUE)
+	sub(/^[ \t]+/, "", VALUE)
 
 	#printf("KEY=%s, VALUE=%s\n", KEY, VALUE)
 	DATABASE[KEY] = VALUE
