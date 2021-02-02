@@ -1,0 +1,9 @@
+; 下载开始时的回调
+on downloadStart
+	require dir, files
+	do '/usr/bin/env echo'
+
+; 下载完成时的回调
+on btDownloadComplete
+	require dir, files
+	do '/usr/bin/env echo'
