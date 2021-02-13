@@ -44,23 +44,23 @@ export class Promise {
 		this.state = ST_PENDING;
 		this.value = VAL_UNDEFINED;
 		this.reason = VAL_UNDEFINED;
-		this.onChanged = function () {};
+		this._onChanged = function () {};
 
 		const promise = this;
 
 		const [error] = call(executor, function (value) {
 			promise.value = value;
 			promise.state = ST_FULFILLED;
-			promise.onChanged();
+			promise._onChanged();
 		}, function (reason) {
 			promise.reason = reason;
 			promise.state = ST_REJECTED;
-			promise.onChanged();
+			promise._onChanged();
 		});
 
 		if (error) {
 			promise.reason = error;
-			promise.onChanged();
+			promise._onChanged();
 		}
 	}
 
@@ -98,7 +98,7 @@ export class Promise {
 
 		// ST_PENDING
 		return new Promise(function (resolve, reject) {
-			promise.onChanged = function () {
+			promise._onChanged = function () {
 				state = promise.state;
 
 				if (state === ST_FULFILLED) {
