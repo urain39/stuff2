@@ -31,10 +31,7 @@ IF_SECTION "." section_1
 ; 	ctx = Context(data);
 ;
 ; 	def section_0(ctx):
-; 		def section_0_0:
-; 			return "Hello, " + runtime.filter(ctx.resolve("name"), "titleCase") + "\n"
-;
-; 		return runtime.if_section(ctx.resolve("props"), section_0_0)
+; 		return "Hello, " + runtime.filter(ctx.resolve("name"), "titleCase") + "\n"
 ;
 ; 	def section_1(ctx):
 ; 		def section_1_0(ctx):
@@ -42,6 +39,6 @@ IF_SECTION "." section_1
 ;
 ; 		return "Blocked List:\n" + runtime.if_section(ctx.resolve("users"), section_1_0)
 ;
-; 	return runtime.if_section(ctx.resolve("name"), section_0) + runtime.if_section(ctx.resolve("."), section_1)
+; 	return runtime.if_section(ctx.resolve("props"), section_0) + runtime.if_section(ctx.resolve("."), section_1)
 
 ;; Golang Impl?
