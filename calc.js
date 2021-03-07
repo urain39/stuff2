@@ -3,11 +3,11 @@
  * @param expression 给定的表达式
  * @return Generator<Token>
  */
-function* tokenize(expression, skipSpace) {
+function* tokenize(expression) {
 	const rules = [
 		['space', /^\s+/],
-		['number', /^-?\d+/],
-		['operator', /^[()^+*/-]/]
+		['identifier', /^[A-Za-z_][0-9A-Za-z_]*/],
+		['operator', /^[()+*/^-]/]
 	];
 
 	let current = expression;
@@ -39,7 +39,7 @@ function* tokenize(expression, skipSpace) {
  * @return ExprAST
  */
 function buildAST(tokens) {
-	const numbers = [];
+	const identifiers = [];
 	const operators = [];
 
 	const precedenceMap = {
@@ -48,22 +48,35 @@ function buildAST(tokens) {
 		"^": 3,
 	};
 
+	const UNDEFINED = void 22;
+	const INVALID_EXPRESSION_ERROR = new Error('Invalid Expression');
+
+	const safePop = stack => {
+		const value = stack.pop();
+
+		if (value === UNDEFINED)
+			throw INVALID_EXPRESSION_ERROR;
+
+		return value;
+	}
+
 	for (const [type, value] of tokens) {
-		if (type === 'number')
-			numbers.push(Number(value));
+		if (type === 'identifier')
+			identifiers.push(value);
 		else if (type === 'operator') {
-			if (operators.length) {
-				const op = operators[operators.length - 1];
+			for (let length = 0; length = operators.length;) {
+				const op = operators[length - 1];
 
-				if (precedenceMap[op] >= precedenceMap[value]) {
-					operators.pop();
+				// 直到找到比当前运算符优先级小的运算符
+				if (precedenceMap[op] < precedenceMap[value]) break;
 
-					const rhs = numbers.pop();
-					const lhs = numbers.pop();
+				safePop(operators);
 
-					// 已运算的的结果算是操作数
-					numbers.push([op, lhs, rhs]);
-				}
+				const rhs = safePop(identifiers);
+				const lhs = safePop(identifiers);
+
+				// 已运算的的结果算是标识符（操作数）
+				identifiers.push([op, lhs, rhs]);
 			}
 
 			operators.push(value);
@@ -71,16 +84,16 @@ function buildAST(tokens) {
 	}
 
 	while (operators.length) {
-		const op = operators.pop();
-		const rhs = numbers.pop();
-		const lhs = numbers.pop();
+		const op = safePop(operators);
+		const rhs = safePop(identifiers);
+		const lhs = safePop(identifiers);
 
-		numbers.push([op, lhs, rhs]);
+		identifiers.push([op, lhs, rhs]);
 	}
 
-	if (numbers.length !== 1) {
-		throw new SyntaxError('Invalid Expression');
-	}
+	let root = safePop(identifiers);
 
-	return numbers[0];
+	return root;
 }
+
+buildAST(tokenize("a + b * c ^ d - e")) == [ "-", [ "+", "a", [ "*", "b", [ "^", "c", "d", ] ] ], "e" ];
