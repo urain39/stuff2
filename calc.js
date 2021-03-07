@@ -45,7 +45,7 @@ function buildAST(tokens) {
 	const precedenceMap = {
 		"+": 1, "-": 1,
 		"*": 2, "/": 2,
-		"^": 3,
+		"^": 3, "(": 0,
 	};
 
 	const UNDEFINED = void 22;
@@ -64,6 +64,28 @@ function buildAST(tokens) {
 		if (type === 'identifier')
 			identifiers.push(value);
 		else if (type === 'operator') {
+			// 匹配括号
+			if (value === '(') {
+				operators.push(value);
+
+				continue;
+			} else if (value === ')') {
+				for (;;) {
+					const op = safePop(operators);
+
+					// 遇到左括号停止
+					if (op === '(') break;
+
+					const rhs = safePop(identifiers);
+					const lhs = safePop(identifiers);
+
+					identifiers.push([op, lhs, rhs]);
+				}
+
+				continue;
+			}
+
+			// 与之前的运算符的进行比较
 			for (let length = 0; length = operators.length;) {
 				const op = operators[length - 1];
 
@@ -93,7 +115,14 @@ function buildAST(tokens) {
 
 	let root = safePop(identifiers);
 
+	if (identifiers.length)
+		throw INVALID_EXPRESSION_ERROR;
+
 	return root;
 }
 
-buildAST(tokenize("a + b * c ^ d - e")) == [ "-", [ "+", "a", [ "*", "b", [ "^", "c", "d", ] ] ], "e" ];
+
+/*
+const stringifyEqual = (x, y) => JSON.stringify(x) === JSON.stringify(y)
+stringifyEqual(buildAST(tokenize("a + b * c ^ d - e")), [ "-", [ "+", "a", [ "*", "b", [ "^", "c", "d", ] ] ], "e" ]);
+*/
