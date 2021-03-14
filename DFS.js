@@ -22,13 +22,14 @@ function codegen(root) {
 		if (unsolved) {
 			parents.push([unsolved, data]);
 		} else {
+			// ID
 			code.push(data);
 
 			for (; parents.length ;) {
 				const context = parents[parents.length - 1];
 
 				[ unsolved ] = context;
-				unsolved--;
+				--unsolved;
 
 				if (unsolved !== 0) {
 					context[0] = unsolved;
@@ -39,6 +40,7 @@ function codegen(root) {
 				parents.pop();
 				[ , data ] = context;
 
+				// OP
 				code.push(data);
 			}
 		}
