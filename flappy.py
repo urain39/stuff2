@@ -1,7 +1,7 @@
 def render(pos):
-	step = randrange(-4, 4)
+	step = randrange(-3, 3)
 	newpos = pos + step
-	if newpos >= 0 and newpos <= 8:
+	if newpos >= 1 and newpos <= 7:
 		pos = newpos
 		frag = 0xff00 >> newpos
 		return pos, format(frag, "#018b")
@@ -12,4 +12,4 @@ def draw(times=100):
 	for i in range(times):
 		pos, frag = render(pos)
 		if frag:
-			print(frag)
+			print(frag[2:])
