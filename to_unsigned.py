@@ -9,5 +9,5 @@ def to_unsigned(number, bitwidth=32):
 		assert number <= max_value
 	return number
 
-# (unsigned char)-128
+# (unsigned char)-1
 to_unsigned(-1, 8)
