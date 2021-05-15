@@ -1,6 +1,9 @@
 #!/bin/sh
 
 
+unset LD_PRELOAD
+
+
 if [ -z "$QCHROOT_ARCH" ]; then
 	QCHROOT_ARCH="$(uname -m)"
 fi
