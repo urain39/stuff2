@@ -1,4 +1,4 @@
-#!/system/bin/sh
+#!/bin/sh
 
 
 if [ -z "$QCHROOT_ARCH" ]; then
@@ -17,18 +17,18 @@ show_usage() {
 main() {
 	while :; do
 		case "$1" in
-			"-a")
-				shift
-				QCHROOT_ARCH="$1"
-				;;
-			"--arch"*)
-				QCHROOT_ARCH="${1:7}"
-				;;
-			*)
-				break
-				;;
-			esac
+		"-a")
 			shift
+			QCHROOT_ARCH="$1"
+			;;
+		"--arch"*)
+			QCHROOT_ARCH="${1:7}"
+			;;
+		*)
+			break
+			;;
+		esac
+		shift
 	done
 
 	if [ $# -lt 1 ]; then
