@@ -43,7 +43,9 @@ main() {
 	shift
 
 	if [ $# -lt 1 ]; then
-		if [ -f "$QCHROOT_NEWROOT/bin/su" ]; then
+		ls "$QCHROOT_NEWROOT/bin/su" > /dev/null 2>&1
+
+		if [ $? = 0 ]; then
 			QCHROOT_PROGRAM="/bin/su -"
 		else
 			QCHROOT_PROGRAM="/bin/sh -"
