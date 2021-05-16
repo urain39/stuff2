@@ -48,7 +48,7 @@ main() {
 		if [ $? = 0 ]; then
 			QCHROOT_PROGRAM="/bin/su -"
 		else
-			QCHROOT_PROGRAM="/bin/sh -"
+			QCHROOT_PROGRAM="/bin/sh -l"
 		fi
 	else
 		QCHROOT_PROGRAM="$@"
