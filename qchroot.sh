@@ -4,6 +4,9 @@
 unset LD_PRELOAD
 
 
+QCHROOT_FORCE_FOREIGN_BINARY="PROOT_FORCE_FOREIGN_BINARY=true"
+
+
 if [ -z "$QCHROOT_ARCH" ]; then
 	QCHROOT_ARCH="$(uname -m)"
 fi
@@ -13,7 +16,8 @@ show_usage() {
 	echo "Usage: qchroot [OPTIONS] <NEWROOT> [PROGRAM [ARGS]]"
 	echo ""
 	echo "Options:"
-	echo "    -a, --arch    set qemu arch manually. (default: $QCHROOT_ARCH)"
+	echo "    -a    set QEMU arch manually. (default: $QCHROOT_ARCH)"
+	echo "    -Q    do NOT use QEMU for host binaries. (default: false)"
 }
 
 
@@ -24,8 +28,12 @@ main() {
 			shift
 			QCHROOT_ARCH="$1"
 			;;
-		"--arch"*)
-			QCHROOT_ARCH="${1:7}"
+		"-Q")
+			unset QCHROOT_FORCE_FOREIGN_BINARY
+			;;
+		"-"*)
+			echo "Invalid option $1" >&2
+			exit 1
 			;;
 		*)
 			break
@@ -54,7 +62,7 @@ main() {
 		QCHROOT_PROGRAM="$@"
 	fi
 
-	proot \
+	eval "$QCHROOT_FORCE_FOREIGN_BINARY" proot \
 		-q "qemu-$QCHROOT_ARCH" \
 		-b /system:/system \
 		-S "$QCHROOT_NEWROOT" \
