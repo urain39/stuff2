@@ -66,6 +66,7 @@ main() {
 		-q "qemu-$QCHROOT_ARCH" \
 		-b /system:/system \
 		-S "$QCHROOT_NEWROOT" \
+		--kill-on-exit \
 		"$QCHROOT_PROGRAM"
 }
 
