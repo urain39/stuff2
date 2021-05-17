@@ -66,7 +66,7 @@ main() {
 		-q "qemu-$QCHROOT_ARCH" \
 		-b /system:/system \
 		-S "$QCHROOT_NEWROOT" \
-		$QCHROOT_PROGRAM
+		"$QCHROOT_PROGRAM"
 }
 
 main "$@"
