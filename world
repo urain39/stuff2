@@ -28,9 +28,13 @@ ibus
 ibus-pinyin><Q13OwBZSVGMKqjcgPMk/gcgzcsB/0=
 ibus-pinyin-lang><Q16XnBvxVcmYy8etS1M7xgfMbtKtU=
 leafpad
+libvirt
+libvirt-qemu
 lightdm-gtk-greeter
 linux-lts
 neofetch
+network-manager-applet
+networkmanager-elogind
 ntfs-3g
 openssh
 openssl
@@ -40,6 +44,7 @@ polkit-elogind
 polkit-gnome
 proot@edge
 pulseaudio
+pulseaudio-utils
 python3
 pyzy><Q1Oh/K2P40Y6eqDIuQuJlygz4JkUQ=
 qemu-img
@@ -52,6 +57,8 @@ sudo
 tree
 udisks2
 vim
+virt-manager
+wpa_supplicant
 wqy-zenhei@edge
 xarchiver
 xf86-input-libinput
