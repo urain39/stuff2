@@ -8,7 +8,7 @@ sed -i '$p;$s/v\d\{1,\}\.\d\{1,\}\/.\{1,\}$/edge\/testing/' /etc/apk/repositorie
 
 # 修改 DNS
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
-echo "nameserver 8.8.4.4" > /etc/resolv.conf
+echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 
 
 # 安装最新版 qBittorrent
