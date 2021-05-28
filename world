@@ -32,6 +32,8 @@ libvirt
 libvirt-qemu
 lightdm-gtk-greeter
 linux-lts
+man-pages
+mandoc
 neofetch
 network-manager-applet
 networkmanager-elogind
