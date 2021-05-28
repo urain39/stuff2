@@ -36,6 +36,7 @@ neofetch
 network-manager-applet
 networkmanager-elogind
 ntfs-3g
+openjdk16-jre@edge
 openssh
 openssl
 p7zip
@@ -51,13 +52,17 @@ qemu-img
 qemu-modules
 qemu-system-x86_64
 qemu-ui-gtk
+rsync
 samba
 shadow
+shellcheck
 sudo
 tree
 udisks2
 vim
 virt-manager
+vlc
+vlc-qt
 wpa_supplicant
 wqy-zenhei@edge
 xarchiver
