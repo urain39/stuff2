@@ -43,6 +43,7 @@ openssh
 openssl
 p7zip
 patchelf
+pavucontrol
 polkit-elogind
 polkit-gnome
 proot@edge
@@ -79,3 +80,4 @@ xfce4-screenshooter
 xfce4-session
 xfce4-terminal
 xorg-server
+zip
