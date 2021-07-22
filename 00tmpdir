@@ -1,0 +1,16 @@
+#!/system/bin/sh
+
+TOPDIR="/data/media/0"
+TMPDIRS="$TOPDIR/ramdisk"
+
+[ -f /data/tmpdir.conf ] && . /data/tmpdir.conf
+
+
+IFS=$'\n'
+for tmpdir in $TMPDIRS; do
+    TLEN=${#TOPDIR}
+    if [ "${tmpdir:0:$TLEN}" == "$TOPDIR" ]; then
+        mkdir -p "$tmpdir"
+        mount -t tmpfs tmpfs "$tmpdir"
+    fi
+done
