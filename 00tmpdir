@@ -1,5 +1,9 @@
 #!/system/bin/sh
 
+#
+## Added by urain39@cyfan.cf
+#
+
 TOPDIR="/data/media/0"
 TMPDIRS="$TOPDIR/ramdisk"
 
@@ -7,10 +11,11 @@ TMPDIRS="$TOPDIR/ramdisk"
 
 
 IFS=$'\n'
-for tmpdir in $TMPDIRS; do
+for TMPDIR in $TMPDIRS; do
     TLEN=${#TOPDIR}
-    if [ "${tmpdir:0:$TLEN}" == "$TOPDIR" ]; then
-        mkdir -p "$tmpdir"
-        mount -t tmpfs tmpfs "$tmpdir"
+    TMPDIR="$(realpath "$TMPDIR")"
+    if [ "${TMPDIR:0:$TLEN}" == "$TOPDIR" ]; then
+        mkdir -p "$TMPDIR"
+        mount -t tmpfs tmpfs "$TMPDIR"
     fi
 done
