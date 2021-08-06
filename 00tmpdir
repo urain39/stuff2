@@ -7,8 +7,7 @@
 TOPDIR="/data/media/0"
 TMPDIRS="$TOPDIR/ramdisk"
 
-[ -f /data/tmpdir.conf ] && . /data/tmpdir.conf
-
+[ -f /data/tmpdir.conf ] && TMPDIRS="$(cat /data/tmpdir.conf | sed "/[\t ]*#/d;s:\\\$TOPDIR:$TOPDIR:g")"
 
 IFS=$'\n'
 for TMPDIR in $TMPDIRS; do
