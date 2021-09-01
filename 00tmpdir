@@ -15,6 +15,6 @@ for TMPDIR in $TMPDIRS; do
     TMPDIR="$(realpath "$TMPDIR")"
     if [ "${TMPDIR:0:$TLEN}" == "$TOPDIR" ]; then
         mkdir -p "$TMPDIR"
-        mount -t tmpfs tmpfs "$TMPDIR"
+        mount -t tmpfs tmpfs -o size=37% "$TMPDIR"
     fi
 done
