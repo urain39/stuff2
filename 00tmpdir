@@ -12,12 +12,14 @@ TMPDIRS="$TOPDIR/ramdisk"
 IFS=$'\n'
 TLEN=${#TOPDIR}
 for TMPDIR_ in $TMPDIRS; do
-    echo "$TMPDIR_" | grep -Eq '^(([\\\/]([^\\\/\.]{1,2}|[^\\\/]{3,}))+[\\\/]?|[\\\/])$'
-    if [ $? = 0 ] && [ "${TMPDIR_:0:$TLEN}" == "$TOPDIR" ]; then
+    grep -Eq '^((/([^/.]{1,2}|[^/]{3,}))+/?|/)$' <<< "$TMPDIR_"
+    [ $? = 0 ] && case "${TMPDIR_:$TLEN:2}" in
+    (/?)
         rm -rf "$TMPDIR_" && mkdir -p "$TMPDIR_"
         mount -t tmpfs tmpfs -o "size=25%" "$TMPDIR_" 2> /dev/null
         if [ $? != 0 ]; then
-            mount -t tmpfs tmpfs "$TMPDIR_" 2> /dev/null
+            mount -t tmpfs tmpfs "$TMPDIR_"
         fi
-    fi
+        ;;
+    esac
 done
