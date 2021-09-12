@@ -10,8 +10,8 @@ TMPDIRS="$TOPDIR/ramdisk"
 [ -f /data/tmpdir.conf ] && TMPDIRS="$(sed "/^[\t ]*#/d;s:\\\$TOPDIR:$TOPDIR:g" /data/tmpdir.conf)"
 
 IFS=$'\n'
+TLEN=${#TOPDIR}
 for TMPDIR in $TMPDIRS; do
-    TLEN=${#TOPDIR}
     echo "$TMPDIR" | grep -Eq '^([\\\/]([^\\\/\.]{1,2}|[^\\\/]{3,}))*[\\\/]?$'
     if [ $? = 0 ] && [ "${TMPDIR:0:$TLEN}" == "$TOPDIR" ]; then
         mkdir -p "$TMPDIR"
