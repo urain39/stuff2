@@ -12,8 +12,8 @@ TMPDIRS="$TOPDIR/ramdisk"
 IFS=$'\n'
 for TMPDIR in $TMPDIRS; do
     TLEN=${#TOPDIR}
-    TMPDIR="$(realpath "$TMPDIR")"
-    if [ "${TMPDIR:0:$TLEN}" == "$TOPDIR" ]; then
+    echo "$TMPDIR" | grep -Eq '^([\\\/]([^\\\/\.]{1,2}|[^\\\/]{3,}))*[\\\/]?$'
+    if [ $? = 0 ] && [ "${TMPDIR:0:$TLEN}" == "$TOPDIR" ]; then
         mkdir -p "$TMPDIR"
         mount -t tmpfs tmpfs -o size=25% "$TMPDIR"
     fi
