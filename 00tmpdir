@@ -7,7 +7,7 @@
 TOPDIR="/data/media/0"
 TMPDIRS="$TOPDIR/ramdisk"
 
-[ -f /data/tmpdir.conf ] && TMPDIRS="$(sed "/^[\t ]*#/d;s:\\\$TOPDIR:$TOPDIR:g" /data/tmpdir.conf)"
+[ -f /data/tmpdir.conf ] && TMPDIRS="$(sed "/^[\t ]*#/d;s:\\\$TOPDIR\\>:$TOPDIR:g" /data/tmpdir.conf)"
 
 IFS=$'\n'
 TLEN=${#TOPDIR}
@@ -17,9 +17,7 @@ for TMPDIR_ in $TMPDIRS; do
     (/?)
         rm -rf "$TMPDIR_" && mkdir -p "$TMPDIR_"
         mount -t tmpfs tmpfs -o "size=25%" "$TMPDIR_" 2> /dev/null
-        if [ $? != 0 ]; then
-            mount -t tmpfs tmpfs "$TMPDIR_"
-        fi
+        [ $? != 0 ] && mount -t tmpfs tmpfs "$TMPDIR_"
         ;;
     esac
 done
