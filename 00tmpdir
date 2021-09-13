@@ -7,7 +7,7 @@
 TOPDIR="/data/media/0"
 TMPDIRS="$TOPDIR/ramdisk"
 
-[ -f /data/tmpdir.conf ] && TMPDIRS="$(sed "/^[\t ]*#/d;s:\\\$TOPDIR\\>:$TOPDIR:g" /data/tmpdir.conf)"
+[ -f /data/tmpdir.conf ] && TMPDIRS="$(sed -E "/^[\t ]*#/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf)"
 
 IFS=$'\n'
 TLEN=${#TOPDIR}
