@@ -12,7 +12,7 @@ TMPDIRS="$TOPDIR/ramdisk"
 IFS=$'\n'
 TLEN=${#TOPDIR}
 for TMPDIR_ in $TMPDIRS; do
-    grep -Eq '^((/([^/.]{1,2}|[^/]{3,}))+/?|/)$' <<< "$TMPDIR_"
+    grep -Eq '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$' <<< "$TMPDIR_"
     [ $? = 0 ] && case "${TMPDIR_:$TLEN:2}" in
     (/?)
         rm -rf "$TMPDIR_" && mkdir -p "$TMPDIR_"
