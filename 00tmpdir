@@ -9,6 +9,8 @@ TMPDIRS="$TOPDIR/ramdisk"
 
 [ -f /data/tmpdir.conf ] && TMPDIRS="$(sed -E "/^[\t ]*#/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf)"
 
+umask 007
+
 IFS=$'\n'
 TLEN=${#TOPDIR}
 for TMPDIR_ in $TMPDIRS; do
