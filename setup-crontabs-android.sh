@@ -22,12 +22,14 @@ SHELL="/system/bin/sh"
 PATH="/sbin:/system/bin:/system/xbin"
 
 # m h       dom mon   dow   cmd
-  8/15 *    * *       *     run-parts /data/cron/00closely
-  00 *      * *       *     run-parts /data/cron/01hourly
-  15 22     * *       *     run-parts /data/cron/02daily
-  # NOTE: Busybox cron expression use 0 as sunday only!
+  00/15 *   * *       *     run-parts /data/cron/00closely
+  10 *      * *       *     run-parts /data/cron/01hourly
+  20 22     * *       *     run-parts /data/cron/02daily
+# NOTE: Busybox cron expression use 0 as sunday only
   30 22     * *       0     run-parts /data/cron/03weekly
-  45 22     1 *       *     run-parts /data/cron/04monthly
+  40 22     1 *       *     run-parts /data/cron/04monthly
+# Uncomment following line to fix time disparity while dozing
+#  50 *      * *       *     input keyevent KEYCODE_POWER
 EOF
 cat > /data/cron/tabs/shell << EOF
 SHELL="/system/bin/sh"
