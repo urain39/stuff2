@@ -23,7 +23,7 @@ SHELL=/system/bin/sh
 PATH=/sbin:/system/bin:/system/xbin
 
 # m h       dom mon   dow   cmd
-  00/15 *   * *       *     run-parts /data/cron/00closely
+  */15 *    * *       *     run-parts /data/cron/00closely
   10 *      * *       *     run-parts /data/cron/01hourly
   20 22     * *       *     run-parts /data/cron/02daily
 # NOTE: Busybox cron expression use 0 as sunday only
