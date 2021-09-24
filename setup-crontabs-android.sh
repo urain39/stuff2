@@ -18,8 +18,9 @@ mkdir -p /data/cron/04monthly
 
 # Add default crontab
 cat > /data/cron/tabs/root << EOF
-SHELL="/system/bin/sh"
-PATH="/sbin:/system/bin:/system/xbin"
+# NOTE: Busybox crontab doesn't support variable with quotes
+SHELL=/system/bin/sh
+PATH=/sbin:/system/bin:/system/xbin
 
 # m h       dom mon   dow   cmd
   00/15 *   * *       *     run-parts /data/cron/00closely
@@ -32,8 +33,9 @@ PATH="/sbin:/system/bin:/system/xbin"
 #  50 *      * *       *     input keyevent KEYCODE_POWER
 EOF
 cat > /data/cron/tabs/shell << EOF
-SHELL="/system/bin/sh"
-PATH="/sbin:/system/bin:/system/xbin"
+# NOTE: Busybox crontab doesn't support variable with quotes
+SHELL=/system/bin/sh
+PATH=/sbin:/system/bin:/system/xbin
 
 # m h       dom mon   dow   cmd
 #  29 05     * *       *     sleep 60 && svc power reboot
