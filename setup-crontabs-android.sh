@@ -38,7 +38,7 @@ SHELL=/system/bin/sh
 PATH=/sbin:/system/bin:/system/xbin
 
 # m h       dom mon   dow   cmd
-#  29 05     * *       *     sleep 60 && svc power reboot
+#  29 05     * *       *     sleep 60 && reboot
 EOF
 
 # Add init.d script
