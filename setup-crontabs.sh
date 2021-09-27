@@ -7,7 +7,6 @@ fi
 umask 022
 
 # Create necessary directory
-mkdir -p ~/.local/cron/tabs
 mkdir -p ~/.local/cron/00closely
 mkdir -p ~/.local/cron/01hourly
 mkdir -p ~/.local/cron/02daily
