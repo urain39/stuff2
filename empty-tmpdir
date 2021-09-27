@@ -1,0 +1,22 @@
+#!/system/bin/sh
+
+#
+## Added by urain39@cyfan.cf
+#
+
+TOPDIR="/data/media/0"
+TMPDIRS="$TOPDIR/ramdisk"
+
+[ -f /data/tmpdir.conf ] && TMPDIRS="$(sed -E "/^[\t ]*#/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf)"
+
+IFS=$'\n'
+TLEN=${#TOPDIR}
+for TMPDIR_ in $TMPDIRS; do
+    grep -Eq '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$' <<< "$TMPDIR_"
+    [ $? = 0 ] && case "${TMPDIR_:$TLEN:2}" in
+    (/?)
+        [ -d "$TMPDIR_" ] \
+            && find "$TMPDIR_"/ -mindepth 1 -maxdepth 1 -print0 | xargs -0 -r rm -r
+        ;;
+    esac
+done
