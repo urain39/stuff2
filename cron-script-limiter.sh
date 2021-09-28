@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Cron Script Switcher
+# Cron Script Limiter
 #
 # Usage: ln -sf ${this_file} ${your_script}-
 #
