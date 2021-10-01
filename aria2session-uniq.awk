@@ -1,8 +1,4 @@
-BEGIN {
-  FS="@#$_&-"
-}
-
-/^\S.+$/ {
+/^[^ \t]/ {
   # Add new URI if NAME is not empty
   if (NAME) {
     URIS[NAME] = sprintf("%s\n%s", NAME, OPTIONS)
@@ -12,7 +8,7 @@ BEGIN {
   OPTIONS = ""
 }
 
-/^\s.+$/ {
+/^[ \t]/ {
   OPTIONS = sprintf("%s%s\n", OPTIONS, $0)
 }
 
