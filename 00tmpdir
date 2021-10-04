@@ -7,15 +7,17 @@
 TOPDIR="/data/media/0"
 TMPDIRS="$TOPDIR/ramdisk"
 
-[ -f /data/tmpdir.conf ] && TMPDIRS="$(sed -E "/^[\t ]*#/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf)"
+[ -f /data/tmpdir.conf ] && TMPDIRS="$(
+  sed -E "/^[\t ]*#/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf \
+    | grep -Eo '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$'
+)"
 
 umask 000
 
 IFS=$'\n'
 TLEN=${#TOPDIR}
 for TMPDIR_ in $TMPDIRS; do
-    grep -Eq '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$' <<< "$TMPDIR_"
-    [ $? = 0 ] && case "${TMPDIR_:$TLEN:2}" in
+    case "${TMPDIR_:$TLEN:2}" in
     (/?)
         rm -rf "$TMPDIR_" && mkdir -p "$TMPDIR_"
         mount -t tmpfs tmpfs -o "size=25%" "$TMPDIR_" 2> /dev/null
