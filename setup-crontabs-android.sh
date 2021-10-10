@@ -30,7 +30,7 @@ PATH=/sbin:/system/bin:/system/xbin
   30 22     * *       0     run-parts /data/cron/03weekly
   40 22     1 *       *     run-parts /data/cron/04monthly
 # Uncomment following line to reduce time disparity while dozing
-#  */30 *      * *       *     input keyevent KEYCODE_POWER
+#  */30 *    * *       *     input keyevent KEYCODE_POWER
 EOF
 cat > /data/cron/tabs/shell << EOF
 # NOTE: Busybox crontab doesn't support variable with quotes
