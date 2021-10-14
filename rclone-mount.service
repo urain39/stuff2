@@ -5,11 +5,11 @@ After=wait-network-online.service
 
 [Service]
 Environment=DOWNLOAD_DIR="%h/my-msod"
-ExecStartPre=/bin/mkdir -p "$DOWNLOAD_DIR"
+ExecStartPre=/bin/sh -c 'rm -rf "$DOWNLOAD_DIR"; mkdir -p "$DOWNLOAD_DIR"'
 ExecStart=/usr/bin/env rclone mount my-msod:/ "$DOWNLOAD_DIR" --vfs-cache-mode writes --vfs-cache-max-age 45m --vfs-cache-max-size 16G --use-mmap
 # Wait until RClone is really be mounted.
-ExecStartPost=/bin/sh -c 'while ! grep -q "$DOWNLOAD_DIR" /proc/mounts; do echo "Waiting \x27$DOWNLOAD_DIR\x27 mount..."; sleep 3; done'
-TimeoutStartSec=600s
+ExecStartPost=/bin/sh -c 'while ! grep -Eq "\\s+$DOWNLOAD_DIR\\s+" /proc/mounts; do echo "Waiting \x27$DOWNLOAD_DIR\x27 mount..."; sleep 3; done'
+TimeoutStartSec=999s
 
 [Install]
 WantedBy=default.target
