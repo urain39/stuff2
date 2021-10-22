@@ -8,7 +8,7 @@ TOPDIR="/data/media/0"
 TMPDIRS="$TOPDIR/ramdisk"
 
 [ -f /data/tmpdir.conf ] && TMPDIRS="$(
-    sed -E "/^[\t ]*#/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf \
+    sed -E "/^[\t ]*(#|\$)/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf \
         | grep -Eo '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$'
 )"
 
