@@ -15,6 +15,9 @@ mkdir -p ~/.local/cron/04monthly
 
 # Add default crontab
 crontab - << EOF
+# NOTE: Busybox crontab doesn't support variable with quotes
+SHELL=/bin/sh
+
 # m h       dom mon   dow   cmd
   */15 *    * *       *     run-parts ~/.local/cron/00closely
   10 *      * *       *     run-parts ~/.local/cron/01hourly
