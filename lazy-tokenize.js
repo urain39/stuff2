@@ -6,7 +6,7 @@
 function* tokenize(expression) {
 	const rules = [
 		['space', /^\s+/],
-		['number', /^-?\d+/],
+		['number', /^\d+/],
 		['operator', /^[+*/-]/]
 	];
 
