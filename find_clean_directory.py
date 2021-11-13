@@ -40,8 +40,11 @@ def find_clean_directory(directory=".", max_size=(1024*1024*150), skip_directori
                 if size > max_size:
                     is_clean = False
 
-        if not is_clean:
-            # 提交未污染的子节点
+        if is_clean:
+            # 未被污染时直接抛弃子节点（合并）
+            pass
+        else:
+            # 被污染后立即提交未污染的子节点
             clean_directories.extend(clean_nodes)
 
         return is_clean
@@ -53,5 +56,5 @@ def find_clean_directory(directory=".", max_size=(1024*1024*150), skip_directori
     return clean_directories
 
 
-for i in find_clean_directory(os.path.expanduser("~/my-msod"), skip_directories=[os.path.expanduser("encrypted")]):
+for i in find_clean_directory(os.path.expanduser("~/my-msod"), skip_directories=["encrypted"]):
     print(i)
