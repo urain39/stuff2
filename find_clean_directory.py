@@ -4,6 +4,11 @@ import os
 def find_clean_directory(directory=".", max_size=(1024*1024*150), skip_directories=[]):
     """用于查找可以被 rclone 安全同步（绝对不包含大于 max_size 的文件）的目录的函数。
     """
+    # 支持非完整路径
+    for i in range(0, len(skip_directories)):
+        skip_directories[i] = os.path.join(directory, skip_directories[i])
+
+    # 未污染目录列表
     clean_directories = []
 
     def walk(node):
@@ -48,5 +53,5 @@ def find_clean_directory(directory=".", max_size=(1024*1024*150), skip_directori
     return clean_directories
 
 
-for i in find_clean_directory(os.path.expanduser("~/my-msod"), skip_directories=[os.path.expanduser("~/my-msod/encrypted")]):
+for i in find_clean_directory(os.path.expanduser("~/my-msod"), skip_directories=[os.path.expanduser("encrypted")]):
     print(i)
