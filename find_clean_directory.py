@@ -18,6 +18,9 @@ def find_clean_directory(directory=".", max_size=(1024*1024*150), skip_directori
 
             if os.path.isdir(node_i):
                 if node_i in skip_directories:
+                    # skip_directories 必须被视作已污染
+                    is_clean = False
+
                     continue
 
                 if walk(node_i) is True:
