@@ -7,11 +7,11 @@ fi
 umask 022
 
 # Create necessary directory
-mkdir -p ~/.local/cron/00closely
-mkdir -p ~/.local/cron/01hourly
-mkdir -p ~/.local/cron/02daily
-mkdir -p ~/.local/cron/03weekly
-mkdir -p ~/.local/cron/04monthly
+mkdir -p ~/.local/share/crontabs/00closely
+mkdir -p ~/.local/share/crontabs/01hourly
+mkdir -p ~/.local/share/crontabs/02daily
+mkdir -p ~/.local/share/crontabs/03weekly
+mkdir -p ~/.local/share/crontabs/04monthly
 
 # Add default crontab
 crontab - << EOF
@@ -19,10 +19,10 @@ crontab - << EOF
 SHELL=/bin/sh
 
 # m h       dom mon   dow   cmd
-  */15 *    * *       *     run-parts ~/.local/cron/00closely
-  10 *      * *       *     run-parts ~/.local/cron/01hourly
-  20 22     * *       *     run-parts ~/.local/cron/02daily
+  */15 *    * *       *     run-parts ~/.local/share/crontabs/00closely
+  10 *      * *       *     run-parts ~/.local/share/crontabs/01hourly
+  20 22     * *       *     run-parts ~/.local/share/crontabs/02daily
 # NOTE: Busybox cron expression use 0 as sunday only
-  30 22     * *       0     run-parts ~/.local/cron/03weekly
-  40 22     1 *       *     run-parts ~/.local/cron/04monthly
+  30 22     * *       0     run-parts ~/.local/share/crontabs/03weekly
+  40 22     1 *       *     run-parts ~/.local/share/crontabs/04monthly
 EOF
