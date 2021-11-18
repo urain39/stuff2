@@ -8,20 +8,21 @@ TOPDIR="/data/media/0"
 TMPDIRS="$TOPDIR/ramdisk"
 
 [ -f /data/tmpdir.conf ] && TMPDIRS="$(
-    sed -E "/^[\t ]*(#|\$)/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf \
-        | grep -Eo '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$'
+  sed -E "/^[\t ]*(#|\$)/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf |
+    grep -Eo '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$'
 )"
 
 umask 000
 
-IFS=$'\n'
-TLEN=${#TOPDIR}
-for TMPDIR_ in $TMPDIRS; do
-    case "${TMPDIR_:$TLEN:2}" in
-    (/?)
-        rm -rf "$TMPDIR_" && mkdir -p "$TMPDIR_"
-        mount -t tmpfs tmpfs -o "size=25%" "$TMPDIR_" 2> /dev/null
-        [ $? != 0 ] && mount -t tmpfs tmpfs "$TMPDIR_"
-        ;;
-    esac
+IFS="
+"
+for LINE in $TMPDIRS; do
+  IFS="	"
+  read -r DIR OPTS <<DELIM
+$LINE
+DELIM
+  (printf "$DIR" | grep -Eq "^$TOPDIR/.") || continue
+  rm -rf "$DIR" && mkdir -p "$DIR"
+  [ "$OPTS" = "" ] && OPTS="size=25%"
+  mount -t tmpfs tmpfs -o "$OPTS" "$DIR" 2>/dev/null || mount -t tmpfs tmpfs "$DIR"
 done
