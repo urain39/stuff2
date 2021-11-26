@@ -4,21 +4,22 @@
 ## Added by urain39@cyfan.cf
 #
 
-TOPDIR="/data/media/0"
+TOPDIR="/sdcard" # Support for non-root
 TMPDIRS="$TOPDIR/ramdisk"
 
 [ -f /data/tmpdir.conf ] && TMPDIRS="$(
-    sed -E "/^[\t ]*(#|\$)/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf \
-        | grep -Eo '^((/([^/.]{1,2}|[^/.]\.|\.[^/.]|[^/]{3,}))+/?|/)$'
+  sed -E "/^[\t ]*(#|\$)/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf |
+    grep -Eo '^((/([^/.\t]{1,2}|[^/.\t]\.|\.[^/.\t]|[^/\t]{3,}))+/?|/)(\t.+)?$'
 )"
 
-IFS=$'\n'
-TLEN=${#TOPDIR}
-for TMPDIR_ in $TMPDIRS; do
-    case "${TMPDIR_:$TLEN:2}" in
-    (/?)
-        [ -d "$TMPDIR_" ] \
-            && find "$TMPDIR_"/ -mindepth 1 -maxdepth 1 -print0 | xargs -0 -r rm -r
-        ;;
-    esac
+umask 000
+
+IFS="
+"
+for LINE in $TMPDIRS; do
+  IFS="	"
+  read -r DIR OPTS <<DELIM
+$LINE
+DELIM
+  rm -rf "$DIR"/*
 done
