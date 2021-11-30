@@ -9,9 +9,13 @@ readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit
 readonly RAM_HALF_SIZE="$((RAM_SIZE / 2))"
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
+[ ! -f "$CFG_FILE" ] && exit 1
+
 umask 022
 
-vdir_callback() { :; }
+vdir_callback() {
+    : pass
+}
 
 vdir_foreach() {
     IFS="
@@ -56,8 +60,8 @@ vdir_start() {
         mkdir -p "$ORG_DIR"
         mkdir -p "$TMP_DIR"
 
-        mount -o bind "$ENT_DIR" "$ORG_DIR"
-        mount -o bind "$TMP_DIR" "$ENT_DIR"
+        mount -o bind,private "$ENT_DIR" "$ORG_DIR"
+        mount -o bind,private "$TMP_DIR" "$ENT_DIR"
 
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
     }
