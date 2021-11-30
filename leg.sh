@@ -67,6 +67,8 @@ vdir_start() {
     if [ "$VDIR_SWAP_SIZE" -gt 0 ] && [ "$VDIR_SWAP_SIZE" -le 50 ]; then
         SWAP_SIZE="$((RAM_SIZE * VDIR_SWAP_SIZE / 100))"
         dd if="/dev/zero" bs=4194304 count="$((SWAP_SIZE / 4194304))" of="$SWAP_FILE"
+        chmod 600 "$SWAP_FILE"
+
         mkswap "$SWAP_FILE"
         swapon "$SWAP_FILE"
     fi
@@ -86,7 +88,7 @@ vdir_stop() {
     }
     vdir_foreach
 
-    swapoff "$SWAP_FILE"
+    swapoff "$SWAP_FILE" 2> /dev/null
     umount -l "$VDIR_MNT_DIR"
 
     rm -f "$RUN_CFG_FILE"
