@@ -1,15 +1,18 @@
 #!/bin/sh
 
-readonly CFG_FILE="/etc/leg/config.conf"
+if [ "$(whoami)" != "root" ]; then
+    echo "You must run it as root!" >&2
+    exit 0
+fi
+
+readonly CONF_FILE="/etc/leg.conf"
 readonly VDIR_MNT_DIR="/mnt/leg/vdir"
-readonly RUN_CFG_FILE="/run/leg.conf"
+readonly RUN_CONF_FILE="/run/leg.conf"
 readonly SWAP_FILE="$VDIR_MNT_DIR/swapfile"
 
 readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit }' /proc/meminfo)"
 readonly RAM_HALF_SIZE="$((RAM_SIZE / 2))"
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
-
-[ ! -f "$CFG_FILE" ] && exit 1
 
 umask 022
 
@@ -18,14 +21,19 @@ vdir_callback() {
 }
 
 vdir_foreach() {
-    IFS="
-"
-    for ENT_DIR in $VDIR_ENTRY_LIST; do
-        if [ ! -d "$ENT_DIR" ]; then
-            continue
-        fi
+    IFS='
+'
+    for ENTRY in $VDIR_ENTRY_LIST; do
+        IFS='	'
+        read -r ENTRY_DIR SYNC_DELAY << DELIM
+$ENTRY
+DELIM
 
-        DIR_NAME="$(echo "$ENT_DIR" | tr "/" "_")"
+        [ ! -d "$ENTRY_DIR" ] && continue
+
+        [ "$SYNC_DELAY" = "" ] && SYNC_DELAY=1
+
+        DIR_NAME="$(echo "$ENTRY_DIR" | tr "/" "_")"
         ORG_DIR="$VDIR_MNT_DIR/org/$DIR_NAME"
         TMP_DIR="$VDIR_MNT_DIR/tmp/$DIR_NAME"
 
@@ -34,16 +42,29 @@ vdir_foreach() {
 }
 
 vdir_start() {
-    [ -f "$RUN_CFG_FILE" ] && return
+    [ -f "$RUN_CONF_FILE" ] && return
 
-    if [ -f "$CFG_FILE" ]; then
-        cat "$CFG_FILE" > "$RUN_CFG_FILE"
+    if [ -f "$CONF_FILE" ]; then
+        cat "$CONF_FILE" > "$RUN_CONF_FILE"
     else
-        : > "$RUN_CFG_FILE"
+        cat > "$RUN_CONF_FILE" << DELIM
+# vDIR List
+VDIR_ENTRY_LIST="
+/var/log	6
+/home	2
+"
+
+# vDIR Sync
+VDIR_SYNC_EXEC="rsync"
+VDIR_SYNC_ARGS="-auy --inplace --no-whole-file --delete-after"
+
+# vDIR Swap
+VDIR_SWAP_SIZE="50"
+DELIM
     fi
 
     # shellcheck disable=SC1090
-    . "$RUN_CFG_FILE"
+    . "$RUN_CONF_FILE"
 
     rm -rf "$VDIR_MNT_DIR"
     modprobe zram num_devices=1
@@ -60,9 +81,10 @@ vdir_start() {
         mkdir -p "$ORG_DIR"
         mkdir -p "$TMP_DIR"
 
-        mount -o bind,private "$ENT_DIR" "$ORG_DIR"
-        mount -o bind,private "$TMP_DIR" "$ENT_DIR"
+        mount -o bind,private "$ENTRY_DIR" "$ORG_DIR"
+        mount -o bind,private "$TMP_DIR" "$ENTRY_DIR"
 
+        # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
     }
     vdir_foreach
@@ -79,36 +101,62 @@ vdir_start() {
 }
 
 vdir_stop() {
-    [ ! -f "$RUN_CFG_FILE" ] && return
+    [ ! -f "$RUN_CONF_FILE" ] && return
 
     # shellcheck disable=SC1090
-    . "$RUN_CFG_FILE"
+    . "$RUN_CONF_FILE"
 
     vdir_callback() {
+        # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
 
-        umount -l "$ENT_DIR"
+        umount -l "$ENTRY_DIR"
         umount -l "$ORG_DIR"
     }
     vdir_foreach
 
-    swapoff "$SWAP_FILE" 2> /dev/null
+    [ -f "$SWAP_FILE" ] && swapoff "$SWAP_FILE"
     umount -l "$VDIR_MNT_DIR"
 
-    rm -f "$RUN_CFG_FILE"
+    rm -f "$RUN_CONF_FILE"
     rm -rf "$VDIR_MNT_DIR"
 }
 
 vdir_sync() {
-    [ ! -f "$RUN_CFG_FILE" ] && return
+    [ ! -f "$RUN_CONF_FILE" ] && return
 
     # shellcheck disable=SC1090
-    . "$RUN_CFG_FILE"
+    . "$RUN_CONF_FILE"
+
+    [ "$VDIR_SYNC_COUNT" = "" ] && VDIR_SYNC_COUNT=0
 
     vdir_callback() {
-        eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
+        if [ "$((VDIR_SYNC_COUNT % SYNC_DELAY))" = "0" ]; then
+            # Use eval is a trick to hack word splitting, that without reset IFS
+            eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
+        fi
     }
     vdir_foreach
+
+    RUN_CONF="$(sed '/^# leg-data-begin@/,/^# leg-data-end@/d' "$RUN_CONF_FILE")"
+    PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
+    cat > "$RUN_CONF_FILE" << DELIM
+$RUN_CONF
+# leg-data-begin@$PATCH_DATE
+VDIR_SYNC_COUNT=$((VDIR_SYNC_COUNT + 1))
+# leg-data-end@$PATCH_DATE
+DELIM
+}
+
+vdir_sched() {
+    SCHED_LIST="$(crontab -l | sed '/^# leg-patch-begin@/,/^# leg-patch-end@/d')"
+    PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
+    crontab - << DELIM
+$SCHED_LIST
+# leg-patch-begin@$PATCH_DATE
+  */5 *    * *       *     $(realpath "$0") sync
+# leg-patch-end@$PATCH_DATE
+DELIM
 }
 
 case "$1" in
@@ -121,8 +169,11 @@ case "$1" in
 "sync")
     vdir_sync
     ;;
+"sched")
+    vdir_sched
+    ;;
 *)
-    echo "${0##*/} [start|stop|sync]"
+    echo "${0##*/} [start|stop|sync|sched]"
     ;;
 esac
 
