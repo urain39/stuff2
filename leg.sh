@@ -2,9 +2,10 @@
 
 if [ "$(whoami)" != "root" ]; then
     echo "You must run it as root!" >&2
-    exit 0
+    exit 1
 fi
 
+readonly THIS_FILE="$(realpath "$0")"
 readonly CONF_FILE="/etc/leg.conf"
 readonly VDIR_MNT_DIR="/mnt/leg/vdir"
 readonly RUN_CONF_FILE="/run/leg.conf"
@@ -25,13 +26,13 @@ vdir_foreach() {
 '
     for ENTRY in $VDIR_ENTRY_LIST; do
         IFS='	'
-        read -r ENTRY_DIR SYNC_DELAY << DELIM
+        read -r ENTRY_DIR SYNC_DELAY << EOF
 $ENTRY
-DELIM
+EOF
 
         [ ! -d "$ENTRY_DIR" ] && continue
 
-        [ "$SYNC_DELAY" = "" ] && SYNC_DELAY=1
+        [ "$SYNC_DELAY" = "" ] && SYNC_DELAY=8
 
         DIR_NAME="$(echo "$ENTRY_DIR" | tr "/" "_")"
         ORG_DIR="$VDIR_MNT_DIR/org/$DIR_NAME"
@@ -41,26 +42,79 @@ DELIM
     done
 }
 
+vdir_init() {
+    if ! command -v rsync > /dev/null; then
+        echo "Did you installed rsync?" >&2
+        exit 1
+    fi
+
+    if command -v systemd > /dev/null; then
+        cat > /etc/systemd/system/leg.service << EOF
+[Unit]
+DefaultDependencies=no
+Requires=local-fs.target
+Before=rsyslog.service sysinit.target syslog.target
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '"$THIS_FILE" start'
+ExecStop=/bin/sh -c '"$THIS_FILE" stop'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
+EOF
+        systemctl enable leg && systemctl start leg
+    elif command -v openrc > /dev/null; then
+        cat > /etc/init.d/leg << EOF
+#!/sbin/openrc-run
+
+depend() {
+    after localmount
+    before acpid logger
+}
+
+start() {
+    "$THIS_FILE" start
+}
+
+stop() {
+    "$THIS_FILE" stop
+}
+EOF
+        chmod 755 /etc/init.d/leg
+        rc-update add leg && rc-service leg start
+    else
+        echo "Unsupported supervisor!" >&2
+        exit 1
+    fi
+
+    vdir_sched
+}
+
 vdir_start() {
     [ -f "$RUN_CONF_FILE" ] && return
 
     if [ -f "$CONF_FILE" ]; then
         cat "$CONF_FILE" > "$RUN_CONF_FILE"
     else
-        cat > "$RUN_CONF_FILE" << DELIM
+        cat > "$RUN_CONF_FILE" << EOF
 # vDIR List
 VDIR_ENTRY_LIST="
-/var/log	6
-/home	2
+/var/log	12
+/var/cache	12
+/home	4
+/root	4
 "
 
 # vDIR Sync
-VDIR_SYNC_EXEC="rsync"
-VDIR_SYNC_ARGS="-auy --inplace --no-whole-file --delete-after"
+VDIR_RSYNC_EXEC="rsync"
+VDIR_RSYNC_ARGS="-auy --inplace --no-whole-file --delete-after"
 
 # vDIR Swap
 VDIR_SWAP_SIZE="50"
-DELIM
+EOF
     fi
 
     # shellcheck disable=SC1090
@@ -85,7 +139,7 @@ DELIM
         mount -o bind,private "$TMP_DIR" "$ENTRY_DIR"
 
         # Use eval is a trick to hack word splitting, that without reset IFS
-        eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
+        eval "$VDIR_RSYNC_EXEC" "$VDIR_RSYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
     }
     vdir_foreach
 
@@ -108,7 +162,7 @@ vdir_stop() {
 
     vdir_callback() {
         # Use eval is a trick to hack word splitting, that without reset IFS
-        eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
+        eval "$VDIR_RSYNC_EXEC" "$VDIR_RSYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
 
         umount -l "$ENTRY_DIR"
         umount -l "$ORG_DIR"
@@ -133,33 +187,36 @@ vdir_sync() {
     vdir_callback() {
         if [ "$((VDIR_SYNC_COUNT % SYNC_DELAY))" = "0" ]; then
             # Use eval is a trick to hack word splitting, that without reset IFS
-            eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
+            eval "$VDIR_RSYNC_EXEC" "$VDIR_RSYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
         fi
     }
     vdir_foreach
 
     RUN_CONF="$(sed '/^# leg-data-begin@/,/^# leg-data-end@/d' "$RUN_CONF_FILE")"
     PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
-    cat > "$RUN_CONF_FILE" << DELIM
+    cat > "$RUN_CONF_FILE" << EOF
 $RUN_CONF
 # leg-data-begin@$PATCH_DATE
 VDIR_SYNC_COUNT=$((VDIR_SYNC_COUNT + 1))
 # leg-data-end@$PATCH_DATE
-DELIM
+EOF
 }
 
 vdir_sched() {
     SCHED_LIST="$(crontab -l | sed '/^# leg-patch-begin@/,/^# leg-patch-end@/d')"
     PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
-    crontab - << DELIM
+    crontab - << EOF
 $SCHED_LIST
 # leg-patch-begin@$PATCH_DATE
-  */5 *    * *       *     $(realpath "$0") sync
+  00 */1    * *       *     "$THIS_FILE" sync
 # leg-patch-end@$PATCH_DATE
-DELIM
+EOF
 }
 
 case "$1" in
+"init")
+    vdir_init
+    ;;
 "start")
     vdir_start
     ;;
@@ -173,7 +230,7 @@ case "$1" in
     vdir_sched
     ;;
 *)
-    echo "${0##*/} [start|stop|sync|sched]"
+    echo "${0##*/} [init|start|stop|sync|sched]"
     ;;
 esac
 
