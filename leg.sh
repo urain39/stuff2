@@ -7,6 +7,8 @@ fi
 
 readonly THIS_FILE="$(realpath "$0")"
 readonly CONF_FILE="/etc/leg.conf"
+
+readonly STATIC_DIR="/static"
 readonly VDIR_MNT_DIR="/mnt/leg/vdir"
 readonly RUN_CONF_FILE="/run/leg.conf"
 readonly SWAP_FILE="$VDIR_MNT_DIR/swapfile"
@@ -102,10 +104,11 @@ vdir_start() {
         cat > "$RUN_CONF_FILE" << EOF
 # vDIR List
 VDIR_ENTRY_LIST="
-/var/log	12
-/var/cache	12
-/home	4
+/tmp	0
 /root	4
+/home	4
+/var/log	12
+/var/cache	24
 "
 
 # vDIR Sync
@@ -130,6 +133,12 @@ EOF
     mkfs.ext4 -F "/dev/zram0"
     mkdir -p "$VDIR_MNT_DIR"
     mount "/dev/zram0" "$VDIR_MNT_DIR"
+
+    mkdir -p "$STATIC_DIR"
+    if [ "$(stat -c "%u%g%a" "$STATIC_DIR")" != "001777" ]; then
+        chown root:root "$STATIC_DIR"
+        chmod 1777 "$STATIC_DIR"
+    fi
 
     vdir_callback() {
         mkdir -p "$ORG_DIR"
@@ -185,6 +194,9 @@ vdir_sync() {
     [ "$VDIR_SYNC_COUNT" = "" ] && VDIR_SYNC_COUNT=0
 
     vdir_callback() {
+        # 0 means disable sync
+        [ "$SYNC_DELAY" = "0" ] && return
+
         if [ "$((VDIR_SYNC_COUNT % SYNC_DELAY))" = "0" ]; then
             # Use eval is a trick to hack word splitting, that without reset IFS
             eval "$VDIR_RSYNC_EXEC" "$VDIR_RSYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
