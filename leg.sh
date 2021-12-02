@@ -51,12 +51,11 @@ vdir_init() {
     fi
 
     if command -v systemd > /dev/null; then
-        cat > /etc/systemd/system/leg.service << EOF
+        cat > '/etc/systemd/system/leg.service' << EOF
 [Unit]
 DefaultDependencies=no
-Requires=local-fs.target
-Before=rsyslog.service sysinit.target syslog.target
 After=local-fs.target
+Before=rsyslog.service sysinit.target syslog.target
 
 [Service]
 Type=oneshot
@@ -69,7 +68,7 @@ WantedBy=default.target
 EOF
         systemctl enable leg && systemctl start leg
     elif command -v openrc > /dev/null; then
-        cat > /etc/init.d/leg << EOF
+        cat > '/etc/init.d/leg' << EOF
 #!/sbin/openrc-run
 
 depend() {
@@ -85,7 +84,7 @@ stop() {
     "$THIS_FILE" stop
 }
 EOF
-        chmod 755 /etc/init.d/leg
+        chmod 755 '/etc/init.d/leg'
         rc-update add leg && rc-service leg start
     else
         echo "Unsupported supervisor!" >&2
