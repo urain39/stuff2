@@ -1,18 +1,19 @@
 #!/bin/sh
 
 REMOTES="own-msod: my-msod-enc:"
-EXTENSIONS="GIF,JFIF,JPEG,JPG,MD,PNG,TXT,WEBP,gif,jfif,jpeg,jpg,md,png,txt,webp"
-GLOBSTARS="{,*/,*/*/,*/*/*/}"
+EXTENSIONS="{GIF,JFIF,JPEG,JPG,MD,PNG,TXT,WEBP,gif,jfif,jpeg,jpg,md,png,txt,webp}"
 
+# Replace it with "**", if rclone supported globstar someday...
+GLOBSTARS="{,*/,*/*/,*/*/*/}"
 for REMOTE in $REMOTES; do
     rclone sync "/sdcard/" "$REMOTE/FakeSD/" \
-        --include "/Android/data/com.tencent.mobileqq/Tencent/QQ_Images/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/Android/data/com.tencent.tim/Tencent/Tim_Images/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/DCIM/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/Download/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/Pictures/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/[Tt]encent/QQ_Images/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/[Tt]encent/Tim_Images/$GLOBSTARS*.{$EXTENSIONS}" \
-        --include "/tieba/$GLOBSTARS*.{$EXTENSIONS}"
+        --include "/Android/data/com.tencent.mobileqq/Tencent/QQ_Images/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/Android/data/com.tencent.mobileqq/Tencent/QQfile_recv/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/Android/data/com.tencent.tim/Tencent/Tim_Images/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/DCIM/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/Download/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/Pictures/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/[Tt]encent/QQ_Images/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/[Tt]encent/Tim_Images/$GLOBSTARS*.$EXTENSIONS" \
+        --include "/tieba/$GLOBSTARS*.$EXTENSIONS"
 done
