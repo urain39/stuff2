@@ -2,7 +2,7 @@
 
 "qemu-system-$(uname -m)" \
     -nographic \
-    -M virt"$([ -c "/dev/kvm" ] && echo ",accel=kvm")" \
+    -M virt,accel=kvm \
     -cpu host \
     -m 786M \
     -bios QEMU_EFI.FD \
