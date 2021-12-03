@@ -1,5 +1,11 @@
 #!/bin/sh
 
+####################################################################
+# Created By: urain39@qq.com
+# Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
+# Last Updated: 2021-12-03 08:58:39
+####################################################################
+
 if [ "$(whoami)" != "root" ]; then
     echo "You must run it as root!" >&2
     exit 1
@@ -28,9 +34,9 @@ vdir_foreach() {
 '
     for ENTRY in $VDIR_ENTRY_LIST; do
         IFS='	'
-        read -r ENTRY_DIR SYNC_DELAY << EOF
+        read -r ENTRY_DIR SYNC_DELAY << EOT
 $ENTRY
-EOF
+EOT
 
         [ ! -d "$ENTRY_DIR" ] && continue
 
@@ -51,7 +57,7 @@ vdir_init() {
     fi
 
     if command -v systemd > /dev/null; then
-        cat > '/etc/systemd/system/leg.service' << EOF
+        cat > '/etc/systemd/system/leg.service' << EOT
 [Unit]
 DefaultDependencies=no
 After=local-fs.target
@@ -65,10 +71,10 @@ RemainAfterExit=yes
 
 [Install]
 WantedBy=default.target
-EOF
+EOT
         systemctl enable leg && systemctl start leg
     elif command -v openrc > /dev/null; then
-        cat > '/etc/init.d/leg' << EOF
+        cat > '/etc/init.d/leg' << EOT
 #!/sbin/openrc-run
 
 depend() {
@@ -83,7 +89,7 @@ start() {
 stop() {
     "$THIS_FILE" stop
 }
-EOF
+EOT
         chmod 755 '/etc/init.d/leg'
         rc-update add leg && rc-service leg start
     else
@@ -100,7 +106,7 @@ vdir_start() {
     if [ -f "$CONF_FILE" ]; then
         cat "$CONF_FILE" > "$RUN_CONF_FILE"
     else
-        cat > "$RUN_CONF_FILE" << EOF
+        cat > "$RUN_CONF_FILE" << EOT
 # vDIR List
 VDIR_ENTRY_LIST="
 /tmp	0
@@ -116,7 +122,7 @@ VDIR_RSYNC_ARGS="-auy --inplace --no-whole-file --delete-after"
 
 # vDIR Swap
 VDIR_SWAP_SIZE="50"
-EOF
+EOT
     fi
 
     # shellcheck disable=SC1090
@@ -205,23 +211,23 @@ vdir_sync() {
 
     RUN_CONF="$(sed '/^# leg-data-begin@/,/^# leg-data-end@/d' "$RUN_CONF_FILE")"
     PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
-    cat > "$RUN_CONF_FILE" << EOF
+    cat > "$RUN_CONF_FILE" << EOT
 $RUN_CONF
 # leg-data-begin@$PATCH_DATE
 VDIR_SYNC_COUNT=$((VDIR_SYNC_COUNT + 1))
 # leg-data-end@$PATCH_DATE
-EOF
+EOT
 }
 
 vdir_sched() {
     SCHED_LIST="$(crontab -l | sed '/^# leg-patch-begin@/,/^# leg-patch-end@/d')"
     PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
-    crontab - << EOF
+    crontab - << EOT
 $SCHED_LIST
 # leg-patch-begin@$PATCH_DATE
-  00 */1    * *       *     "$THIS_FILE" sync
+  00 *      * *       *     "$THIS_FILE" sync
 # leg-patch-end@$PATCH_DATE
-EOF
+EOT
 }
 
 case "$1" in
