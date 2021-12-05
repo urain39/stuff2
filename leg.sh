@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2021-12-03 08:58:39
+# Last Updated: 2021-12-05 12:39:46
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -17,10 +17,8 @@ readonly CONF_FILE="/etc/leg.conf"
 readonly STATIC_DIR="/static"
 readonly VDIR_MNT_DIR="/mnt/leg/vdir"
 readonly RUN_CONF_FILE="/run/leg.conf"
-readonly SWAP_FILE="$VDIR_MNT_DIR/swapfile"
 
 readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit }' /proc/meminfo)"
-readonly RAM_HALF_SIZE="$((RAM_SIZE / 2))"
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
 umask 022
@@ -128,12 +126,20 @@ EOT
     # shellcheck disable=SC1090
     . "$RUN_CONF_FILE"
 
-    rm -rf "$VDIR_MNT_DIR"
-    modprobe zram num_devices=1
+    if [ "$VDIR_SWAP_SIZE" = "" ] ||
+        [ "$VDIR_SWAP_SIZE" -le 0 ] ||
+        [ "$VDIR_SWAP_SIZE" -gt 75 ]; then
+        VDIR_SWAP_SIZE=50
+    fi
+
+    VDIR_SIZE="$((RAM_SIZE * (100 - VDIR_SWAP_SIZE) / 100))"
+    SWAP_SIZE="$((RAM_SIZE * VDIR_SWAP_SIZE / 100))"
+
+    modprobe zram num_devices=2
 
     echo "1" > "/sys/block/zram0/reset"
     echo "$CPU_COUNT" > "/sys/block/zram0/max_comp_streams"
-    echo "$RAM_SIZE" > "/sys/block/zram0/disksize"
+    echo "$VDIR_SIZE" > "/sys/block/zram0/disksize"
 
     mkfs.ext4 -F "/dev/zram0"
     mkdir -p "$VDIR_MNT_DIR"
@@ -157,15 +163,12 @@ EOT
     }
     vdir_foreach
 
-    [ "$VDIR_SWAP_SIZE" = "" ] && return
-    if [ "$VDIR_SWAP_SIZE" -gt 0 ] && [ "$VDIR_SWAP_SIZE" -le 50 ]; then
-        SWAP_SIZE="$((RAM_SIZE * VDIR_SWAP_SIZE / 100))"
-        dd if="/dev/zero" bs=4194304 count="$((SWAP_SIZE / 4194304))" of="$SWAP_FILE"
-        chmod 600 "$SWAP_FILE"
+    echo "1" > "/sys/block/zram1/reset"
+    echo "$CPU_COUNT" > "/sys/block/zram1/max_comp_streams"
+    echo "$SWAP_SIZE" > "/sys/block/zram1/disksize"
 
-        mkswap "$SWAP_FILE"
-        swapon "$SWAP_FILE"
-    fi
+    mkswap "/dev/zram1"
+    swapon -p 32767 "/dev/zram1"
 }
 
 vdir_stop() {
@@ -183,7 +186,7 @@ vdir_stop() {
     }
     vdir_foreach
 
-    [ -f "$SWAP_FILE" ] && swapoff "$SWAP_FILE"
+    swapoff "/dev/zram1"
     umount -l "$VDIR_MNT_DIR"
 
     rm -f "$RUN_CONF_FILE"
