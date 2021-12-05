@@ -116,10 +116,10 @@ VDIR_ENTRY_LIST="
 
 # vDIR Sync
 VDIR_RSYNC_EXEC="rsync"
-VDIR_RSYNC_ARGS="-auy --inplace --no-whole-file --delete-after"
+VDIR_RSYNC_ARGS="-auxy --inplace --no-whole-file --delete-after"
 
 # vDIR Swap
-VDIR_SWAP_SIZE="50"
+VDIR_SWAP_SIZE="100"
 EOT
     fi
 
@@ -128,11 +128,11 @@ EOT
 
     if [ "$VDIR_SWAP_SIZE" = "" ] ||
         [ "$VDIR_SWAP_SIZE" -le 0 ] ||
-        [ "$VDIR_SWAP_SIZE" -gt 75 ]; then
-        VDIR_SWAP_SIZE=50
+        [ "$VDIR_SWAP_SIZE" -gt 125 ]; then
+        VDIR_SWAP_SIZE=100
     fi
 
-    VDIR_SIZE="$((RAM_SIZE * (100 - VDIR_SWAP_SIZE) / 100))"
+    VDIR_SIZE="$((RAM_SIZE * (150 - VDIR_SWAP_SIZE) / 100))"
     SWAP_SIZE="$((RAM_SIZE * VDIR_SWAP_SIZE / 100))"
 
     modprobe zram num_devices=2
