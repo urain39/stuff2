@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2021-12-05 12:39:46
+# Last Updated: 2021-12-05 15:13:59
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -115,8 +115,8 @@ VDIR_ENTRY_LIST="
 "
 
 # vDIR Sync
-VDIR_RSYNC_EXEC="rsync"
-VDIR_RSYNC_ARGS="-auxy --inplace --no-whole-file --delete-after"
+VDIR_SYNC_EXEC="rsync"
+VDIR_SYNC_ARGS="-auxy --inplace --no-whole-file --delete-after"
 
 # vDIR Swap
 VDIR_SWAP_SIZE="100"
@@ -159,7 +159,7 @@ EOT
         mount -o bind,private "$TMP_DIR" "$ENTRY_DIR"
 
         # Use eval is a trick to hack word splitting, that without reset IFS
-        eval "$VDIR_RSYNC_EXEC" "$VDIR_RSYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
+        eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
     }
     vdir_foreach
 
@@ -179,7 +179,7 @@ vdir_stop() {
 
     vdir_callback() {
         # Use eval is a trick to hack word splitting, that without reset IFS
-        eval "$VDIR_RSYNC_EXEC" "$VDIR_RSYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
+        eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
 
         umount -l "$ENTRY_DIR"
         umount -l "$ORG_DIR"
@@ -207,7 +207,7 @@ vdir_sync() {
 
         if [ "$((VDIR_SYNC_COUNT % SYNC_DELAY))" = "0" ]; then
             # Use eval is a trick to hack word splitting, that without reset IFS
-            eval "$VDIR_RSYNC_EXEC" "$VDIR_RSYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
+            eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
         fi
     }
     vdir_foreach
