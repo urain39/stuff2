@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2021-12-05 15:13:59
+# Last Updated: 2021-12-07 13:50:57
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -60,6 +60,7 @@ vdir_init() {
 DefaultDependencies=no
 After=local-fs.target
 Before=rsyslog.service sysinit.target syslog.target
+Conflicts=shutdown.target
 
 [Service]
 Type=oneshot
@@ -70,7 +71,7 @@ RemainAfterExit=yes
 [Install]
 WantedBy=default.target
 EOT
-        systemctl enable leg && systemctl start leg
+        systemctl enable leg
     elif command -v openrc > /dev/null; then
         cat > '/etc/init.d/leg' << EOT
 #!/sbin/openrc-run
@@ -89,7 +90,7 @@ stop() {
 }
 EOT
         chmod 755 '/etc/init.d/leg'
-        rc-update add leg && rc-service leg start
+        rc-update add leg
     else
         echo "Unsupported supervisor!" >&2
         exit 1
