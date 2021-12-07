@@ -104,14 +104,16 @@ vdir_start() {
     if [ -f "$CONF_FILE" ]; then
         cat "$CONF_FILE" > "$RUN_CONF_FILE"
     else
-        cat > "$RUN_CONF_FILE" << EOT
+        cat > "$RUN_CONF_FILE" << \EOT
 # vDIR List
 VDIR_ENTRY_LIST="
 /tmp	0
-/root	4
-/home	4
-/var/log	12
+/root	8
+/home	8
+/var/log	24
 /var/cache	24
+/var/backups	24
+/var/lib/rpimonitor	24
 "
 
 # vDIR Sync
