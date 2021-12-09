@@ -113,7 +113,6 @@ VDIR_ENTRY_LIST="
 /home	8
 /var/log	24
 /var/cache	24
-/var/backups	24
 /var/lib/rpimonitor	24
 "
 
@@ -123,6 +122,11 @@ VDIR_SYNC_ARGS="-auxy --inplace --no-whole-file --delete-after"
 
 # vDIR Swap
 VDIR_SWAP_SIZE="100"
+
+# zRAM Compression
+ZRAM_VDIR_ALGS="lzo-rle	zstd"
+ZRAM_SWAP_ALGS="lzo-rle	lzo"
+ZRAM_OVER_SIZE="150"
 EOT
     fi
 
@@ -135,13 +139,23 @@ EOT
         VDIR_SWAP_SIZE=100
     fi
 
-    VDIR_SIZE="$((RAM_SIZE * (150 - VDIR_SWAP_SIZE) / 100))"
+    if [ "$ZRAM_OVER_SIZE" = "" ] ||
+        [ "$ZRAM_OVER_SIZE" -lt 125 ] ||
+        [ "$ZRAM_OVER_SIZE" -gt 250 ]; then
+        ZRAM_OVER_SIZE=150
+    fi
+
+    VDIR_SIZE="$((RAM_SIZE * (ZRAM_OVER_SIZE - VDIR_SWAP_SIZE) / 100))"
     SWAP_SIZE="$((RAM_SIZE * VDIR_SWAP_SIZE / 100))"
 
     modprobe zram num_devices=2
 
     echo "1" > "/sys/block/zram0/reset"
     echo "$CPU_COUNT" > "/sys/block/zram0/max_comp_streams"
+    IFS='	'
+    for ALG in $ZRAM_VDIR_ALGS; do
+        echo "$ALG" > "/sys/block/zram0/comp_algorithm" 2> /dev/null && break
+    done
     echo "$VDIR_SIZE" > "/sys/block/zram0/disksize"
 
     mkfs.ext4 -F "/dev/zram0"
@@ -168,6 +182,10 @@ EOT
 
     echo "1" > "/sys/block/zram1/reset"
     echo "$CPU_COUNT" > "/sys/block/zram1/max_comp_streams"
+    IFS='	'
+    for ALG in $ZRAM_SWAP_ALGS; do
+        echo "$ALG" > "/sys/block/zram1/comp_algorithm" 2> /dev/null && break
+    done
     echo "$SWAP_SIZE" > "/sys/block/zram1/disksize"
 
     mkswap "/dev/zram1"
