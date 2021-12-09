@@ -118,7 +118,7 @@ VDIR_ENTRY_LIST="
 
 # vDIR Sync
 VDIR_SYNC_EXEC="rsync"
-VDIR_SYNC_ARGS="-auxy --inplace --no-whole-file --delete-after"
+VDIR_SYNC_ARGS="-auxy --inplace --no-whole-file --delete-after --"
 
 # vDIR Swap
 VDIR_SWAP_SIZE="100"
