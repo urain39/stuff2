@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2021-12-07 13:50:57
+# Last Updated: 2021-12-09 20:10:20
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -124,25 +124,25 @@ VDIR_SYNC_ARGS="-auxy --inplace --no-whole-file --delete-after"
 VDIR_SWAP_SIZE="100"
 
 # zRAM Compression
+ZRAM_OVER_SIZE="150"
 ZRAM_VDIR_ALGS="lzo-rle	zstd"
 ZRAM_SWAP_ALGS="lzo-rle	lzo"
-ZRAM_OVER_SIZE="150"
 EOT
     fi
 
     # shellcheck disable=SC1090
     . "$RUN_CONF_FILE"
 
-    if [ "$VDIR_SWAP_SIZE" = "" ] ||
-        [ "$VDIR_SWAP_SIZE" -le 0 ] ||
-        [ "$VDIR_SWAP_SIZE" -gt 125 ]; then
-        VDIR_SWAP_SIZE=100
-    fi
-
     if [ "$ZRAM_OVER_SIZE" = "" ] ||
         [ "$ZRAM_OVER_SIZE" -lt 125 ] ||
         [ "$ZRAM_OVER_SIZE" -gt 250 ]; then
         ZRAM_OVER_SIZE=150
+    fi
+
+    if [ "$VDIR_SWAP_SIZE" = "" ] ||
+        [ "$VDIR_SWAP_SIZE" -le 0 ] ||
+        [ "$VDIR_SWAP_SIZE" -gt "$((ZRAM_OVER_SIZE * 3 / 4))" ]; then
+        VDIR_SWAP_SIZE="$((ZRAM_OVER_SIZE * 2 / 3))"
     fi
 
     VDIR_SIZE="$((RAM_SIZE * (ZRAM_OVER_SIZE - VDIR_SWAP_SIZE) / 100))"
