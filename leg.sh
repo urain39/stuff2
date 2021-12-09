@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2021-12-09 20:10:20
+# Last Updated: 2021-12-10 00:15:11
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -154,7 +154,7 @@ EOT
     echo "$CPU_COUNT" > "/sys/block/zram0/max_comp_streams"
     IFS='	'
     for ALG in $ZRAM_VDIR_ALGS; do
-        echo "$ALG" > "/sys/block/zram0/comp_algorithm" 2> /dev/null && break
+        (echo "$ALG" > "/sys/block/zram0/comp_algorithm") 2> /dev/null && break
     done
     echo "$VDIR_SIZE" > "/sys/block/zram0/disksize"
 
@@ -184,7 +184,7 @@ EOT
     echo "$CPU_COUNT" > "/sys/block/zram1/max_comp_streams"
     IFS='	'
     for ALG in $ZRAM_SWAP_ALGS; do
-        echo "$ALG" > "/sys/block/zram1/comp_algorithm" 2> /dev/null && break
+        (echo "$ALG" > "/sys/block/zram1/comp_algorithm") 2> /dev/null && break
     done
     echo "$SWAP_SIZE" > "/sys/block/zram1/disksize"
 
@@ -244,7 +244,7 @@ EOT
 }
 
 vdir_sched() {
-    SCHED_LIST="$(crontab -l | sed '/^# leg-patch-begin@/,/^# leg-patch-end@/d')"
+    SCHED_LIST="$(crontab -l 2> /dev/null | sed '/^# leg-patch-begin@/,/^# leg-patch-end@/d')"
     PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
     crontab - << EOT
 $SCHED_LIST
