@@ -4,7 +4,7 @@
     -nographic \
     -M virt,accel=kvm \
     -cpu host \
-    -m 512M \
+    -m 256M \
     -bios QEMU_EFI.FD \
     -hda DISK.QCOW2 \
     -cdrom CDROM.ISO \
