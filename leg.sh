@@ -143,7 +143,7 @@ EOT
     if [ "$VDIR_SWAP_SIZE" = "" ] ||
         [ "$VDIR_SWAP_SIZE" -le 0 ] ||
         [ "$VDIR_SWAP_SIZE" -gt "$((ZRAM_OVER_SIZE * 3 / 4))" ]; then
-        VDIR_SWAP_SIZE="$((ZRAM_OVER_SIZE / 2))"
+        VDIR_SWAP_SIZE="$((ZRAM_OVER_SIZE * 2 / 3))"
     fi
 
     USABLE_SIZE="$RAM_SIZE"
