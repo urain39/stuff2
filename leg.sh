@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2021-12-10 00:15:11
+# Last Updated: 2021-12-12 16:19:01
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -38,7 +38,7 @@ EOT
 
         [ ! -d "$ENTRY_DIR" ] && continue
 
-        [ "$SYNC_DELAY" = "" ] && SYNC_DELAY=8
+        [ "$SYNC_DELAY" = "" ] && SYNC_DELAY="8"
 
         DIR_NAME="$(echo "$ENTRY_DIR" | tr "/" "_")"
         ORG_DIR="$VDIR_MNT_DIR/org/$DIR_NAME"
@@ -125,6 +125,7 @@ VDIR_SWAP_SIZE="100"
 
 # zRAM Compression
 ZRAM_OVER_SIZE="150"
+ZRAM_CONST_SIZE="10"
 ZRAM_VDIR_ALGS="lzo-rle	zstd"
 ZRAM_SWAP_ALGS="lzo-rle	lzo"
 EOT
@@ -136,19 +137,26 @@ EOT
     if [ "$ZRAM_OVER_SIZE" = "" ] ||
         [ "$ZRAM_OVER_SIZE" -lt 125 ] ||
         [ "$ZRAM_OVER_SIZE" -gt 250 ]; then
-        ZRAM_OVER_SIZE=150
+        ZRAM_OVER_SIZE="150"
     fi
 
     if [ "$VDIR_SWAP_SIZE" = "" ] ||
         [ "$VDIR_SWAP_SIZE" -le 0 ] ||
         [ "$VDIR_SWAP_SIZE" -gt "$((ZRAM_OVER_SIZE * 3 / 4))" ]; then
-        VDIR_SWAP_SIZE="$((ZRAM_OVER_SIZE * 2 / 3))"
+        VDIR_SWAP_SIZE="$((ZRAM_OVER_SIZE / 2))"
     fi
 
-    VDIR_SIZE="$((RAM_SIZE * (ZRAM_OVER_SIZE - VDIR_SWAP_SIZE) / 100))"
-    SWAP_SIZE="$((RAM_SIZE * VDIR_SWAP_SIZE / 100))"
+    USABLE_SIZE="$RAM_SIZE"
+    if [ "$ZRAM_CONST_SIZE" != "" ] &&
+        [ "$ZRAM_CONST_SIZE" -gt 0 ] &&
+        [ "$ZRAM_CONST_SIZE" -le 25 ]; then
+        USABLE_SIZE="$((USABLE_SIZE * (100 - ZRAM_CONST_SIZE) / 100))"
+    fi
 
-    modprobe zram num_devices=2
+    VDIR_SIZE="$((USABLE_SIZE * (ZRAM_OVER_SIZE - VDIR_SWAP_SIZE) / 100))"
+    SWAP_SIZE="$((USABLE_SIZE * VDIR_SWAP_SIZE / 100))"
+
+    modprobe zram num_devices="2"
 
     echo "1" > "/sys/block/zram0/reset"
     echo "$CPU_COUNT" > "/sys/block/zram0/max_comp_streams"
@@ -220,7 +228,7 @@ vdir_sync() {
     # shellcheck disable=SC1090
     . "$RUN_CONF_FILE"
 
-    [ "$VDIR_SYNC_COUNT" = "" ] && VDIR_SYNC_COUNT=0
+    [ "$VDIR_SYNC_COUNT" = "" ] && VDIR_SYNC_COUNT="0"
 
     vdir_callback() {
         # 0 means disable sync
