@@ -25,7 +25,7 @@ tmp_dir="/tmp/$$.tmp"
 #     3. 旧版不能在低内存状态下将 disk 限制为 0B
 magick_tmp_dir="/dev/shm"
 store_dir="$HOME/my-msod-enc/Repack"
-cache_size_max="$((400 * (1 << 20)))"
+cache_size_max="$((100 * (1 << 20)))"
 for arc in "$org_dir"/*.zip; do
     arcname="${arc##*/}"
     name="${arcname%.*}"
@@ -37,7 +37,7 @@ for arc in "$org_dir"/*.zip; do
     mkdir -p "$store_dir/$name"
     cache_size=0
     pack_count=0
-    while read -r _ _ _ size _ file_; do
+    while read -r _ _ _ _ _ file_; do
         7z x -aoa -y "$arc" "$file_"
         echo "Started at $(date +'%Y-%m-%d %H:%M:%S')"
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert \
@@ -51,6 +51,7 @@ for arc in "$org_dir"/*.zip; do
             -sampling-factor "4:2:0" \
             "$file_" "$file_"
         echo "Stopped at $(date +'%Y-%m-%d %H:%M:%S')"
+        size="$(stat -c '%s' "$file_")"
         : "$((cache_size += size))"
         if [ "$cache_size" -gt "$cache_size_max" ]; then
             pack_files
