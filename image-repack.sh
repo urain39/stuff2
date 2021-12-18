@@ -42,7 +42,7 @@ for arc in "$org_dir"/*.zip; do
         echo "Started at $(date +'%Y-%m-%d %H:%M:%S')"
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert \
             -limit disk "512MiB" \
-            -limit memory "384MiB" \
+            -limit memory "256MiB" \
             -depth "8" \
             -enhance \
             -interlace "none" \
