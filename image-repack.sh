@@ -21,8 +21,9 @@ org_dir="$HOME/my-msod-enc/qBittorrent"
 tmp_dir="/tmp/$$.tmp"
 # 设置临时文件目录为 /dev/shm 的原因如下：
 #     1. /dev/shm 能保证在内存中操作
-#     2. 临时文件的可压缩空间非常高（配合zRAM）
+#     2. 临时文件的可压缩空间非常高（配合 zRAM）
 #     3. 旧版不能在低内存状态下将 disk 限制为 0B
+#     4. 瞬时请求大内存容易触发 OOM （zRAM bug？）
 magick_tmp_dir="/dev/shm"
 store_dir="$HOME/my-msod-enc/Repack"
 cache_size_max="$((100 * (1 << 20)))"
