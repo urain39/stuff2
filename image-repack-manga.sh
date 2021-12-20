@@ -54,14 +54,13 @@ for arc in "$org_dir"/*.zip; do
             resize_="$magick_width1"
         fi
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert"$magick_suffix" \
-            -limit disk "512MiB" \
-            -limit memory "256MiB" \
-            -depth "6" \
+            -limit disk "786MiB" \
+            -limit memory "512MiB" \
             -enhance \
             -interlace "none" \
             -quality "95%" \
             -resize "$resize_" \
-            -sampling-factor "4:1:0" \
+            -sampling-factor "4:2:0" \
             -strip \
             "$file_" "$file_"
         echo "Stopped at $(date +'%Y-%m-%d %H:%M:%S')"
