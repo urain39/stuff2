@@ -43,7 +43,13 @@ for arc in "$org_dir"/*.zip; do
     mkdir -p "$store_dir/$name"
     cache_size=0
     pack_count=0
-    while read -r _ _ _ _ _ file_; do
+    IFS='
+'
+    for entry in $(7z l "$arc" | get_files); do
+        IFS=' 	'
+        read -r _ _ _ _ _ file_ << EOI
+$entry
+EOI
         7z x -aoa -y "$arc" "$file_"
         echo "Started at $(date +'%Y-%m-%d %H:%M:%S')"
         width="$(identify"$magick_suffix" -format "%w" "$file_")"
@@ -71,9 +77,7 @@ for arc in "$org_dir"/*.zip; do
         if [ "$cache_size" -gt "$cache_size_max" ]; then
             pack_files
         fi
-    done << EOT
-$(7z l "$arc" | get_files)
-EOT
+    done
     if ls "$tmp_dir"/* > /dev/null 2>&1; then
         pack_files
     fi
