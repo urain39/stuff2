@@ -5,7 +5,7 @@ BASENAME="${0##*/}"
 exec > ~/"$BASENAME.out" 2> ~/"$BASENAME.err"
 
 get_files() {
-    sed -En '1,/^-{5}/d;/^-{5}/,$d;p'
+    sed -En '1,/^-{5}/d;/^-{5}/,$d;/\.([Jj][Pp][Gg]|[Pp][Nn][Gg])$/p'
 }
 
 pack_files() {
@@ -53,6 +53,7 @@ for arc in "$org_dir"/*.zip; do
         else
             resize_="$magick_width1"
         fi
+        file__="${file_%.*}.jpg"
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert"$magick_suffix" \
             -limit disk "786MiB" \
             -limit memory "512MiB" \
@@ -62,9 +63,10 @@ for arc in "$org_dir"/*.zip; do
             -resize "$resize_" \
             -sampling-factor "4:2:0" \
             -strip \
-            "$file_" "$file_"
+            "$file_" "$file__"
+        [ "$file_" != "$file__" ] && rm "$file_"
         echo "Stopped at $(date +'%Y-%m-%d %H:%M:%S')"
-        size="$(stat -c '%s' "$file_")"
+        size="$(stat -c '%s' "$file__")"
         : "$((cache_size += size))"
         if [ "$cache_size" -gt "$cache_size_max" ]; then
             pack_files
@@ -74,5 +76,8 @@ $(7z l "$arc" | get_files)
 EOT
     if ls "$tmp_dir"/* > /dev/null 2>&1; then
         pack_files
+    fi
+    if ! ls "$store_dir/$name"/* > /dev/null 2>&1; then
+        rm -r "$store_dir/$name"
     fi
 done
