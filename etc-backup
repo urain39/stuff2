@@ -9,4 +9,4 @@ file_="$prefix$(date +"%Y-%m-%d")$suffix"
 tar czf "$dir_/$file_" "/etc"
 
 # Remove old backups
-find "$dir_"/ -type f -name "$prefix*$suffix" -atime +30 -delete
+find "$dir_"/ -type f -name "$prefix*$suffix" -mtime +30 -delete
