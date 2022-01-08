@@ -3,3 +3,6 @@
 
 ; 1080P@60FPS,H.264,AAC
 -s 1920x1080 -r 60 -b:v 5M -c:v h264 -ac 2 -ar 44.1K -b:a 192K -c:a aac
+
+; 截取图片
+-r 0.125 -q:v 1 -qmin 1 -qmax 1 %08d.jpg
