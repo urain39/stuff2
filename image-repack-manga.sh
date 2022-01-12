@@ -22,8 +22,8 @@ tmp_dir="/tmp/$$.tmp"
 magick_suffix="" # Default
 #magick_suffix="-6" # Alpine
 #magick_suffix="-im6" # Ubuntu
-magick_width0="1280>" # Width < Height
-magick_width1="2560>" # Width >= Height
+magick_width0="1536>" # Width < Height
+magick_width1="3072>" # Width >= Height
 # 设置临时文件目录为 /dev/shm 的原因如下：
 #     1. /dev/shm 能保证在内存中操作
 #     2. 临时文件的可压缩空间非常高（配合 zRAM）
