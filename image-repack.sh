@@ -47,7 +47,7 @@ for arc in "$org_dir"/*.zip; do
             -depth "8" \
             -enhance \
             -interlace "none" \
-            -quality "95%" \
+            -quality 0 \
             -resize "1920>" \
             -sampling-factor "4:2:0" \
             "$file_" "$file_"
