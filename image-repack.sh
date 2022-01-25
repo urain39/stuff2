@@ -44,10 +44,11 @@ for arc in "$org_dir"/*.zip; do
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert \
             -limit disk "512MiB" \
             -limit memory "256MiB" \
+            -colorspace "sRGB" \
             -depth "8" \
             -enhance \
             -interlace "none" \
-            -quality 0 \
+            -quality "0"\
             -resize "1920>" \
             -sampling-factor "4:2:0" \
             "$file_" "$file_"
