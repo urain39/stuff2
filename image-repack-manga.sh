@@ -59,7 +59,6 @@ EOI
         else
             resize_="$magick_width1"
         fi
-        file__="${file_%.*}.jpg"
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert"$magick_suffix" \
             -limit disk "786MiB" \
             -limit memory "512MiB" \
@@ -67,14 +66,13 @@ EOI
             -depth "8" \
             -enhance \
             -interlace "none" \
-            -quality "0"\
+            -quality "95" \
             -resize "$resize_" \
             -sampling-factor "4:2:0" \
             -strip \
-            "$file_" "$file__"
-        [ "$file_" != "$file__" ] && rm "$file_"
+            "$file_" "$file_"
         echo "Stopped at $(date +'%Y-%m-%d %H:%M:%S')"
-        size="$(stat -c '%s' "$file__")"
+        size="$(stat -c '%s' "$file_")"
         : "$((cache_size += size))"
         if [ "$cache_size" -gt "$cache_size_max" ]; then
             pack_files
