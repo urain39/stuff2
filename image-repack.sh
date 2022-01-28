@@ -44,7 +44,7 @@ for arc in "$org_dir"/*.zip; do
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert \
             -limit disk "512MiB" \
             -limit memory "256MiB" \
-            -colorspace "sRGB" \
+            -colorspace "YUV" \
             -depth "8" \
             -enhance \
             -interlace "none" \

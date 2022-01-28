@@ -63,7 +63,7 @@ EOI
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert"$magick_suffix" \
             -limit disk "786MiB" \
             -limit memory "512MiB" \
-            -colorspace "sRGB" \
+            -colorspace "YUV" \
             -depth "8" \
             -enhance \
             -interlace "none" \
