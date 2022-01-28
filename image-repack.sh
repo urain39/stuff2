@@ -49,7 +49,7 @@ for arc in "$org_dir"/*.zip; do
             -enhance \
             -interlace "none" \
             -quality "0"\
-            -resize "1920>" \
+            -resize "1680>" \
             -sampling-factor "4:2:0" \
             "$file_" "$file_"
         echo "Stopped at $(date +'%Y-%m-%d %H:%M:%S')"
