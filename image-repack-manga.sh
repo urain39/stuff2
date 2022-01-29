@@ -66,7 +66,7 @@ EOI
             -depth "8" \
             -enhance \
             -interlace "none" \
-            -quality "95" \
+            -quality "0" \
             -resize "$resize_" \
             -sampling-factor "4:2:0" \
             -strip \

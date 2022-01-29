@@ -46,9 +46,8 @@ for arc in "$org_dir"/*.zip; do
             -limit memory "256MiB" \
             -colorspace "YUV" \
             -depth "8" \
-            -enhance \
             -interlace "none" \
-            -quality "95" \
+            -quality "0" \
             -resize "1680>" \
             -sampling-factor "4:2:0" \
             "$file_" "$file_"
