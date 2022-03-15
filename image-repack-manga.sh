@@ -59,6 +59,7 @@ EOI
         else
             resize_="$magick_width1"
         fi
+        file__="${file_%.*}.webp"
         MAGICK_TEMPORARY_PATH="$magick_tmp_dir" convert"$magick_suffix" \
             -limit disk "786MiB" \
             -limit memory "512MiB" \
@@ -70,9 +71,10 @@ EOI
             -resize "$resize_" \
             -sampling-factor "4:2:0" \
             -strip \
-            "$file_" "$file_"
+            "$file_" "$file__"
+        [ "$file_" != "$file__" ] && rm "$file_"
         echo "Stopped at $(date +'%Y-%m-%d %H:%M:%S')"
-        size="$(stat -c '%s' "$file_")"
+        size="$(stat -c '%s' "$file__")"
         : "$((cache_size += size))"
         if [ "$cache_size" -gt "$cache_size_max" ]; then
             pack_files
