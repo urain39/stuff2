@@ -23,17 +23,17 @@ readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
 readonly LOG_DIR="/var/log/leg"
 readonly DATE_TODAY="$(date +"%Y-%m-%d")"
-readonly CURRENT_TTY="$(realpath "/dev/stdin")"
+readonly CURRENT_TTY="$(realpath "/dev/stdout")"
 
 umask 022
 
 leg_log_begin() {
     mkdir -p "$LOG_DIR"
-    exec >> "$LOG_DIR/$DATE_TODAY.log" 2>&1
+    exec 9>&1 8>&2 >> "$LOG_DIR/$DATE_TODAY.log" 2>&1
 }
 
 leg_log_end() {
-    exec > "$CURRENT_TTY" 2> "$CURRENT_TTY"
+    exec >&9 2>&8 9>&- 8>&-
 }
 
 leg_callback() {
