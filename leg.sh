@@ -21,15 +21,15 @@ readonly RUN_CONF_FILE="/run/leg.conf"
 readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit }' /proc/meminfo)"
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
-readonly RUN_LOG_DIR="/var/log/leg"
+readonly LOG_DIR="/var/log/leg"
 readonly DATE_TODAY="$(date +"%Y-%m-%d")"
 readonly CURRENT_TTY="$(realpath "/dev/stdin")"
 
 umask 022
 
 leg_log_begin() {
-    mkdir -p "$RUN_LOG_DIR"
-    exec >> "$RUN_LOG_DIR/$DATE_TODAY.log" 2>&1
+    mkdir -p "$LOG_DIR"
+    exec >> "$LOG_DIR/$DATE_TODAY.log" 2>&1
 }
 
 leg_log_end() {
@@ -198,7 +198,7 @@ EOT
         mount -o bind,private "$ENTRY_DIR" "$ORG_DIR"
         mount -o bind,private "$TMP_DIR" "$ENTRY_DIR"
 
-        echo "[$(date +"%Y-%m-%d %H:%M:%S")] $ORG_DIR -> $TMP_DIR"
+        echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' -> '$TMP_DIR'"
 
         # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
@@ -224,7 +224,7 @@ leg_stop() {
     . "$RUN_CONF_FILE"
 
     leg_callback() {
-        echo "[$(date +"%Y-%m-%d %H:%M:%S")] $ORG_DIR <- $TMP_DIR"
+        echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' <- '$TMP_DIR'"
 
         # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
@@ -254,7 +254,7 @@ leg_sync() {
         [ "$SYNC_DELAY" = "0" ] && return
 
         if [ "$((VDIR_SYNC_COUNT % SYNC_DELAY))" = "0" ]; then
-            echo "[$(date +"%Y-%m-%d %H:%M:%S")] $ORG_DIR <- $TMP_DIR"
+            echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' <- '$TMP_DIR'"
 
             # Use eval is a trick to hack word splitting, that without reset IFS
             eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
@@ -272,7 +272,7 @@ VDIR_SYNC_COUNT=$((VDIR_SYNC_COUNT + 1))
 EOT
 
     # Remove old logs
-    find "$RUN_LOG_DIR" -type f -mtime +30 -delete
+    find "$LOG_DIR/" -type f -mtime +30 -delete
 }
 
 leg_sched() {
