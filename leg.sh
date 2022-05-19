@@ -21,13 +21,26 @@ readonly RUN_CONF_FILE="/run/leg.conf"
 readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit }' /proc/meminfo)"
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
+readonly RUN_LOG_DIR="/var/log/leg"
+readonly DATE_TODAY="$(date +"%Y-%m-%d")"
+readonly CURRENT_TTY="$(realpath "/dev/stdin")"
+
 umask 022
 
-vdir_callback() {
+leg_log_begin() {
+    mkdir -p "$RUN_LOG_DIR"
+    exec >> "$RUN_LOG_DIR/$DATE_TODAY.log" 2>&1
+}
+
+leg_log_end() {
+    exec > "$CURRENT_TTY" 2> "$CURRENT_TTY"
+}
+
+leg_callback() {
     : pass
 }
 
-vdir_foreach() {
+leg_foreach() {
     IFS='
 '
     for ENTRY in $VDIR_ENTRY_LIST; do
@@ -44,11 +57,13 @@ EOT
         ORG_DIR="$VDIR_MNT_DIR/org/$DIR_NAME"
         TMP_DIR="$VDIR_MNT_DIR/tmp/$DIR_NAME"
 
-        vdir_callback
+        leg_log_begin
+        leg_callback
+        leg_log_end
     done
 }
 
-vdir_init() {
+leg_init() {
     if ! command -v rsync > /dev/null; then
         echo "Did you installed rsync?" >&2
         exit 1
@@ -96,10 +111,10 @@ EOT
         exit 1
     fi
 
-    vdir_sched
+    leg_sched
 }
 
-vdir_start() {
+leg_start() {
     [ -f "$RUN_CONF_FILE" ] && return
 
     if [ -f "$CONF_FILE" ]; then
@@ -118,7 +133,7 @@ VDIR_ENTRY_LIST="
 
 # vDIR Sync
 VDIR_SYNC_EXEC="rsync"
-VDIR_SYNC_ARGS="-auxy --inplace --no-whole-file --delete-after --"
+VDIR_SYNC_ARGS="-auvxy --inplace --no-whole-file --delete-after --"
 
 # vDIR Swap
 VDIR_SWAP_SIZE="100"
@@ -176,17 +191,19 @@ EOT
         chmod 1777 "$STATIC_DIR"
     fi
 
-    vdir_callback() {
+    leg_callback() {
         mkdir -p "$ORG_DIR"
         mkdir -p "$TMP_DIR"
 
         mount -o bind,private "$ENTRY_DIR" "$ORG_DIR"
         mount -o bind,private "$TMP_DIR" "$ENTRY_DIR"
 
+        echo "[$(date +"%Y-%m-%d %H:%M:%S")] $ORG_DIR -> $TMP_DIR"
+
         # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
     }
-    vdir_foreach
+    leg_foreach
 
     echo "1" > "/sys/block/zram1/reset"
     echo "$CPU_COUNT" > "/sys/block/zram1/max_comp_streams"
@@ -200,20 +217,22 @@ EOT
     swapon -p 32767 "/dev/zram1"
 }
 
-vdir_stop() {
+leg_stop() {
     [ ! -f "$RUN_CONF_FILE" ] && return
 
     # shellcheck disable=SC1090
     . "$RUN_CONF_FILE"
 
-    vdir_callback() {
+    leg_callback() {
+        echo "[$(date +"%Y-%m-%d %H:%M:%S")] $ORG_DIR <- $TMP_DIR"
+
         # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
 
         umount -l "$ENTRY_DIR"
         umount -l "$ORG_DIR"
     }
-    vdir_foreach
+    leg_foreach
 
     swapoff "/dev/zram1"
     umount -l "$VDIR_MNT_DIR"
@@ -222,7 +241,7 @@ vdir_stop() {
     rm -rf "$VDIR_MNT_DIR"
 }
 
-vdir_sync() {
+leg_sync() {
     [ ! -f "$RUN_CONF_FILE" ] && return
 
     # shellcheck disable=SC1090
@@ -230,16 +249,18 @@ vdir_sync() {
 
     [ "$VDIR_SYNC_COUNT" = "" ] && VDIR_SYNC_COUNT="0"
 
-    vdir_callback() {
+    leg_callback() {
         # 0 means disable sync
         [ "$SYNC_DELAY" = "0" ] && return
 
         if [ "$((VDIR_SYNC_COUNT % SYNC_DELAY))" = "0" ]; then
+            echo "[$(date +"%Y-%m-%d %H:%M:%S")] $ORG_DIR <- $TMP_DIR"
+
             # Use eval is a trick to hack word splitting, that without reset IFS
             eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
         fi
     }
-    vdir_foreach
+    leg_foreach
 
     RUN_CONF="$(sed '/^# leg-data-begin@/,/^# leg-data-end@/d' "$RUN_CONF_FILE")"
     PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
@@ -249,9 +270,12 @@ $RUN_CONF
 VDIR_SYNC_COUNT=$((VDIR_SYNC_COUNT + 1))
 # leg-data-end@$PATCH_DATE
 EOT
+
+    # Remove old logs
+    find "$RUN_LOG_DIR" -type f -mtime +30 -delete
 }
 
-vdir_sched() {
+leg_sched() {
     SCHED_LIST="$(crontab -l 2> /dev/null | sed '/^# leg-patch-begin@/,/^# leg-patch-end@/d')"
     PATCH_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
     crontab - << EOT
@@ -264,19 +288,19 @@ EOT
 
 case "$1" in
 "init")
-    vdir_init
+    leg_init
     ;;
 "start")
-    vdir_start
+    leg_start
     ;;
 "stop")
-    vdir_stop
+    leg_stop
     ;;
 "sync")
-    vdir_sync
+    leg_sync
     ;;
 "sched")
-    vdir_sched
+    leg_sched
     ;;
 *)
     echo "${0##*/} [init|start|stop|sync|sched]"
