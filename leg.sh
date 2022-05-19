@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2021-12-12 16:19:01
+# Last Updated: 2022-05-19 18:54:12
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -13,10 +13,10 @@ fi
 
 readonly THIS_FILE="$(realpath "$0")"
 readonly CONF_FILE="/etc/leg.conf"
+readonly RUN_CONF_FILE="/run/leg.conf"
 
 readonly STATIC_DIR="/static"
 readonly VDIR_MNT_DIR="/mnt/leg/vdir"
-readonly RUN_CONF_FILE="/run/leg.conf"
 
 readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit }' /proc/meminfo)"
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
