@@ -23,7 +23,6 @@ readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
 readonly LOG_DIR="/var/log/leg"
 readonly DATE_TODAY="$(date +"%Y-%m-%d")"
-readonly CURRENT_TTY="$(realpath "/dev/stdout")"
 
 umask 022
 
