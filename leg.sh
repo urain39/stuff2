@@ -249,6 +249,7 @@ leg_sync() {
     . "$RUN_CONF_FILE"
 
     [ "$VDIR_SYNC_COUNT" = "" ] && VDIR_SYNC_COUNT="0"
+    : "$((VDIR_SYNC_COUNT += 1))"
 
     leg_callback() {
         # 0 means disable sync
@@ -268,7 +269,7 @@ leg_sync() {
     cat > "$RUN_CONF_FILE" << EOT
 $RUN_CONF
 # leg-data-begin@$PATCH_DATE
-VDIR_SYNC_COUNT=$((VDIR_SYNC_COUNT + 1))
+VDIR_SYNC_COUNT=$VDIR_SYNC_COUNT
 # leg-data-end@$PATCH_DATE
 EOT
 
