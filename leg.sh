@@ -28,6 +28,8 @@ umask 022
 
 leg_log_begin() {
     mkdir -p "$LOG_DIR"
+    chmod 770 "$LOG_DIR"
+
     exec 9>&1 8>&2 >> "$LOG_DIR/$DATE_TODAY.log" 2>&1
 }
 
