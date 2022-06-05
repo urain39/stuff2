@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REMOTES="22-msod-enc: my-msod-enc:"
+REMOTES="22-msod-enc:"
 EXTENSIONS="{GIF,JFIF,JPEG,JPG,MD,MHTML,PNG,TXT,WEBP,gif,jfif,jpeg,jpg,md,mhtml,png,txt,webp}"
 
 # Replace it with "**", if rclone supported globstar someday...
