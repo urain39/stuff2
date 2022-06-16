@@ -21,7 +21,7 @@ readonly VDIR_MNT_DIR="/mnt/leg/vdir"
 readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit }' /proc/meminfo)"
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
-readonly LOG_DIR="/static/log/leg"
+readonly LOG_DIR="$STATIC_DIR/log/leg"
 readonly DATE_TODAY="$(date +"%Y-%m-%d")"
 
 umask 022
