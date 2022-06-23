@@ -3,7 +3,7 @@
 ####################################################################
 # Created By: urain39@qq.com
 # Source URL: https://github.com/urain39/stuff2/blob/master/leg.sh
-# Last Updated: 2022-05-19 18:54:12
+# Last Updated: 2022-06-24 15:45:12
 ####################################################################
 
 if [ "$(whoami)" != "root" ]; then
@@ -11,20 +11,31 @@ if [ "$(whoami)" != "root" ]; then
     exit 1
 fi
 
+# shellcheck disable=SC2155
 readonly THIS_FILE="$(realpath "$0")"
 readonly CONF_FILE="/etc/leg.conf"
 readonly RUN_CONF_FILE="/run/leg.conf"
 
+readonly ZRAM_DEV_NUM="2"
+readonly ZRAM_VDIR_DEV="/dev/zram0"
+readonly ZRAM_VDIR_CONF="/sys/block/zram0"
+readonly ZRAM_SWAP_DEV="/dev/zram1"
+readonly ZRAM_SWAP_CONF="/sys/block/zram1"
+readonly ZRAM_BACK_DEV="/dev/zrambackfile"
+
 readonly STATIC_DIR="/static"
 readonly VDIR_MNT_DIR="/mnt/leg/vdir"
 
+# shellcheck disable=SC2155
 readonly RAM_SIZE="$(awk '$1 == "MemTotal:" { printf("%d", int($2) * 1024); exit }' /proc/meminfo)"
+# shellcheck disable=SC2155
 readonly CPU_COUNT="$(grep -c '^processor' /proc/cpuinfo)"
 
 readonly LOG_DIR="$STATIC_DIR/log/leg"
+# shellcheck disable=SC2155
 readonly DATE_TODAY="$(date +"%Y-%m-%d")"
 
-umask 022
+umask 0077
 
 leg_log_begin() {
     mkdir -p "$LOG_DIR"
@@ -142,8 +153,13 @@ VDIR_SWAP_SIZE="100"
 # zRAM Compression
 ZRAM_OVER_SIZE="150"
 ZRAM_CONST_SIZE="10"
-ZRAM_VDIR_ALGS="lzo-rle	zstd"
-ZRAM_SWAP_ALGS="lzo-rle	lzo"
+ZRAM_VDIR_ALGS="zstd	lzo-rle"
+ZRAM_SWAP_ALGS="zstd	lzo-rle"
+
+# zRAM Writeback (Testing)
+#ZRAM_BACK_FILE="$STATIC_DIR/zrambackfile"
+#ZRAM_BACK_SIZE="1536"
+#ZRAM_BACK_LIMIT="3072"
 EOT
     fi
 
@@ -172,19 +188,19 @@ EOT
     VDIR_SIZE="$((USABLE_SIZE * (ZRAM_OVER_SIZE - VDIR_SWAP_SIZE) / 100))"
     SWAP_SIZE="$((USABLE_SIZE * VDIR_SWAP_SIZE / 100))"
 
-    modprobe zram num_devices="2"
+    modprobe zram num_devices="$ZRAM_DEV_NUM"
 
-    echo "1" > "/sys/block/zram0/reset"
-    echo "$CPU_COUNT" > "/sys/block/zram0/max_comp_streams"
+    echo "1" > "$ZRAM_VDIR_CONF/reset"
+    echo "$CPU_COUNT" > "$ZRAM_VDIR_CONF/max_comp_streams"
     IFS='	'
     for ALG in $ZRAM_VDIR_ALGS; do
-        (echo "$ALG" > "/sys/block/zram0/comp_algorithm") 2> /dev/null && break
+        (echo "$ALG" > "$ZRAM_VDIR_CONF/comp_algorithm") 2> /dev/null && break
     done
-    echo "$VDIR_SIZE" > "/sys/block/zram0/disksize"
+    echo "$VDIR_SIZE" > "$ZRAM_VDIR_CONF/disksize"
 
-    mkfs.ext4 -F "/dev/zram0"
+    mkfs.ext4 -F "$ZRAM_VDIR_DEV"
     mkdir -p "$VDIR_MNT_DIR"
-    mount "/dev/zram0" "$VDIR_MNT_DIR"
+    mount "$ZRAM_VDIR_DEV" "$VDIR_MNT_DIR"
 
     mkdir -p "$STATIC_DIR"
     if [ "$(stat -c "%u%g%a" "$STATIC_DIR")" != "001777" ]; then
@@ -206,16 +222,33 @@ EOT
     }
     leg_foreach
 
-    echo "1" > "/sys/block/zram1/reset"
-    echo "$CPU_COUNT" > "/sys/block/zram1/max_comp_streams"
+    echo "1" > "$ZRAM_SWAP_CONF/reset"
+    echo "$CPU_COUNT" > "$ZRAM_SWAP_CONF/max_comp_streams"
     IFS='	'
     for ALG in $ZRAM_SWAP_ALGS; do
-        (echo "$ALG" > "/sys/block/zram1/comp_algorithm") 2> /dev/null && break
+        (echo "$ALG" > "$ZRAM_SWAP_CONF/comp_algorithm") 2> /dev/null && break
     done
-    echo "$SWAP_SIZE" > "/sys/block/zram1/disksize"
+    if [ "$ZRAM_BACK_FILE" != "" ] &&
+       [ "$ZRAM_BACK_SIZE" != "" ] &&
+       [ "$ZRAM_BACK_LIMIT" != "" ]; then
+        if [ ! -f "$ZRAM_BACK_FILE" ]; then
+            dd if=/dev/zero of="$ZRAM_BACK_FILE" bs="$((1 << 20))" count="$ZRAM_BACK_SIZE"
+        fi
+        mknod -m 0600 "$ZRAM_BACK_DEV" b 7 9532
+        losetup "$ZRAM_BACK_DEV" "$ZRAM_BACK_FILE"
+        echo "$ZRAM_BACK_DEV" > "$ZRAM_SWAP_CONF/backing_dev"
+        echo "$((ZRAM_BACK_LIMIT << 8))" > "$ZRAM_SWAP_CONF/writeback_limit"
+        echo "1" > "$ZRAM_SWAP_CONF/writeback_limit_enable"
+    fi
+    echo "$SWAP_SIZE" > "$ZRAM_SWAP_CONF/disksize"
+    if [ -b "$ZRAM_BACK_DEV" ]; then
+        # Kernel<=5.0 needs do this after setting disksize
+        echo "all" > "$ZRAM_SWAP_CONF/idle"
+        echo "idle" > "$ZRAM_SWAP_CONF/writeback"
+    fi
 
-    mkswap "/dev/zram1"
-    swapon -p 32767 "/dev/zram1"
+    mkswap "$ZRAM_SWAP_DEV"
+    swapon -p 32767 "$ZRAM_SWAP_DEV"
 }
 
 leg_stop() {
@@ -235,7 +268,11 @@ leg_stop() {
     }
     leg_foreach
 
-    swapoff "/dev/zram1"
+    swapoff "$ZRAM_SWAP_DEV"
+    if [ -b "$ZRAM_BACK_DEV" ]; then
+        losetup -d "$ZRAM_BACK_DEV"
+        rm "$ZRAM_BACK_DEV"
+    fi
     umount -l "$VDIR_MNT_DIR"
 
     rm -f "$RUN_CONF_FILE"

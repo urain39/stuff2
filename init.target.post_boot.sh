@@ -23,11 +23,12 @@ fi
 mknod -m 0600 /dev/block/loop0 b 7 0
 losetup /dev/block/loop0 /data/swapfile
 echo /dev/block/loop0 > /sys/block/zram0/backing_dev
-echo idle > /sys/block/zram0/writeback
-echo 21600 > /sys/block/zram0/idle
 echo 1048576 > /sys/block/zram0/writeback_limit
 echo 1 > /sys/block/zram0/writeback_limit_enable
 echo 2147483648 > /sys/block/zram0/disksize
+# Kernel<=5.0 needs do this after setting disksize
+echo all > /sys/block/zram0/idle
+echo idle > /sys/block/zram0/writeback
 echo 100 > /proc/sys/vm/swappiness
 mkswap /dev/block/zram0
 swapon /dev/block/zram0
