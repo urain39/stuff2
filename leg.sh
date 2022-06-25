@@ -215,7 +215,7 @@ EOT
         mount -o bind,private "$ENTRY_DIR" "$ORG_DIR"
         mount -o bind,private "$TMP_DIR" "$ENTRY_DIR"
 
-        echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' -> '$TMP_DIR'"
+        echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' => '$TMP_DIR'"
 
         # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$ORG_DIR/"' '"$TMP_DIR/"'
@@ -258,7 +258,7 @@ leg_stop() {
     . "$RUN_CONF_FILE"
 
     leg_callback() {
-        echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' <- '$TMP_DIR'"
+        echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' <= '$TMP_DIR'"
 
         # Use eval is a trick to hack word splitting, that without reset IFS
         eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
@@ -293,7 +293,7 @@ leg_sync() {
         [ "$SYNC_DELAY" = "0" ] && return
 
         if [ "$((VDIR_SYNC_COUNT % SYNC_DELAY))" = "0" ]; then
-            echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' <- '$TMP_DIR'"
+            echo "[$(date +"%Y-%m-%d %H:%M:%S")] '$ORG_DIR' <= '$TMP_DIR'"
 
             # Use eval is a trick to hack word splitting, that without reset IFS
             eval "$VDIR_SYNC_EXEC" "$VDIR_SYNC_ARGS" '"$TMP_DIR/"' '"$ORG_DIR/"'
