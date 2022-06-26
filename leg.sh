@@ -21,7 +21,9 @@ readonly ZRAM_VDIR_DEV="/dev/zram0"
 readonly ZRAM_VDIR_CONF="/sys/block/zram0"
 readonly ZRAM_SWAP_DEV="/dev/zram1"
 readonly ZRAM_SWAP_CONF="/sys/block/zram1"
-readonly ZRAM_BACK_DEV="/dev/zrambackfile"
+
+readonly SERVICE_FILE_SYSTEMD="/etc/systemd/system/leg.service"
+readonly SERVICE_FILE_OPENRC="/etc/init.d/leg"
 
 readonly STATIC_DIR="/static"
 readonly VDIR_MNT_DIR="/mnt/leg/vdir"
@@ -39,7 +41,7 @@ umask 0077
 
 leg_log_begin() {
     mkdir -p "$LOG_DIR"
-    chmod 770 "$LOG_DIR"
+    chmod 0770 "$LOG_DIR"
 
     exec 9>&1 8>&2 >> "$LOG_DIR/$DATE_TODAY.log" 2>&1
 }
@@ -82,7 +84,7 @@ leg_init() {
     fi
 
     if command -v systemd > /dev/null; then
-        cat > '/etc/systemd/system/leg.service' << EOT
+        cat > "$SERVICE_FILE_SYSTEMD" << EOT
 [Unit]
 DefaultDependencies=no
 After=local-fs.target
@@ -98,9 +100,10 @@ RemainAfterExit=yes
 [Install]
 WantedBy=default.target
 EOT
+        chmod 0644 "$SERVICE_FILE_SYSTEMD"
         systemctl enable leg
     elif command -v openrc > /dev/null; then
-        cat > '/etc/init.d/leg' << EOT
+        cat > "$SERVICE_FILE_OPENRC" << EOT
 #!/sbin/openrc-run
 
 depend() {
@@ -116,7 +119,7 @@ stop() {
     "$THIS_FILE" stop
 }
 EOT
-        chmod 755 '/etc/init.d/leg'
+        chmod 0755 "$SERVICE_FILE_OPENRC"
         rc-update add leg
     else
         echo "Unsupported supervisor!" >&2
@@ -155,11 +158,6 @@ ZRAM_OVER_SIZE="150"
 ZRAM_CONST_SIZE="10"
 ZRAM_VDIR_ALGS="zstd	lzo-rle"
 ZRAM_SWAP_ALGS="zstd	lzo-rle"
-
-# zRAM Writeback (Testing)
-#ZRAM_BACK_FILE="$STATIC_DIR/zrambackfile"
-#ZRAM_BACK_SIZE="1536"
-#ZRAM_BACK_LIMIT="3072"
 EOT
     fi
 
@@ -228,24 +226,7 @@ EOT
     for ALG in $ZRAM_SWAP_ALGS; do
         (echo "$ALG" > "$ZRAM_SWAP_CONF/comp_algorithm") 2> /dev/null && break
     done
-    if [ "$ZRAM_BACK_FILE" != "" ] &&
-       [ "$ZRAM_BACK_SIZE" != "" ] &&
-       [ "$ZRAM_BACK_LIMIT" != "" ]; then
-        if [ ! -f "$ZRAM_BACK_FILE" ]; then
-            dd if=/dev/zero of="$ZRAM_BACK_FILE" bs="$((1 << 20))" count="$ZRAM_BACK_SIZE"
-        fi
-        mknod -m 0600 "$ZRAM_BACK_DEV" b 7 9532
-        losetup "$ZRAM_BACK_DEV" "$ZRAM_BACK_FILE"
-        echo "$ZRAM_BACK_DEV" > "$ZRAM_SWAP_CONF/backing_dev"
-        echo "$((ZRAM_BACK_LIMIT << 8))" > "$ZRAM_SWAP_CONF/writeback_limit"
-        echo "1" > "$ZRAM_SWAP_CONF/writeback_limit_enable"
-    fi
     echo "$SWAP_SIZE" > "$ZRAM_SWAP_CONF/disksize"
-    if [ -b "$ZRAM_BACK_DEV" ]; then
-        # Kernel<=5.0 needs do this after setting disksize
-        echo "all" > "$ZRAM_SWAP_CONF/idle"
-        echo "idle" > "$ZRAM_SWAP_CONF/writeback"
-    fi
 
     mkswap "$ZRAM_SWAP_DEV"
     swapon -p 32767 "$ZRAM_SWAP_DEV"
@@ -269,10 +250,6 @@ leg_stop() {
     leg_foreach
 
     swapoff "$ZRAM_SWAP_DEV"
-    if [ -b "$ZRAM_BACK_DEV" ]; then
-        losetup -d "$ZRAM_BACK_DEV"
-        rm "$ZRAM_BACK_DEV"
-    fi
     umount -l "$VDIR_MNT_DIR"
 
     rm -f "$RUN_CONF_FILE"
