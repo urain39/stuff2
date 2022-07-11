@@ -3,10 +3,10 @@
 注意：使用前请务必先阅读完下方的配置小节。
 
 ```sh
-# 安装
+# 安装本体
 sudo install -Dm 0755 leg.sh /usr/local/bin/leg
 
-# 初始化
+# 初始化配置
 sudo leg init
 ```
 
@@ -55,8 +55,26 @@ ZRAM_SWAP_ALGS="lzo-rle	lzo"
 注意1：修改配置文件在重启后才生效。  
 注意2：安装前请确保 home 目录下的总大小不超过 RAM 的一半。  
 注意3：请将大文件储存在 /static 目录下。  
+注意4：本脚本会与 log2ram 冲突。  
 
 
 ### 卸载说明
 
-待补充。
+```sh
+# 卸载本体
+sudo rm /usr/local/bin/leg
+
+# 移除配置
+sudo rm /etc/leg.conf
+
+# 移除 crontab 配置
+    crontab - << EOT
+$(crontab -l 2> /dev/null | sed '/^# leg-patch-begin@/,/^# leg-patch-end@/d')
+EOT
+
+# 移除 systemd 配置
+sudo rm -f /etc/systemd/system/leg.service
+
+# 移除 openrc 配置
+sudo rm -f /etc/init.d/leg
+```
