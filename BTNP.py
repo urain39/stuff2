@@ -20,7 +20,7 @@ def parse(name):
   # XXX: 因为 Python 中的 RegExp 不支持重复定义命名捕获组，
   # 所以我们只能使用一个表达式匹配两种情况。即：我们将 author
   # 视作是可省略的，group 视作是必须的；当 author 缺失时，我
-  # 再将 group 提取出来当作 author。
+  # 们再将 group 提取出来当作 author。
   if rv["author"] is None:
     rv["author"] = rv["group"]
     rv["group"] = None

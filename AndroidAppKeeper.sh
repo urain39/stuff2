@@ -20,6 +20,7 @@ refresh_keep_procs() {
     for PKG_ in $KEEP_PKGS; do
       if [ "$PKG" = "$PKG_" ]; then
         KEEP_PROCS="$KEEP_PROCS $PROC"
+        break
       fi
     done
   done <<EOF
