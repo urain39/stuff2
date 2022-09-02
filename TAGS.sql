@@ -10,9 +10,9 @@
 --  配合 CHECK (tag_id > 0) 可以实现快速查询
 ------------------------------------------
 
--- CREATE TABLE tags (
+-- CREATE TABLE IF NOT EXISTS tags (
 --   id INTEGER PRIMARY KEY AUTOINCREMENT CHECK (id > 0),
---   name TEXT NOT NULL,
+--   name TEXT UNIQUE NOT NULL,
 --   time TEXT NOT NULL
 -- );
 
@@ -20,10 +20,11 @@
 -- UPDATE files SET tags=REPLACE(tags, "\x00\x00\x00", "")
 --   WHERE INSTR(tags, "\x00\x00\x00");
 
-CREATE TABLE files (
+CREATE TABLE IF NOT EXISTS files (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
+  name TEXT UNIQUE NOT NULL,
   size INTEGER NOT NULL,
+  time TEXT NOT NULL,
   tags TEXT NOT NULL
 );
 
@@ -31,6 +32,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - きらいな人.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -38,6 +40,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - しんでしまうとはなさけない!.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -45,6 +48,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - 夕立のりぼん.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -52,6 +56,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - 路地裏猫の正体.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -59,6 +64,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - After This.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -66,6 +72,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - ギガンティックO.T.N.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -73,6 +80,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - 威風堂々.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -80,6 +88,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - シﾞュリエッタとロミヲ.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
@@ -87,6 +96,7 @@ INSERT INTO files VALUES (
   NULL,
   "Au - Glow.mp3",
   0,
+  "2022-09-02 15:54:20",
   "\x00Au\x00ぺろ。\x00"
 );
 
