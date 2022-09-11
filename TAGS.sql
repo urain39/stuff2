@@ -16,7 +16,7 @@
 --   time TEXT NOT NULL
 -- );
 
--- 假如某个 file 的 tags 存在 tag_id > 0 那么可以使用下面的语句修复
+-- 假如某个 file 的 tags 存在 tag_id == 0 那么可以使用下面的语句修复
 -- UPDATE files SET tags=REPLACE(tags, "\x00\x00\x00", "")
 --   WHERE INSTR(tags, "\x00\x00\x00");
 
