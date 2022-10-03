@@ -11,3 +11,6 @@ ufw default deny incoming
 
 # 允许内网 192.168.1.0/24 段访问本机
 ufw allow from 192.168.1.0/24
+
+# 禁用日志功能（部分环境限制）
+ufw logging off
