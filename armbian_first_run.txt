@@ -36,7 +36,7 @@ FR_net_wifi_countrycode='GB'
 
 #If you want to use a static ip, set it here
 
-FR_net_use_static=0
+FR_net_use_static=1
 FR_net_static_ip='192.168.1.250'
 FR_net_static_mask='255.255.255.0'
 FR_net_static_gateway='192.168.1.1'
