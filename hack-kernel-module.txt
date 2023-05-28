@@ -1,0 +1,8 @@
+编译对应Linux内核版本的内核模块
+
+1. 检查 include/linux/vermagic.h 并修改 defconfig
+2. make xxx_defconfig
+3. make prepare
+4. make scripts
+5. 修改 include/config/kernel.release
+6. 修改 include/generated/utsrelease.h
