@@ -9,7 +9,7 @@ TMPDIRS="$TOPDIR/ramdisk"
 
 [ -f /data/tmpdir.conf ] && TMPDIRS="$(
   sed -E "/^[\t ]*(#|\$)/d;s:\\\$TOPDIR\\\$?:$TOPDIR:g" /data/tmpdir.conf |
-    grep -Eo '^((/([^/.\t]{1,2}|[^/.\t]\.|\.[^/.\t]|[^/\t]{3,}))+/?|/)(\t.+)?$'
+    grep -Eo '^((/([^/.\t]{1,2}|[^/.\t]\.|\.[^/.\t]|[^/\t]{3,}))+/?|/)([\t].+)?$'
 )"
 
 umask 000
