@@ -1,5 +1,22 @@
 global.__keyCache = %[];
 global.__whiteList = %[];
+global.__checkHeader = function (buff, head) {
+  var min = buff.count < head.length ? buff.count : head.length;
+  Debug.message('bufferLength = ' + min);
+  for (var i = 0; i < min; i++) {
+    if (buff[i] !== head[i])
+      return false;
+  }
+  return true;
+};
+global.__checkPlainText = function (buff) {
+  for (var i = 0, len = buff.count; i < len; i++) {
+    if (buff[i] >= 0x80)
+      return false;
+  }
+  return true;
+};
+
 Storages.setXP3ArchiveExtractionFilter(
   function (h, o, b, l, f) {
     Debug.message(h, o, b, l, f);
@@ -8,27 +25,28 @@ Storages.setXP3ArchiveExtractionFilter(
     var pars = f.split('.');
     pars.reverse();
     var ext = pars[0].toLowerCase();
-    Debug.message(ext);
     switch (ext) {
     case 'tjs':
-    case 'ks': {
+    case 'ks':
+    case 'asd': {
         Debug.message('Decoding ' + f + '...');
         // TJS2 Bytecode
-        if (b[0] === 0x54 && b[1] === 0x4a && b[2] === 0x53 && b[3] == 0x32) {
+        if (global.__checkHeader(b, <% 54 4a 53 32 %>)) {
           global.__whiteList[f] = true;
           return;
         }
         // TJS2 TextStream - krkrz/krkrz/blob/master/base/TextStream.cpp#97
-        if (b[0] === 0xfe && b[1] === 0xfe) {
+        if (global.__checkHeader(b, <% fe fe %>)) {
           global.__whiteList[f] = true;
           return;
         }
         // PlainText
-        if (b[0] < 0x80 && b[1] < 0x80 && b[2] < 0x80 && b[3] < 0x80) {
-          global.__whiteList[f] = true;
-          return;
-        }
-        // Encrypted
+        //if (global.__checkPlainText(b)) {
+        //  global.__whiteList[f] = true;
+        //  return;
+        //}
+        Debug.message('Entrypted ' + f);
+        // Encrypted TJS2 TextStream
         if (global.__keyCache[f] === void) {
           global.__keyCache[f] = b[0] ^ 0xfe;
         }
@@ -36,7 +54,7 @@ Storages.setXP3ArchiveExtractionFilter(
     case 'png': {
         Debug.message('Decoding ' + f + '...');
         // Normal PNG
-        if (b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47) {
+        if (global.__checkHeader(b, <% 89 50 4e 47 %>)) {
           global.__whiteList[f] = true;
           return;
         }
@@ -45,10 +63,59 @@ Storages.setXP3ArchiveExtractionFilter(
           global.__keyCache[f] = b[0] ^ 0x89;
         }
       } break;
+      case 'mpg': {
+        Debug.message('Decoding ' + f + '...');
+        // Normal MPG
+        if (global.__checkHeader(b, <% 00 00 01 B3 %>)) {
+          global.__whiteList[f] = true;
+          return;
+        }
+        // Encrypted
+        if (global.__keyCache[f] === void) {
+          global.__keyCache[f] = b[0] ^ 0x00;
+        }
+      } break;
+    case 'wmv': {
+        Debug.message('Decoding ' + f + '...');
+        // Normal WMV
+        if (global.__checkHeader(b, <% 30 26 B2 75 8E 66 CF 11 A6 D9 00 AA 00 62 CE 6C %>)) {
+          global.__whiteList[f] = true;
+          return;
+        }
+        // Encrypted
+        if (global.__keyCache[f] === void) {
+          global.__keyCache[f] = b[0] ^ 0x30;
+        }
+      } break;
+    case 'ogg': {
+        Debug.message('Decoding ' + f + '...');
+        // Normal OGG
+        if (global.__checkHeader(b, <% 4f 67 67 73 %>)) {
+          global.__whiteList[f] = true;
+          return;
+        }
+        // Encrypted
+        if (global.__keyCache[f] === void) {
+          global.__keyCache[f] = b[0] ^ 0x4f;
+        }
+      } break;
+    case 'sli': {
+        Debug.message('Decoding ' + f + '...');
+        // Normal SLI
+        if (global.__checkHeader(b, <% 03 12 0e 10 10 2a 03 00 %>)) {
+          global.__whiteList[f] = true;
+          return;
+        }
+        // Encrypted
+        if (global.__keyCache[f] === void) {
+          global.__keyCache[f] = b[0] ^ 0x03;
+        }
+      } break;
     default:
       return;
     }
     var k = global.__keyCache[f];
+    Debug.message(f + ' key: ' + k);
     b.xor(0, l, k);
     //throw new Exception();
   }
