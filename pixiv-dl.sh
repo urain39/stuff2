@@ -21,7 +21,7 @@ download_pixiv() {
     --content-disposition \
     "https://pixiv.re/$_pid-1.jpg"; then
     local _i=
-    for _i in $(seq 1 999); do
+    for _i in $(seq 2 999); do
       random_wait 0 15
       wget \
         --continue \
