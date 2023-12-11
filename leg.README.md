@@ -1,11 +1,11 @@
 ### 基本依赖
 
-1. ash/bash/mksh（必选）
+1. sh/ash/bash/dash/mksh（必选）
 2. grep（必选）
 3. awk（必选）
 4. openrc/systemd（必选）
 5. crontab（必选）
-6. rsync（可选；默认必选）
+6. rsync（可选；默认配置必选）
 
 
 ### 安装说明
