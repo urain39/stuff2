@@ -19,14 +19,14 @@ download_pixiv() {
   if wget \
     --continue \
     --content-disposition \
-    "https://pixiv.re/$_pid-1.jpg"; then
+    "https://pixiv.nl/$_pid-1.jpg"; then
     local _i=
     for _i in $(seq 2 999); do
       random_wait 0 15
       wget \
         --continue \
         --content-disposition \
-        "https://pixiv.re/$_pid-$_i.jpg" ||
+        "https://pixiv.nl/$_pid-$_i.jpg" ||
         break
     done
   else
@@ -34,7 +34,7 @@ download_pixiv() {
     wget \
       --continue \
       --content-disposition \
-      "https://pixiv.re/$_pid.jpg"
+      "https://pixiv.nl/$_pid.jpg"
   fi
 }
 
