@@ -12,6 +12,5 @@ convert 0525_Koharu_NOBG.png \
 
 convert 0525_Koharu_NOBG.jpg \
   0525_Koharu_NOBG-alpha.jpg \
-    -alpha copy \
   -compose CopyOpacity \
   -composite 0525_Koharu_NOBG-REGEN.png
