@@ -27,13 +27,14 @@ class DrawMachine {
         } else this.guaranteed = true;
       }
     }
+    const realDrawTotal = (this.drawTotal - this.drawCount);
     return {
       "drawTotal": this.drawTotal,
       "drawCount": this.drawCount,
       "GoldCount": this.goldCount,
-      "GoldRate": this.goldCount / this.drawTotal,
+      "DrawCountPerGold": realDrawTotal / this.goldCount,
       "UpGoldCount": this.upGoldCount,
-      "UpGoldRate": this.upGoldCount / this.drawTotal
+      "DrawCountPerUpGold": realDrawTotal / this.upGoldCount
     };
   }
 }
