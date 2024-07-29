@@ -12,12 +12,12 @@ class DrawMachine {
     for (let i = 0; i < n; i++) {
       ++this.drawTotal;
       drawCount = ++this.drawCount;
-      if (drawCount <= 70)
+      if (drawCount < 70)
         p = 0.008;
-      else {
-        p = (drawCount - 70) * 0.1 + 0.008;
-        //p = p > 1 ? 1 : p;
-      }
+      else if (drawCount < 80)
+        p = (drawCount - 69) * 0.08 + 0.008;
+      else
+        p = 1;
       if (Math.random() < p) {
         this.drawCount = 0;
         ++this.goldCount;
@@ -29,8 +29,8 @@ class DrawMachine {
     }
     const realDrawTotal = (this.drawTotal - this.drawCount);
     return {
-      "drawTotal": this.drawTotal,
-      "drawCount": this.drawCount,
+      "DrawTotal": this.drawTotal,
+      "DrawCount": this.drawCount,
       "GoldCount": this.goldCount,
       "DrawCountPerGold": realDrawTotal / this.goldCount,
       "UpGoldCount": this.upGoldCount,
@@ -39,4 +39,5 @@ class DrawMachine {
   }
 }
 
-new DrawMachine().draw(160);
+
+new DrawMachine().draw(50000000);
