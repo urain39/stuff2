@@ -1,4 +1,4 @@
-ls | grep -Eo '^[0-9A-Za-z]{5}.zip' | while read -r O; do
+ls | grep -Eo '^[0-9A-Za-z]{5}.*\.zip' | while read -r O; do
   S="$(du -k "$O" | awk '{ print $1 }')"
   if [ "$S" -lt 1000 ]; then
     echo "Skip dummy $O"
