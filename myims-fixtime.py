@@ -9,7 +9,7 @@ def fix_time(path, time):
   os.utime(path, (time, time))
 
 def get_name(name):
-  return re.sub('^@?!|(?:-resize)?\.(?:jpg|png)$', '', name)
+  return re.sub('^@?!|(?:-resize)?\.(?:jpg|png|webp|bmp)$', '', name)
 
 def parse_index(path):
   indexes = {}
