@@ -9,7 +9,7 @@ def fix_time(path, time):
   os.utime(path, (time, time))
 
 def get_name(name):
-  return re.sub('^@?!|(?:-resize)?\.(?:jpg|png|webp|bmp)$', '', name)
+  return re.sub(r'^@?!|(?:-resize)?\.(?:jpg|png|webp|bmp|gif)$', '', name)
 
 def parse_index(path):
   indexes = {}
@@ -23,7 +23,7 @@ def fix_time_dir(path):
   cwd = os.getcwd()
   os.chdir(path)
   indexes = parse_index('~source.filestats.tsv')
-  for file in glob('*.jpg') + glob('*.png'):
+  for file in glob('*.jpg') + glob('*.png') + glob('*.gif'):
     time = indexes[get_name(file)]
     fix_time(file, time)
     print(file)
