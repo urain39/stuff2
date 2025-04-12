@@ -16,21 +16,25 @@ BEGIN {
   chars[3] = "|"
   total = 0
   count = 0
+  estimate = ""
   start_time = systime()
 } {
   if (NF != 1) next
-  if ($1 > 0) { total = $1; count = 0 }
-  else if ($1 == 0) count++
+  if      ($1 == 0) count++
+  else if ($1 == -2147483648) count--
+  else if ($1 == 2147483647) ;
+  else if ($1 == -2147483647) exit 1
+  else if ($1 > 0) { total = $1; count = 0 }
   else count = -$1
   if (count >= total) {
-     printf "\r\033[KProcessing: %d / %d (%.2f%%) | Done\n", count, total, count * 100 / total
+     printf "\r\033[K\033[1;44mProcessing: %d / %d (%.2f%%) | Done\033[0m\n", count, total, count * 100 / total
      exit 0
   }
-  printf "\r\033[KProcessing: %d %c %d (%.2f%%) | ETA: ", count, chars[count % 4], total, count * 100 / total
   if (count == 0) {
+    estimate = "N/A"
     start_time = systime()
-    printf "N/A"
   } else {
+    estimate = ""
     now_time = systime()
     remain = (total - count) * ((now_time - start_time) / count)
     index_ = 1
@@ -41,6 +45,7 @@ BEGIN {
     }
     buffer[index_] = remain
     for (i = index_; i > 0; i--)
-      printf "%d%s", buffer[i], units[i]
+      estimate = estimate sprintf("%d%s", buffer[i], units[i])
   }
+  printf "\r\033[K\033[1;44mProcessing: %d %c %d (%.2f%%) | ETA: %s\033[0m", count, chars[count % 4], total, count * 100 / total, estimate
 }
