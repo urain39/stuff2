@@ -39,6 +39,9 @@ BEGIN {
   if ( sr_min < 0 ) sr_min += 1440
   ss_min = ss - 1440 * int( ss / 1440 )
   if ( ss_min < 0 ) ss_min += 1440
+  # 四舍五入到最近的15分钟
+  sr_min = int( ( sr_min + 7.5 ) / 15 ) * 15
+  ss_min = int( ( ss_min + 7.5 ) / 15 ) * 15
   print int( sr_min ), int( ss_min )
 }')
 EOF
