@@ -1,3 +1,5 @@
+#!/bin/sh
+
 for v in *.mp4; do
   case "$v" in
     !*)
@@ -6,7 +8,8 @@ for v in *.mp4; do
   esac
   [ -f "!$v" ] && continue
   ffmpeg -i "$v" \
-    -c:v hevc -preset:v veryfast -g 240 -bf 4 -refs 3 -qcomp 0.75 -qmin 33 \
-    -c:a aac -q:a 1 \
+    -c:v libsvtav1 -preset 8 -g 120 -bf 8 -refs 5 -crf 33 -pix_fmt yuv420p10le \
+    -svtav1-params scd=1:superres-mode=3:superres-qthres=22:tune=5 \
+    -c:a aac -ac 2 -q:a 1 \
     "!$v"
 done
