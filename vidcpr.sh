@@ -2,7 +2,7 @@
 
 CRF="${1:-"27"}"
 
-for v in *.mp4; do
+for V in *.mp4; do
   case "${V}" in
     !*)
       continue

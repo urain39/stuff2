@@ -2,7 +2,7 @@
 
 TBR="${1:-"3M"}"
 
-for v in *.mp4; do
+for V in *.mp4; do
   case "${V}" in
     !*)
       continue
