@@ -8,8 +8,8 @@ codec="${3:-"hevc"}"
 
 ffmpeg -y \
   -hwaccel mediacodec \
-  -i "$input" \
+  -i "${input}" \
   -c:v "${codec}_mediacodec" \
   -bitrate_mode:v 0 \
-  -global_quality:v "$quality" \
-  "!$input"
+  -global_quality:v "${quality}" \
+  "!${input}"
