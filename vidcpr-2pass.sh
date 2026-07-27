@@ -1,6 +1,8 @@
 #!/bin/sh
 
 TBR="${1:-"3M"}"
+TUN="${2:-"0"}"
+PRE="${3:-"6"}"
 
 for V in *.mp4; do
   case "${V}" in
@@ -12,14 +14,14 @@ for V in *.mp4; do
   esac
   [ -f "!${V}" ] && continue
   ffmpeg -i "${V}" \
-    -c:v libsvtav1 -preset 5 -g 120 -bf 8 -refs 5 -b:v "${TBR}" -pix_fmt yuv420p10le \
-    -svtav1-params enable-dlf=2:rc=1:scd=1:tune=0 -pass 1 \
+    -c:v libsvtav1 -preset "${PRE}" -g 120 -bf 8 -refs 5 -b:v "${TBR}" -pix_fmt yuv420p10le \
+    -svtav1-params enable-dlf=2:rc=1:scd=1:tune="${TUN}" -pass 1 \
     -an \
     -f null \
     "/dev/null"
   ffmpeg -i "${V}" \
-    -c:v libsvtav1 -preset 5 -g 120 -bf 8 -refs 5 -b:v "${TBR}" -pix_fmt yuv420p10le \
-    -svtav1-params enable-dlf=2:rc=1:scd=1:tune=0 -pass 2 \
+    -c:v libsvtav1 -preset "${PRE}" -g 120 -bf 8 -refs 5 -b:v "${TBR}" -pix_fmt yuv420p10le \
+    -svtav1-params enable-dlf=2:rc=1:scd=1:tune="${TUN}" -pass 2 \
     -c:a aac -ac 2 -q:a 1 \
     "!${V}"
 done
